@@ -1,0 +1,11 @@
+@import './../../constants/variables';
+@import './../../constants/_colors';
+
+.header {
+  display: flex;
+  justify-content: center;
+  min-height: $header_height;
+  width: 100%;
+  margin-bottom: $margin-base-vertical;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./../../assets/background.jpg") center no-repeat;
+}
