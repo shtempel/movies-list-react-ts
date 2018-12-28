@@ -1,5 +1,5 @@
-import appReducer from './saved-state/reducer';
+import movieReducer from './movies/reducer';
 
 export default {
-  app: appReducer
+    moviesState: movieReducer
 };

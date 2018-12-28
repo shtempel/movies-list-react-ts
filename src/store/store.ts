@@ -1,32 +1,38 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createHashHistory, History } from 'history';
-import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 
+import { MoviesState } from './movies/reducer';
 import reducers from './reducers';
 
+export interface GlobalState {
+    movies: MoviesState;
+}
+
 export interface EmptyAction {
-  type: string;
+    type: string;
 }
 
 export interface Action<TPayload> extends EmptyAction {
-  payload: TPayload;
+    payload: TPayload;
 }
 
 export const appHistory = createHashHistory();
+export const sagaMiddleware = createSagaMiddleware();
 
-const middleware: any[] = [thunk, routerMiddleware(appHistory)];
+const middleware: any[] = [sagaMiddleware, routerMiddleware(appHistory)];
 
 const rootReducer = (history: History) =>
-  combineReducers({
-    ...reducers,
-    router: connectRouter(history)
-  });
+    combineReducers({
+        ...reducers,
+        router: connectRouter(history)
+    });
 
 const composeEnhancer: typeof compose =
-  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+    (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const store = createStore(
-  rootReducer(appHistory),
-  composeEnhancer(applyMiddleware(...middleware))
+    rootReducer(appHistory),
+    composeEnhancer(applyMiddleware(...middleware))
 );

@@ -7,6 +7,7 @@ const routes = (
     <div>
         <Switch>
             <Route exact path="/home" component={ Home }/>
+            <Route exact path="/search/:searchQuery" component={ Home }/>
             <Redirect to="/home"/>
         </Switch>
     </div>
