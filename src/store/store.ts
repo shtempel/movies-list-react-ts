@@ -5,6 +5,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import { MoviesState } from './movies/reducer';
 import reducers from './reducers';
+import rootSaga from './sagas';
 
 export interface GlobalState {
     movies: MoviesState;
@@ -36,3 +37,5 @@ export const store = createStore(
     rootReducer(appHistory),
     composeEnhancer(applyMiddleware(...middleware))
 );
+
+sagaMiddleware.run(rootSaga);

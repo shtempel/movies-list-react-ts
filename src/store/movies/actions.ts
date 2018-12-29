@@ -7,11 +7,15 @@ export enum MoviesActions {
 }
 
 export interface MovieItem {
+    id: number;
     title: string;
-    movieId: number;
-    posterPath: string;
-    releaseDate: string;
+    poster_path: string;
+    release_date: string;
     genres: string[];
+    vote_average: number;
+    tagline: string;
+    runtime: number;
+    overview: string;
 }
 
 export const fetchMovies = (queryString: string): Action<string> => ({
