@@ -18,9 +18,14 @@ export interface MovieItem {
     overview: string;
 }
 
-export const fetchMovies = (queryString: string): Action<string> => ({
+export interface FetchMoviesPayload {
+    searchQuery: string;
+    searchBy: string;
+}
+
+export const fetchMovies = (payload: FetchMoviesPayload): Action<FetchMoviesPayload> => ({
     type: MoviesActions.FetchMovies,
-    payload: queryString
+    payload
 });
 
 export const fetchMoviesSuccess = (movies: MovieItem[]): Action<MovieItem[]> => ({

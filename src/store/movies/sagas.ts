@@ -7,12 +7,13 @@ export function* watchFetchMovies() {
     yield takeEvery(MoviesActions.FetchMovies, fetchMovies);
 }
 
-export function* fetchMovies() {
+export function* fetchMovies(action: any) {
+    console.log(action);
     try {
-        const fetchedMovies = yield call([moviesService, moviesService.getMovies]);
+        const fetchedMovies = yield call(
+            [moviesService, moviesService.getMovies], action.payload.searchQuery, action.payload.searchBy);
 
         yield put(fetchMoviesSuccess(fetchedMovies));
-        console.log(fetchedMovies);
     } catch (error) {
         // yield put(fetchCasesInfoFail(error));
     }

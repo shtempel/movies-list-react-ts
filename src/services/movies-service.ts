@@ -5,9 +5,8 @@ import { BASE_URL } from '../constants/constants';
 
 export class MoviesService {
 
-    getMovies() {
-        // return axios.get(`${BASE_URL}?search=${action.payload}&searchBy=${urlType}`)
-        return axios.get(`${ BASE_URL }?search=wars&searchBy=title`)
+    getMovies(searchQuery: string, searchBy: string) {
+        return axios.get(`${ BASE_URL }?search=${ searchQuery }&searchBy=${ searchBy }`)
             .then((response) => {
                 return response.data.data.map(
                     (movie: MovieItem) => {
@@ -26,6 +25,8 @@ export class MoviesService {
                 )
             })
     }
+
+    getMovieById() {}
 }
 
 const service = new MoviesService();

@@ -4,11 +4,19 @@
 $padding-small:                         .4rem;
 $padding-base:                          .8rem;
 
-/*Margin*/
-$margin-base-horizontal:                1.2rem;
-$margin-x-small-vertical:               0.5rem ;
-$margin-small-vertical:                 1rem;
-$margin-base-vertical:                  1.2rem;
+/* Margin*/
+$margin-base-horizontal:                20px;
+$margin-base-vertical:                  20px;
+$margin-X-vertical:                     50px;
 
-/*Common*/
-$header_height:                         350px;
+/* Common*/
+$header_height:                         250px;
+$buttons_padding:                       3px 15px;
+
+/* Search input*/
+$search_input_opacity:                  0.9;
+$search_input_height:                   30px;
+$search_input_font_size:                20px;
+
+/* Search button*/
+$search_button_font_size:               13px;
