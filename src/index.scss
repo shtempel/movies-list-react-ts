@@ -43,3 +43,20 @@ code {
 .active-button {
   background-color: $_color_Mandy;
 }
+
+.active-link {
+  color: $_color_Mandy;
+}
+
+.link {
+  outline: none;
+  cursor: pointer;
+}
+
+.link:hover {
+  color: $_color_Mandy;
+}
+
+.link:active {
+  color: $_color_Crown_of_Thorns;
+}

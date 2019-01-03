@@ -8,7 +8,6 @@ export function* watchFetchMovies() {
 }
 
 export function* fetchMovies(action: any) {
-    console.log(action);
     try {
         const fetchedMovies = yield call(
             [moviesService, moviesService.getMovies], action.payload.searchQuery, action.payload.searchBy);

@@ -19,7 +19,6 @@ const reducer: Reducer<MoviesState, MoviesActionType> = (
     switch (action.type) {
         case MoviesActions.FetchMovieSuccess: {
             const { payload: movies } = action as Action<MovieItem[]>;
-            console.log(action.payload);
             return {
                 ...state,
                 movies

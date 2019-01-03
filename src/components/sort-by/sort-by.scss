@@ -1,0 +1,16 @@
+@import './../../constants/colors';
+@import './../../constants/variables';
+
+.sort-by {
+  justify-content: space-between;
+  font-size: $search_button_font_size;
+  font-weight: bold;
+  color: $_colors_Dove_Gray;
+  background-color: $_color_Silver_Chalice;
+  padding: $padding-small;
+  box-sizing: border-box;
+
+  &__buttons span:first-child {
+    margin-right: $margin-base-horizontal;
+  }
+}

@@ -8,7 +8,9 @@ import reducers from './reducers';
 import rootSaga from './sagas';
 
 export interface GlobalState {
-    movies: MoviesState;
+    moviesState: MoviesState;
+    searchBy: string;
+    sortBy: string;
 }
 
 export interface EmptyAction {

@@ -1,0 +1,13 @@
+@import './../../../constants/variables';
+@import './../../../constants/_colors';
+
+.search-result {
+
+}
+
+  .no-films-found {
+    display: flex;
+    padding: 80px 0;
+    width: 100%;
+    justify-content: center;
+  }

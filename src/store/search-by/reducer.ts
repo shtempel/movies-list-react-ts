@@ -5,9 +5,8 @@ import { SearchByActions, SearchByActionType } from "./actions";
 export const initialState: string = 'title';
 
 const reducer: Reducer<string, SearchByActionType> = (
-    state = initialState,
-    action: SearchByActionType
-) => {
+    state = initialState, action: SearchByActionType) => {
+
     switch (action.type) {
 
         case SearchByActions.SetSearchBy: {

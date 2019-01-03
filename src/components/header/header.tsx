@@ -4,10 +4,10 @@ import cn from 'classnames';
 
 import './header.scss';
 import { common } from '../../constants/constants';
-import { appHistory } from '../../store/store';
-import { fetchMovies, FetchMoviesPayload } from '../../store/movies/actions';
+import { appHistory, GlobalState } from '../../store/store';
+import { fetchMovies, FetchMoviesPayload, setSearchBy } from '../../store/actions';
 import { Button } from "..";
-import { setSearchBy } from "../../store/search-by/actions";
+import { getMoviesQuantity } from "../../store/movies/selectors";
 
 export interface HeaderProps {
     fetchMovies: (payload: FetchMoviesPayload) => any,
@@ -69,14 +69,16 @@ export class Header extends Component<HeaderProps, HeaderState> {
                             className={ cn('btn', { 'active-button': this.setActiveBtn('genre') }) }
                             name={ common.GENRE }/>
                 </div>
+
             </div>
         );
     }
 }
 
 export default connect(
-    (state: any) => ({
-        searchBy: state.searchBy
+    (state: GlobalState) => ({
+        searchBy: state.searchBy,
+        moviesCount: getMoviesQuantity(state)
     }),
     {
         fetchMovies: fetchMovies,
