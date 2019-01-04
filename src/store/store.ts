@@ -1,6 +1,6 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
-import { createHashHistory, History } from 'history';
+import { createHashHistory, HashType, History } from 'history';
 import createSagaMiddleware from 'redux-saga';
 
 import { MoviesState } from './movies/reducer';
@@ -21,7 +21,11 @@ export interface Action<TPayload> extends EmptyAction {
     payload: TPayload;
 }
 
-export const appHistory = createHashHistory();
+export const appHistory = createHashHistory({
+    basename: '',
+    hashType: 'slash'
+});
+
 export const sagaMiddleware = createSagaMiddleware();
 
 const middleware: any[] = [sagaMiddleware, routerMiddleware(appHistory)];

@@ -2,12 +2,44 @@
 @import './../../../constants/_colors';
 
 .search-result {
+  margin: $margin-base;
+  overflow: auto;
+  height: $result-height;
 
+  &__movie-card {
+    margin-bottom: $margin-X;
+
+    &__header {
+      justify-content: space-between;
+      margin-top: $margin-small;
+    }
+
+    &__title {
+      color: $_colors_Dove_Gray;
+      font-weight: bold;
+      font-size: large;
+    }
+
+    &__date {
+      font-size: smaller;
+      margin-right: $margin-small;
+      border: $border-base;
+      padding: 2px 5px;
+      border-radius: $border-radius-small;
+    }
+
+    &__genres {
+      font-size: x-small;
+      color: $_colors_Dove_Gray;
+    }
+  }
 }
 
-  .no-films-found {
-    display: flex;
-    padding: 80px 0;
-    width: 100%;
-    justify-content: center;
-  }
+.no-films-found {
+  display: flex;
+  padding: 80px 0;
+  width: 100%;
+  justify-content: center;
+}
+
+

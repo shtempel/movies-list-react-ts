@@ -10,7 +10,7 @@
   &__title {
     font-weight: bold;
     color: $_color_Mandy;
-    margin-bottom: $margin-X-vertical;
+    margin-bottom: $margin-X;
   }
 
   &__form {
@@ -20,7 +20,7 @@
       background-color: $_color_Black;
       opacity: $search_input_opacity;
       outline: none;
-      margin-bottom: $margin-base-vertical;
+      margin-bottom: $margin-base;
       height: $search_input_height;
       color: $_color_White;
       font-size: $search_input_font_size;
@@ -45,7 +45,7 @@
   }
 
   &__search-by {
-    margin-top: $margin-base-vertical;
+    margin-top: $margin-base;
     justify-content: space-between;
 
     * {

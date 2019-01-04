@@ -9,15 +9,15 @@ export class MoviesService {
         return axios.get(`${ BASE_URL }?search=${ searchQuery }&searchBy=${ searchBy }`)
             .then((response) => {
                 return response.data.data.map(
-                    (movie: MovieItem) => {
+                    (movie: any) => {
                         return {
                             title: movie.title,
                             id: movie.id,
                             posterPath: movie.poster_path,
                             releaseDate: movie.release_date,
                             genres: movie.genres,
-                            vote_average: movie.vote_average,
-                            tagline: movie.tagline,
+                            voteAverage: movie.vote_average,
+                            tagLine: movie.tagline,
                             runtime: movie.runtime,
                             overview: movie.overview
                         }

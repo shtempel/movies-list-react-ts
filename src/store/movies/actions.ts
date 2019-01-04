@@ -9,11 +9,11 @@ export enum MoviesActions {
 export interface MovieItem {
     id: number;
     title: string;
-    poster_path: string;
-    release_date: string;
+    posterPath: string;
+    releaseDate: string;
     genres: string[];
-    vote_average: number;
-    tagline: string;
+    voteAverage: number;
+    tagLine: string;
     runtime: number;
     overview: string;
 }

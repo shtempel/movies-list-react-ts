@@ -27,7 +27,7 @@ export class Header extends Component<HeaderProps, HeaderState> {
     }
 
     private handleSubmit = () => {
-        appHistory.push(`/search/${ this.state.value }`);
+        appHistory.push(`${ this.state.value }`);
         this.props.fetchMovies({ searchQuery: this.state.value, searchBy: this.props.searchBy });
     };
 

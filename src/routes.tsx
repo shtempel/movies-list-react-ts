@@ -1,14 +1,13 @@
 import React from 'react';
-import { Redirect, Route, Switch } from 'react-router';
+import { Route, Switch } from 'react-router';
 
 import { Home } from './pages';
 
 const routes = (
     <div>
         <Switch>
-            <Route exact path="/home" component={ Home }/>
-            <Route exact path="/search/:searchQuery" component={ Home }/>
-            <Redirect to="/home"/>
+            <Route path="/" component={ Home }/>
+            <Route path="/search/:searchQuery" component={ Home }/>
         </Switch>
     </div>
 );
