@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { SearchResult } from "./search-result/search-result";
-import { GlobalState } from "../../store/store";
+import { appHistory, GlobalState } from "../../store/store";
 import { MovieItem } from "../../store/movies/actions";
 import { getMovies } from "../../store/selectors";
 
@@ -10,14 +10,22 @@ interface HomeProps {
     movies: MovieItem[];
 }
 
-export class Home extends Component<HomeProps> {
+class Home extends Component<HomeProps> {
+
+    private handleOnClick = () => {
+        appHistory.push({
+            // pathname: `/movie/:${movie.id}`
+        });
+        console.log(this.props);
+    };
+
     render() {
         const { movies } = this.props;
         return (
             <div>
                 {
                     movies.length
-                        ? <SearchResult movies={ movies }/>
+                        ? <SearchResult movies={ movies } />
                         : < div className='no-films-found'>< h1> No films found</h1></div>
                 }
             </div>

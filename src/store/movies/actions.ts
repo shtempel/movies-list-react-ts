@@ -4,6 +4,10 @@ export enum MoviesActions {
     FetchMovies = 'FETCH_MOVIES',
     FetchMovieSuccess = 'FETCH_MOVIES_SUCCESS',
     FetchMoviesFail = 'FETCH_MOVIES_FAIL',
+
+    FetchMovieById = 'FETCH_MOVIE_BY_ID ',
+    FetchMovieByIdSuccess = 'FETCH_MOVIE_BY_ID_SUCCESS',
+    FetchMovieByIdFail = 'FETCH_MOVIE_BY_ID_FAIL'
 }
 
 export interface MovieItem {
@@ -23,6 +27,10 @@ export interface FetchMoviesPayload {
     searchBy: string;
 }
 
+export interface FetchMovieByIdPayload {
+    id: number;
+}
+
 export const fetchMovies = (payload: FetchMoviesPayload): Action<FetchMoviesPayload> => ({
     type: MoviesActions.FetchMovies,
     payload
@@ -38,7 +46,13 @@ export const fetchMoviesFail = (error: Error) => ({
     payload: error
 });
 
+export const fetchMovieById = (payload: FetchMovieByIdPayload): Action<FetchMovieByIdPayload> => ({
+    type: MoviesActions.FetchMovieById,
+    payload
+});
+
 export type MoviesActionType =
     | Action<MovieItem[]>
+    | Action<MovieItem>
     | Action<Error>
     | Action<string>;

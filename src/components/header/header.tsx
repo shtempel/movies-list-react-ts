@@ -19,20 +19,26 @@ export interface HeaderState {
     value: string;
 }
 
-export class Header extends Component<HeaderProps, HeaderState> {
+class Header extends Component<HeaderProps, HeaderState> {
     constructor(props: HeaderProps) {
         super(props);
 
         this.state = { value: '' };
     }
 
-    private handleSubmit = () => {
-        appHistory.push(`${ this.state.value }`);
+    handleSubmit = () => {
+        appHistory.push(`/search/:${ this.state.value }`);
         this.props.fetchMovies({ searchQuery: this.state.value, searchBy: this.props.searchBy });
     };
 
     private handleChange = (e: any) => {
         this.setState({ value: e.target.value });
+    };
+
+    private submitEvent = (e: any) => {
+        if (e.key === 'Enter') {
+            this.handleSubmit()
+        }
     };
 
     private setSearchBy = (e: any) => {
@@ -47,13 +53,17 @@ export class Header extends Component<HeaderProps, HeaderState> {
         return (
             <div className='header column'>
                 <span className='header__title'>{ common.MAIN_TITLE }</span>
-                <form onSubmit={ this.handleSubmit } className='header__form column'>
+                <div className='header__form column'>
                     <input className='header__form__search-input'
-                           type='text'
+                           type='search'
+                           onKeyPress={ this.submitEvent }
                            value={ this.state.value }
                            onChange={ this.handleChange }/>
-                    <Button className='header__form__search-button btn' type='submit' name={ common.SEARCH }/>
-                </form>
+                    <Button className='header__form__search-button btn'
+                            onClick={ this.handleSubmit }
+                            type='submit'
+                            name={ common.SEARCH }/>
+                </div>
                 <div className='header__search-by row'>
                     <span>{ common.SEARCH_BY }</span>
                     <Button value='title'

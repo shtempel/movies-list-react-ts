@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-import { MovieItem } from '../store/movies/actions';
 import { BASE_URL } from '../constants/constants';
 
 export class MoviesService {
@@ -26,7 +25,12 @@ export class MoviesService {
             })
     }
 
-    getMovieById() {}
+    getMovieById(id: number) {
+        return axios.get(`${ BASE_URL }/${ id }`)
+            .then((response)=> {
+                console.log(response);
+            })
+    }
 }
 
 const service = new MoviesService();

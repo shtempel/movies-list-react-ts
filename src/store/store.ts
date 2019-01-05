@@ -1,16 +1,27 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
-import { createHashHistory, HashType, History } from 'history';
+import { createHashHistory, History } from 'history';
 import createSagaMiddleware from 'redux-saga';
 
 import { MoviesState } from './movies/reducer';
 import reducers from './reducers';
 import rootSaga from './sagas';
 
+export interface Router {
+    action: string;
+    location: {
+        hash: string;
+        pathname: string;
+        search: string;
+        state: any;
+    };
+}
+
 export interface GlobalState {
     moviesState: MoviesState;
     searchBy: string;
     sortBy: string;
+    router: Router
 }
 
 export interface EmptyAction {
@@ -21,10 +32,7 @@ export interface Action<TPayload> extends EmptyAction {
     payload: TPayload;
 }
 
-export const appHistory = createHashHistory({
-    basename: '',
-    hashType: 'slash'
-});
+export const appHistory = createHashHistory();
 
 export const sagaMiddleware = createSagaMiddleware();
 

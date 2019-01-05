@@ -11,7 +11,6 @@ export function* fetchMovies(action: any) {
     try {
         const fetchedMovies = yield call(
             [moviesService, moviesService.getMovies], action.payload.searchQuery, action.payload.searchBy);
-
         yield put(fetchMoviesSuccess(fetchedMovies));
     } catch (error) {
         // yield put(fetchCasesInfoFail(error));
