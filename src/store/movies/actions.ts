@@ -11,15 +11,15 @@ export enum MoviesActions {
 }
 
 export interface MovieItem {
-    id: number;
-    title: string;
-    posterPath: string;
-    releaseDate: string;
-    genres: string[];
-    voteAverage: number;
-    tagLine: string;
-    runtime: number;
-    overview: string;
+    id?: number;
+    title?: string;
+    posterPath?: string;
+    releaseDate?: string;
+    genres?: string[];
+    voteAverage?: number;
+    tagLine?: string;
+    runtime?: number;
+    overview?: string;
 }
 
 export interface FetchMoviesPayload {
@@ -49,6 +49,16 @@ export const fetchMoviesFail = (error: Error) => ({
 export const fetchMovieById = (payload: FetchMovieByIdPayload): Action<FetchMovieByIdPayload> => ({
     type: MoviesActions.FetchMovieById,
     payload
+});
+
+export const fetchMovieByIdSuccess = (currentMovie: MovieItem): Action<MovieItem> => ({
+    type: MoviesActions.FetchMovieByIdSuccess,
+    payload: currentMovie
+});
+
+export const fetchMovieByIdFail = (error: Error) => ({
+    type: MoviesActions.FetchMovieByIdFail,
+    payload: error
 });
 
 export type MoviesActionType =

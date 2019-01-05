@@ -8,6 +8,11 @@ export const getMovies = createSelector(
     state => state.movies
 );
 
+export const getCurrentMovie = createSelector(
+    getMoviesState,
+    state => state.currentMovie
+);
+
 export const getMoviesQuantity = createSelector(
     getMovies,
     state => state.length
