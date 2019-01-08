@@ -4,12 +4,22 @@
 .search-result {
   margin: $margin-base;
   overflow: auto;
+  flex-wrap: wrap;
   height: $result-height;
 
   &__movie-card {
-    margin-bottom: $margin-X;
+    margin: $margin-base;
+    width: 20%;
+
     &__poster {
       width: 100%;
+      box-sizing: border-box;
+    }
+
+    &__poster:hover {
+      box-sizing: border-box;
+      padding: 4px 4px;
+      border: 2px solid $_color_Mandy;
     }
 
     &__header {
@@ -21,6 +31,9 @@
       color: $_colors_Dove_Gray;
       font-weight: bold;
       font-size: large;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
     }
 
     &__date {

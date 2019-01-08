@@ -1,4 +1,4 @@
-import { Action } from '../store';
+import { Action, EmptyAction } from '../store';
 
 export enum MoviesActions {
     FetchMovies = 'FETCH_MOVIES',
@@ -7,7 +7,10 @@ export enum MoviesActions {
 
     FetchMovieById = 'FETCH_MOVIE_BY_ID ',
     FetchMovieByIdSuccess = 'FETCH_MOVIE_BY_ID_SUCCESS',
-    FetchMovieByIdFail = 'FETCH_MOVIE_BY_ID_FAIL'
+    FetchMovieByIdFail = 'FETCH_MOVIE_BY_ID_FAIL',
+
+    SortByDate = 'SORT_BY_DATE',
+    SortByRating = 'SORT_BY_RATING'
 }
 
 export interface MovieItem {
@@ -61,8 +64,17 @@ export const fetchMovieByIdFail = (error: Error) => ({
     payload: error
 });
 
+export const sortByRating = (): EmptyAction => ({
+    type: MoviesActions.SortByRating
+});
+
+export const sortByDate = (): EmptyAction => ({
+    type: MoviesActions.SortByDate
+});
+
 export type MoviesActionType =
     | Action<MovieItem[]>
     | Action<MovieItem>
     | Action<Error>
+    | EmptyAction
     | Action<string>;

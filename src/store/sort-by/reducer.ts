@@ -1,6 +1,6 @@
 import { Reducer } from 'redux';
 import { Action } from '../store';
-import { SortByActions, SortByActionType } from "./actions";
+import { SortByActions, SortByActionType } from './actions';
 
 export const initialState: string = 'date';
 

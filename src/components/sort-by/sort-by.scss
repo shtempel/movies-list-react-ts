@@ -10,6 +10,10 @@
   padding: $padding-small;
   box-sizing: border-box;
 
+  &__buttons span:last-child {
+    margin-left: $margin-base;
+  }
+
   &__buttons span:first-child {
     margin-right: $margin-base;
   }

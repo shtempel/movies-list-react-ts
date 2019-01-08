@@ -3,7 +3,9 @@
 /* Padding */
 $padding-small:                         .4rem;
 $padding-base:                          .8rem;
-
+$padding-XL:                             25px 100px;
+$padding-integer:                        5px 11px;
+$padding-fractional:                     6px;
 /* Margin*/
 
 $margin-small:                           5px;
@@ -12,8 +14,9 @@ $margin-X:                              50px;
 
 /* Common*/
 $header_height:                         250px;
-$result-height:                         550px;
+$result-height:                         450px;
 $buttons_padding:                       3px 15px;
+$buttons_padding_hover:                 1px 13px;
 
 /* Search input*/
 $search_input_opacity:                  0.9;

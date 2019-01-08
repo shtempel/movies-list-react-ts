@@ -5,6 +5,7 @@ export enum common {
     SEARCH = 'search',
     SEARCH_BY = 'search by',
     SORT_BY = 'Sort by',
+    FIND_YOUR_MOVIE = 'find your movie',
     TITLE = 'title',
     GENRE = 'genre',
     RELEASE_DATE = 'release date',

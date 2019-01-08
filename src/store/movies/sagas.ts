@@ -1,4 +1,5 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, throttle } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
 
 import moviesService from './../../services/movies-service';
 import {
@@ -9,13 +10,14 @@ import {
     fetchMoviesSuccess,
     MoviesActions
 } from './actions';
-import { Action } from "../store";
+import { Action } from '../store';
 
 export function* watchFetchMovies() {
-    yield takeEvery(MoviesActions.FetchMovies, fetchMovies);
+    yield throttle(1000, MoviesActions.FetchMovies, fetchMovies);
 }
 
 export function* fetchMovies(action: Action<FetchMoviesPayload>) {
+    yield call(delay, 1000);
     try {
         const fetchedMovies = yield call(
             [moviesService, moviesService.getMovies], action.payload.searchQuery, action.payload.searchBy);
@@ -26,7 +28,7 @@ export function* fetchMovies(action: Action<FetchMoviesPayload>) {
 }
 
 export function* watchFetchMovieById() {
-    yield takeEvery(MoviesActions.FetchMovieById, fetchMovieById);
+    yield throttle(1000, MoviesActions.FetchMovieById, fetchMovieById);
 }
 
 export function* fetchMovieById(action: Action<FetchMovieByIdPayload>) {

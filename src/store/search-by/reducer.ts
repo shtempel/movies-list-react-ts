@@ -1,6 +1,6 @@
 import { Reducer } from 'redux';
 import { Action } from '../store';
-import { SearchByActions, SearchByActionType } from "./actions";
+import { SearchByActions, SearchByActionType } from './actions';
 
 export const initialState: string = 'title';
 

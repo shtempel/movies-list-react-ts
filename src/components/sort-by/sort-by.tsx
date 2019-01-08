@@ -3,15 +3,17 @@ import { connect } from 'react-redux';
 import cn from 'classnames';
 
 import './sort-by.scss';
-import { common } from "../../constants/constants";
-import { GlobalState } from "../../store/store";
-import { getMoviesQuantity } from "../../store/movies/selectors";
-import { setSortBy } from "../../store/actions";
+import { common } from '../../constants/constants';
+import { GlobalState } from '../../store/store';
+import { getMoviesQuantity } from '../../store/movies/selectors';
+import { setSortBy, sortByDate, sortByRating } from '../../store/actions';
 
 interface SortByProps {
     moviesCount: number;
     sortBy: string;
-    setSortBy: (payload: string) => any
+    setSortBy: (payload: string) => any,
+    sortByRating: () => any,
+    sortByDate: () => any
 }
 
 class SortBy extends Component<SortByProps> {
@@ -20,6 +22,12 @@ class SortBy extends Component<SortByProps> {
     }
 
     private setSortBy = (e: any) => {
+        if (e.target.id === 'rating') {
+            this.props.sortByRating();
+        } else {
+            this.props.sortByDate();
+        }
+
         this.props.setSortBy(e.target.id);
     };
 
@@ -33,6 +41,7 @@ class SortBy extends Component<SortByProps> {
             <div className='sort-by row'>
                 <span>{ moviesCount }{ common.MOVIES_FOUND }</span>
                 <div className='row sort-by__buttons'>
+                    <span>{ common.SORT_BY }</span>
                     <span id='date'
                           className={ cn('link', { 'active-link': this.setActiveLink('date') }) }
                           onClick={ this.setSortBy }>{ common.RELEASE_DATE }</span>
@@ -50,5 +59,9 @@ export default connect(
         moviesCount: getMoviesQuantity(state),
         sortBy: state.sortBy
     }),
-    { setSortBy: setSortBy }
+    {
+        setSortBy: setSortBy,
+        sortByRating: sortByRating,
+        sortByDate: sortByDate
+    }
 )(SortBy);

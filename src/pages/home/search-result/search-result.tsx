@@ -6,19 +6,22 @@ import { MovieItem } from '../../../store/movies/actions';
 
 interface SearchResultProps {
     movies: MovieItem[];
+    onClick?: any;
 }
 
 export const SearchResult = (props: SearchResultProps) => {
     return (
-        <div className='search-result' { ...props }>
+        <div className='search-result row' { ...props }>
             {
                 props.movies && props.movies.map(
                     movie => (
                         <div className='search-result__movie-card column' key={ movie.id }>
                             <Link to={ `/movie/${ movie.id }` }>
                                 <img className='search-result__movie-card__poster'
+                                     id={ movie.id ? movie.id.toString() : undefined }
                                      src={ movie.posterPath }
-                                     alt={ movie.title }/>
+                                     alt={ movie.title }
+                                     onClick={ props.onClick }/>
                             </Link>
                             <div className='search-result__movie-card__header row'>
                                 <span className='search-result__movie-card__title'>{ movie.title }</span>

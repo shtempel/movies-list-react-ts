@@ -1,31 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { SearchResult } from "./search-result/search-result";
-import { appHistory, GlobalState } from "../../store/store";
-import { MovieItem } from "../../store/movies/actions";
-import { getMovies } from "../../store/selectors";
+import { SearchResult } from './search-result/search-result';
+import { GlobalState } from '../../store/store';
+import { fetchMovies, FetchMoviesPayload, MovieItem } from '../../store/movies/actions';
+import { getMovies } from '../../store/selectors';
+import { Header, SortBy, Loader } from '../../components';
 
 interface HomeProps {
     movies: MovieItem[];
+    isLoading: boolean;
+    fetchMovies: (payload: FetchMoviesPayload) => any;
 }
 
 class Home extends Component<HomeProps> {
-
-    private handleOnClick = () => {
-        appHistory.push({
-            // pathname: `/movie/:${movie.id}`
-        });
-        console.log(this.props);
-    };
+    componentWillMount(): void {
+        this.props.fetchMovies({ searchQuery: ' ', searchBy: 'title' });
+    }
 
     render() {
-        const { movies } = this.props;
+        const { movies, isLoading } = this.props;
+
         return (
             <div>
-                {
+                <Header/>
+                <SortBy/>
+                { isLoading ? <Loader/> :
                     movies.length
-                        ? <SearchResult movies={ movies } />
+                        ? <SearchResult movies={ movies }/>
                         : < div className='no-films-found'>< h1> No films found</h1></div>
                 }
             </div>
@@ -35,7 +37,15 @@ class Home extends Component<HomeProps> {
 
 export default connect(
     (state: GlobalState) => ({
-        movies: getMovies(state)
+        movies: getMovies(state),
+        isLoading: state.moviesState.isLoading
     }),
-    null
+    {
+        fetchMovies: fetchMovies
+    }
 )(Home);
+
+export const sort = () => {
+
+
+};

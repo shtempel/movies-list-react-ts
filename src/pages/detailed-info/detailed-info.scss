@@ -1,0 +1,86 @@
+@import './../../constants/variables';
+@import './../../constants/_colors';
+
+.detailed-info {
+  padding: $padding-base;
+  background: linear-gradient(rgba(0, 0, 0, 0.5),
+          rgba(0, 0, 0, 0.5)), url("./../../assets/background.jpg");
+  background-size: cover;
+
+  &__top {
+    justify-content: space-between;
+    margin-bottom: $margin-X;
+    &__title {
+      font-weight: bold;
+      color: $_color_Mandy;
+    }
+
+    &__to-search {
+      text-transform: uppercase;
+      margin-right: 10%;
+      box-sizing: border-box;
+      color: $_color_Mandy;
+      background-color: $_color_White;
+    }
+    &__to-search:hover {
+      box-sizing: border-box;
+      padding: $buttons_padding_hover;
+      border: 2px solid $_color_Mandy;
+
+
+    }
+  }
+
+  &__film {
+    color: $_color_White;
+
+    &__poster {
+      display: flex;
+      height: 265px;
+    }
+
+    &__right {
+      width: 60%;
+      margin-left: $margin-X;
+
+      &__title-rating {
+        align-items: center;
+        margin-top: $margin-base;
+
+        &__title {
+          color: $_color_Mandy;
+          font-weight: bolder;
+          font-size: x-large;
+        }
+
+        &__rating {
+          margin-left: $margin-base;
+          border-radius: $border-radius-circle;
+          border: 1px solid $_color_White;
+        }
+      }
+
+      &__tagline {
+        font-size: small;
+        margin-top: $margin-small;
+        color: $_color_Silver_Chalice;
+      }
+
+      &__date-runtime {
+        font-weight: bold;
+        margin-top: $margin-base;
+
+        &__date {
+          margin-right: $margin-X;
+        }
+      }
+
+      &__overview {
+        margin-top: $margin-base;
+        height: 100px;
+        overflow: auto;
+      }
+    }
+
+  }
+}

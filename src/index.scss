@@ -1,9 +1,15 @@
 @import './constants/_colors';
 @import './constants/variables';
 
+html {
+  justify-content: space-around;
+  flex-direction: row;
+  display: flex;
+}
+
 body {
   margin: 0;
-  padding: 0;
+  padding: 2%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
   "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
   sans-serif;
@@ -56,4 +62,12 @@ code {
 
 .link:active {
   color: $_color_Crown_of_Thorns;
+}
+
+.fractional-border {
+padding: $padding-fractional;
+}
+
+.integer-border {
+  padding: $padding-integer;
 }

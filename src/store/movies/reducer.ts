@@ -19,11 +19,33 @@ const reducer: Reducer<MoviesState, MoviesActionType> = (
     action: MoviesActionType
 ) => {
     switch (action.type) {
+        case MoviesActions.FetchMovies: {
+            return {
+                ...state,
+                isLoading: true
+            }
+        }
+
         case MoviesActions.FetchMovieSuccess: {
             const { payload: movies } = action as Action<MovieItem[]>;
             return {
                 ...state,
+                isLoading: false,
                 movies
+            }
+        }
+
+        case MoviesActions.FetchMoviesFail: {
+            return {
+                ...state,
+                isLoading: false
+            }
+        }
+
+        case MoviesActions.FetchMovieById: {
+            return {
+                ...state,
+                isLoading: true
             }
         }
 
@@ -31,8 +53,34 @@ const reducer: Reducer<MoviesState, MoviesActionType> = (
             const { payload: currentMovie } = action as Action<MovieItem>;
             return {
                 ...state,
-                currentMovie
+                currentMovie,
+                isLoading: false
             }
+        }
+
+        case MoviesActions.FetchMovieByIdFail: {
+            return {
+                ...state,
+                isLoading: false
+            };
+        }
+
+        case MoviesActions.SortByRating: {
+            return {
+                ...state,
+                movies: state.movies.sort((a: any, b: any) => {
+                    return a.voteAverage - b.voteAverage;
+                })
+            };
+        }
+
+        case MoviesActions.SortByDate: {
+            return {
+                ...state,
+                movies: state.movies.sort((a: any, b: any) => {
+                    return parseInt(b.releaseDate) - parseInt(a.releaseDate);
+                })
+            };
         }
 
         default: {
