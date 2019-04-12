@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { MovieItem } from '../../../store/movies/reducer';
+
 import './search-result.scss';
-import { MovieItem } from '../../../store/movies/actions';
 
 interface SearchResultProps {
     movies: MovieItem[];
@@ -13,7 +14,7 @@ export const SearchResult = (props: SearchResultProps) => {
     return (
         <div className='search-result row' { ...props }>
             {
-                props.movies && props.movies.map(
+                props.movies.map(
                     movie => (
                         <div className='search-result__movie-card column' key={ movie.id }>
                             <Link to={ `/movie/${ movie.id }` }>

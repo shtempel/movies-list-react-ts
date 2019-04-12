@@ -5,16 +5,18 @@ import cn from 'classnames';
 import './header.scss';
 import { common } from '../../constants/constants';
 import { appHistory, GlobalState } from '../../store/store';
-import { fetchMovies, FetchMoviesPayload, setSearchBy } from '../../store/actions';
+import { fetchMovies, setQueryString, setSearchBy } from '../../store/actions';
 import { Button, Title } from '..';
-import { getMoviesQuantity } from '../../store/movies/selectors';
+import { selectMoviesQuantity } from '../../store/movies/selectors';
 
 export interface HeaderProps {
-    fetchMovies: (payload: FetchMoviesPayload) => any,
-    setSearchBy: (payload: string) => any,
     searchBy: string,
     match?: any;
     isLoading?: boolean;
+
+    fetchMovies(): void,
+    setSearchBy(payload: string): void,
+    setQueryString(payload: string): void,
 }
 
 export interface HeaderState {
@@ -29,8 +31,11 @@ class Header extends Component<HeaderProps, HeaderState> {
     }
 
     handleSubmit = () => {
+        const { setQueryString, fetchMovies } = this.props;
+
         appHistory.push(`/search/:${ this.state.value }`);
-        this.props.fetchMovies({ searchQuery: this.state.value, searchBy: this.props.searchBy });
+        setQueryString(this.state.value);
+        fetchMovies();
     };
 
     private handleChange = (e: any) => {
@@ -39,7 +44,7 @@ class Header extends Component<HeaderProps, HeaderState> {
 
     private submitEvent = (e: any) => {
         if (e.key === 'Enter') {
-            this.handleSubmit()
+            this.handleSubmit();
         }
     };
 
@@ -92,10 +97,11 @@ export default connect(
     (state: GlobalState) => ({
         searchBy: state.searchBy,
         isLoading: state.moviesState.isLoading,
-        moviesCount: getMoviesQuantity(state)
+        moviesCount: selectMoviesQuantity(state)
     }),
     {
         fetchMovies: fetchMovies,
-        setSearchBy: setSearchBy
+        setSearchBy: setSearchBy,
+        setQueryString: setQueryString
     }
 )(Header);

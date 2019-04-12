@@ -1,71 +1,82 @@
 import { Reducer } from 'redux';
-import { MovieItem, MoviesActions, MoviesActionType } from './actions';
-import { Action } from '../store';
+import { ActionType, getType } from 'typesafe-actions';
+
+import * as actions from './actions';
+
+export interface MovieItem {
+    id?: number;
+    title?: string;
+    posterPath?: string;
+    releaseDate?: string;
+    genres?: string[];
+    voteAverage?: number;
+    tagLine?: string;
+    runtime?: number;
+    overview?: string;
+}
 
 export interface MoviesState {
     isLoading: boolean;
+    queryString: string;
     movies: MovieItem[];
     currentMovie: MovieItem;
 }
 
+export type MoviesAction = ActionType<typeof actions>;
+
 export const initialState: MoviesState = {
     isLoading: false,
+    queryString: '',
     movies: [],
     currentMovie: {}
 };
 
-const reducer: Reducer<MoviesState, MoviesActionType> = (
+const reducer: Reducer<MoviesState, MoviesAction> = (
     state = initialState,
-    action: MoviesActionType
+    action
 ) => {
     switch (action.type) {
-        case MoviesActions.FetchMovies: {
+
+        case getType(actions.setQueryString): {
+            return {
+                ...state,
+                queryString: action.payload
+            };
+        }
+
+        case getType(actions.fetchMovies):
+        case getType(actions.fetchMovieById): {
             return {
                 ...state,
                 isLoading: true
-            }
+            };
         }
 
-        case MoviesActions.FetchMovieSuccess: {
-            const { payload: movies } = action as Action<MovieItem[]>;
+        case getType(actions.fetchMoviesSuccess): {
             return {
                 ...state,
                 isLoading: false,
-                movies
-            }
+                movies: action.payload
+            };
         }
 
-        case MoviesActions.FetchMoviesFail: {
-            return {
-                ...state,
-                isLoading: false
-            }
-        }
-
-        case MoviesActions.FetchMovieById: {
-            return {
-                ...state,
-                isLoading: true
-            }
-        }
-
-        case MoviesActions.FetchMovieByIdSuccess: {
-            const { payload: currentMovie } = action as Action<MovieItem>;
-            return {
-                ...state,
-                currentMovie,
-                isLoading: false
-            }
-        }
-
-        case MoviesActions.FetchMovieByIdFail: {
+        case getType(actions.fetchMovieByIdFail):
+        case getType(actions.fetchMoviesFail): {
             return {
                 ...state,
                 isLoading: false
             };
         }
 
-        case MoviesActions.SortByRating: {
+        case getType(actions.fetchMovieByIdSuccess): {
+            return {
+                ...state,
+                currentMovie: action.payload,
+                isLoading: false
+            };
+        }
+
+        case getType(actions.sortByRating): {
             return {
                 ...state,
                 movies: state.movies.sort((a: any, b: any) => {
@@ -74,7 +85,7 @@ const reducer: Reducer<MoviesState, MoviesActionType> = (
             };
         }
 
-        case MoviesActions.SortByDate: {
+        case getType(actions.sortByDate): {
             return {
                 ...state,
                 movies: state.movies.sort((a: any, b: any) => {

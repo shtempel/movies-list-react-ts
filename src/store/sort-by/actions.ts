@@ -1,12 +1,6 @@
-import { Action } from '../store';
+import { createAction } from 'typesafe-actions';
 
-export enum SortByActions {
-    SetSortBy = 'SET_SORT_BY'
-}
-
-export const setSortBy = (sortBy: string) => ({
-    type: SortByActions.SetSortBy,
-    payload: sortBy
-});
-
-export type SortByActionType = Action<string>;
+export const setSortBy = createAction(
+    'SET_SORT_BY',
+    resolve => (sortBy: string) => resolve(sortBy)
+);

@@ -1,17 +1,19 @@
 import { Reducer } from 'redux';
-import { Action } from '../store';
-import { SearchByActions, SearchByActionType } from './actions';
+import { ActionType, getType } from 'typesafe-actions';
+
+import * as actions from './actions';
+
+export type SearchByAction = ActionType<typeof actions>;
 
 export const initialState: string = 'title';
 
-const reducer: Reducer<string, SearchByActionType> = (
-    state = initialState, action: SearchByActionType) => {
+const reducer: Reducer<string, SearchByAction> = (
+    state = initialState, action) => {
 
     switch (action.type) {
 
-        case SearchByActions.SetSearchBy: {
-            const { payload: searchBy } = action as Action<string>;
-            return searchBy;
+        case getType(actions.setSearchBy): {
+            return action.payload;
         }
 
         default: {

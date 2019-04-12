@@ -3,32 +3,34 @@ import { connect } from 'react-redux';
 import cn from 'classnames';
 
 import { appHistory, GlobalState } from '../../store/store';
-import { fetchMovieById, FetchMovieByIdPayload, MovieItem } from '../../store/actions';
-import { getCurrentMovie, getMovies } from '../../store/movies/selectors';
+import { fetchMovieById } from '../../store/actions';
+import { selectCurrentMovie, selectMovies } from '../../store/movies/selectors';
 import { SearchResult } from '../home/search-result/search-result';
 import { Button, Title } from '../../components';
 import { common } from '../../constants/constants';
+import { MovieItem } from '../../store/movies/reducer';
 
 import './detailed-info.scss';
 
 interface DetailedInfoProps {
     match: any;
-    fetchMovieById: (payload: FetchMovieByIdPayload) => any,
     currentMovie: MovieItem,
-    movies: MovieItem[]
+    movies: MovieItem[],
+
+    fetchMovieById(id: number): void
 }
 
 class DetailedInfo extends Component<DetailedInfoProps> {
-    componentWillMount(): void {
-        this.props.fetchMovieById({ id: this.props.match.params.id });
+    componentWillMount() {
+        this.props.fetchMovieById(this.props.match.params.id);
     }
 
     setPaddingForRating = (rating: any) => {
         return Number.isInteger(rating);
     };
 
-    getMovie = (event: any): any => {
-        this.props.fetchMovieById({ id: event.target.id });
+    getMovie = (event: any) => {
+        this.props.fetchMovieById(event.target.id);
     };
 
     toSearch = () => {
@@ -84,8 +86,8 @@ class DetailedInfo extends Component<DetailedInfoProps> {
 
 export default connect(
     (state: GlobalState) => ({
-        currentMovie: getCurrentMovie(state),
-        movies: getMovies(state)
+        currentMovie: selectCurrentMovie(state),
+        movies: selectMovies(state)
     }),
     {
         fetchMovieById: fetchMovieById

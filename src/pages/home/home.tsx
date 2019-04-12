@@ -1,35 +1,44 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import { connect } from 'react-redux';
 
 import { SearchResult } from './search-result/search-result';
 import { GlobalState } from '../../store/store';
-import { fetchMovies, FetchMoviesPayload, MovieItem } from '../../store/movies/actions';
-import { getMovies } from '../../store/selectors';
+import { fetchMovies } from '../../store/movies/actions';
+import { selectMovies } from '../../store/selectors';
 import { Header, SortBy, Loader } from '../../components';
+import { MovieItem } from '../../store/movies/reducer';
 
 interface HomeProps {
     movies: MovieItem[];
     isLoading: boolean;
-    fetchMovies: (payload: FetchMoviesPayload) => any;
+    fetchMovies: () => any;
 }
 
 class Home extends Component<HomeProps> {
     componentWillMount(): void {
-        this.props.fetchMovies({ searchQuery: ' ', searchBy: 'title' });
+        this.props.fetchMovies();
     }
 
     render() {
         const { movies, isLoading } = this.props;
 
+        const searchResult: ReactNode = (
+            movies.length
+            ? <SearchResult movies={ movies }/>
+            : < div className='no-films-found'>< h1> No films found</h1></div>
+        );
+
+        const content: ReactNode = (
+            isLoading
+            ? <Loader/>
+            : searchResult
+        );
+
         return (
             <div>
                 <Header/>
                 <SortBy/>
-                { isLoading ? <Loader/> :
-                    movies.length
-                        ? <SearchResult movies={ movies }/>
-                        : < div className='no-films-found'>< h1> No films found</h1></div>
-                }
+                { content }
             </div>
         );
     }
@@ -37,7 +46,7 @@ class Home extends Component<HomeProps> {
 
 export default connect(
     (state: GlobalState) => ({
-        movies: getMovies(state),
+        movies: selectMovies(state),
         isLoading: state.moviesState.isLoading
     }),
     {
@@ -46,6 +55,5 @@ export default connect(
 )(Home);
 
 export const sort = () => {
-
 
 };

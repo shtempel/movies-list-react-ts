@@ -24,14 +24,6 @@ export interface GlobalState {
     router: Router
 }
 
-export interface EmptyAction {
-    type: string;
-}
-
-export interface Action<TPayload> extends EmptyAction {
-    payload: TPayload;
-}
-
 export const appHistory = createHashHistory();
 
 export const sagaMiddleware = createSagaMiddleware();

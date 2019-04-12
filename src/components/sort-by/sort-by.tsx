@@ -5,7 +5,7 @@ import cn from 'classnames';
 import './sort-by.scss';
 import { common } from '../../constants/constants';
 import { GlobalState } from '../../store/store';
-import { getMoviesQuantity } from '../../store/movies/selectors';
+import { selectMoviesQuantity } from '../../store/movies/selectors';
 import { setSortBy, sortByDate, sortByRating } from '../../store/actions';
 
 interface SortByProps {
@@ -56,7 +56,7 @@ class SortBy extends Component<SortByProps> {
 
 export default connect(
     (state: GlobalState) => ({
-        moviesCount: getMoviesQuantity(state),
+        moviesCount: selectMoviesQuantity(state),
         sortBy: state.sortBy
     }),
     {

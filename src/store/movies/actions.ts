@@ -1,80 +1,43 @@
-import { Action, EmptyAction } from '../store';
+import { createAction } from 'typesafe-actions';
 
-export enum MoviesActions {
-    FetchMovies = 'FETCH_MOVIES',
-    FetchMovieSuccess = 'FETCH_MOVIES_SUCCESS',
-    FetchMoviesFail = 'FETCH_MOVIES_FAIL',
+import { MovieItem } from './reducer';
 
-    FetchMovieById = 'FETCH_MOVIE_BY_ID ',
-    FetchMovieByIdSuccess = 'FETCH_MOVIE_BY_ID_SUCCESS',
-    FetchMovieByIdFail = 'FETCH_MOVIE_BY_ID_FAIL',
+export const setQueryString = createAction(
+    'SET_QUERY_STRING',
+    resolve => (id: string) => resolve(id)
+);
 
-    SortByDate = 'SORT_BY_DATE',
-    SortByRating = 'SORT_BY_RATING'
-}
+export const fetchMovies = createAction('FETCH_MOVIES');
 
-export interface MovieItem {
-    id?: number;
-    title?: string;
-    posterPath?: string;
-    releaseDate?: string;
-    genres?: string[];
-    voteAverage?: number;
-    tagLine?: string;
-    runtime?: number;
-    overview?: string;
-}
+export const fetchMoviesSuccess = createAction(
+    'FETCH_MOVIES_SUCCESS',
+    resolve => (movies: MovieItem[]) => resolve(movies)
+);
 
-export interface FetchMoviesPayload {
-    searchQuery: string;
-    searchBy: string;
-}
+export const fetchMoviesFail = createAction(
+    'FETCH_MOVIES_FAIL',
+    resolve => (payload: Error) => resolve(payload)
+);
 
-export interface FetchMovieByIdPayload {
-    id: number;
-}
+export const fetchMovieById = createAction(
+    'FETCH_MOVIE_BY_ID ',
+    resolve => (id: number) => resolve(id)
+);
 
-export const fetchMovies = (payload: FetchMoviesPayload): Action<FetchMoviesPayload> => ({
-    type: MoviesActions.FetchMovies,
-    payload
-});
+export const fetchMovieByIdSuccess = createAction(
+    'FETCH_MOVIE_BY_ID_SUCCESS',
+    resolve => (currentMovie: MovieItem) => resolve(currentMovie)
+);
 
-export const fetchMoviesSuccess = (movies: MovieItem[]): Action<MovieItem[]> => ({
-    type: MoviesActions.FetchMovieSuccess,
-    payload: movies
-});
+export const fetchMovieByIdFail = createAction(
+    'FETCH_MOVIE_BY_ID_FAIL',
+    resolve => (payload: Error) => resolve(payload)
+);
 
-export const fetchMoviesFail = (error: Error) => ({
-    type: MoviesActions.FetchMoviesFail,
-    payload: error
-});
+export const sortByRating = createAction(
+    'SORT_BY_RATING'
+);
 
-export const fetchMovieById = (payload: FetchMovieByIdPayload): Action<FetchMovieByIdPayload> => ({
-    type: MoviesActions.FetchMovieById,
-    payload
-});
-
-export const fetchMovieByIdSuccess = (currentMovie: MovieItem): Action<MovieItem> => ({
-    type: MoviesActions.FetchMovieByIdSuccess,
-    payload: currentMovie
-});
-
-export const fetchMovieByIdFail = (error: Error) => ({
-    type: MoviesActions.FetchMovieByIdFail,
-    payload: error
-});
-
-export const sortByRating = (): EmptyAction => ({
-    type: MoviesActions.SortByRating
-});
-
-export const sortByDate = (): EmptyAction => ({
-    type: MoviesActions.SortByDate
-});
-
-export type MoviesActionType =
-    | Action<MovieItem[]>
-    | Action<MovieItem>
-    | Action<Error>
-    | EmptyAction
-    | Action<string>;
+export const sortByDate = createAction(
+    'SORT_BY_DATE'
+);

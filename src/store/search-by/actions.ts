@@ -1,12 +1,6 @@
-import { Action } from '../store';
+import { createAction } from 'typesafe-actions';
 
-export enum SearchByActions {
-    SetSearchBy = 'SET_SEARCH_BY'
-}
-
-export const setSearchBy = (searchBy: string) => ({
-    type: SearchByActions.SetSearchBy,
-    payload: searchBy
-});
-
-export type SearchByActionType = Action<string>;
+export const setSearchBy = createAction(
+    'SET_SEARCH_BY',
+    resolve => (searchBy: string) => resolve(searchBy)
+);

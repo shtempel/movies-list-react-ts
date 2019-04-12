@@ -1,44 +1,42 @@
-import { call, put, throttle } from 'redux-saga/effects';
+import { call, put, select, throttle } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
+import { getType } from 'typesafe-actions';
 
 import moviesService from './../../services/movies-service';
-import {
-    fetchMovieByIdFail,
-    FetchMovieByIdPayload, fetchMovieByIdSuccess,
-    fetchMoviesFail,
-    FetchMoviesPayload,
-    fetchMoviesSuccess,
-    MoviesActions
-} from './actions';
-import { Action } from '../store';
+import * as actions from './actions';
+import { selectSearchBy } from '../search-by/selectors';
+import { selectSearchQuery } from './selectors';
 
 export function* watchFetchMovies() {
-    yield throttle(1000, MoviesActions.FetchMovies, fetchMovies);
+    yield throttle(1000, getType(actions.fetchMovies), fetchMovies);
 }
 
-export function* fetchMovies(action: Action<FetchMoviesPayload>) {
+export function* fetchMovies() {
     yield call(delay, 1000);
     try {
-        const fetchedMovies = yield call(
-            [moviesService, moviesService.getMovies], action.payload.searchQuery, action.payload.searchBy);
-        yield put(fetchMoviesSuccess(fetchedMovies));
+        const searchQuery = yield select(selectSearchQuery);
+        const searchBy = yield select(selectSearchBy);
+        const fetchedMovies = yield call([moviesService, moviesService.getMovies], searchQuery, searchBy);
+        yield put(actions.fetchMoviesSuccess(fetchedMovies));
     } catch (error) {
-        yield put(fetchMoviesFail(error));
+        yield put(actions.fetchMoviesFail(error));
     }
 }
 
 export function* watchFetchMovieById() {
-    yield throttle(1000, MoviesActions.FetchMovieById, fetchMovieById);
+    yield throttle(1000, getType(actions.fetchMovieById), fetchMovieById);
 }
 
-export function* fetchMovieById(action: Action<FetchMovieByIdPayload>) {
+export function* fetchMovieById(action: any) {
     try {
-        const fetchedMovie = yield call([moviesService, moviesService.getMovieById], action.payload.id);
-        yield put(fetchMovieByIdSuccess(fetchedMovie));
+        const fetchedMovie = yield call([moviesService, moviesService.getMovieById], action.payload);
+        yield put(actions.fetchMovieByIdSuccess(fetchedMovie));
     } catch (error) {
-        yield put(fetchMovieByIdFail(error));
+        yield put(actions.fetchMovieByIdFail(error));
     }
 }
 
-
-export const moviesSagas = [watchFetchMovies(), watchFetchMovieById()];
+export const moviesSagas = [
+    watchFetchMovies(),
+    watchFetchMovieById()
+];
