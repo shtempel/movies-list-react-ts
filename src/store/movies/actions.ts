@@ -1,9 +1,14 @@
-import { createAction } from 'typesafe-actions';
+import {createAction} from 'typesafe-actions';
 
-import { MovieItem } from './reducer';
+import {MovieItem} from './reducer';
 
 export const setQueryString = createAction(
     'SET_QUERY_STRING',
+    resolve => (queryString: string) => resolve(queryString)
+);
+
+export const setCurrentMovieId = createAction(
+    'SET_CURRENT_MOVIE_ID',
     resolve => (id: string) => resolve(id)
 );
 
@@ -19,10 +24,7 @@ export const fetchMoviesFail = createAction(
     resolve => (payload: Error) => resolve(payload)
 );
 
-export const fetchMovieById = createAction(
-    'FETCH_MOVIE_BY_ID ',
-    resolve => (id: number) => resolve(id)
-);
+export const fetchMovieById = createAction('FETCH_MOVIE_BY_ID ');
 
 export const fetchMovieByIdSuccess = createAction(
     'FETCH_MOVIE_BY_ID_SUCCESS',
@@ -34,10 +36,6 @@ export const fetchMovieByIdFail = createAction(
     resolve => (payload: Error) => resolve(payload)
 );
 
-export const sortByRating = createAction(
-    'SORT_BY_RATING'
-);
+export const sortByRating = createAction('SORT_BY_RATING');
 
-export const sortByDate = createAction(
-    'SORT_BY_DATE'
-);
+export const sortByDate = createAction('SORT_BY_DATE');

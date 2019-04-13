@@ -1,11 +1,11 @@
-import { call, put, select, throttle } from 'redux-saga/effects';
-import { delay } from 'redux-saga';
-import { getType } from 'typesafe-actions';
+import {call, put, select, throttle} from 'redux-saga/effects';
+import {delay} from 'redux-saga';
+import {getType} from 'typesafe-actions';
 
 import moviesService from './../../services/movies-service';
 import * as actions from './actions';
-import { selectSearchBy } from '../search-by/selectors';
-import { selectSearchQuery } from './selectors';
+import {selectSearchBy} from '../search-by/selectors';
+import {selectCurrentMovieId, selectSearchQuery} from './selectors';
 
 export function* watchFetchMovies() {
     yield throttle(1000, getType(actions.fetchMovies), fetchMovies);
@@ -27,9 +27,10 @@ export function* watchFetchMovieById() {
     yield throttle(1000, getType(actions.fetchMovieById), fetchMovieById);
 }
 
-export function* fetchMovieById(action: any) {
+export function* fetchMovieById() {
     try {
-        const fetchedMovie = yield call([moviesService, moviesService.getMovieById], action.payload);
+        const movieId = yield select(selectCurrentMovieId);
+        const fetchedMovie = yield call([moviesService, moviesService.getMovieById], movieId);
         yield put(actions.fetchMovieByIdSuccess(fetchedMovie));
     } catch (error) {
         yield put(actions.fetchMovieByIdFail(error));

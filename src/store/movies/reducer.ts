@@ -1,5 +1,5 @@
-import { Reducer } from 'redux';
-import { ActionType, getType } from 'typesafe-actions';
+import {Reducer} from 'redux';
+import {ActionType, getType} from 'typesafe-actions';
 
 import * as actions from './actions';
 
@@ -18,6 +18,7 @@ export interface MovieItem {
 export interface MoviesState {
     isLoading: boolean;
     queryString: string;
+    currentMovieId: string;
     movies: MovieItem[];
     currentMovie: MovieItem;
 }
@@ -26,6 +27,7 @@ export type MoviesAction = ActionType<typeof actions>;
 
 export const initialState: MoviesState = {
     isLoading: false,
+    currentMovieId: '',
     queryString: '',
     movies: [],
     currentMovie: {}
@@ -42,6 +44,13 @@ const reducer: Reducer<MoviesState, MoviesAction> = (
                 ...state,
                 queryString: action.payload
             };
+        }
+
+        case getType(actions.setCurrentMovieId): {
+            return {
+                ...state,
+                currentMovieId: action.payload
+            }
         }
 
         case getType(actions.fetchMovies):

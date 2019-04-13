@@ -1,12 +1,17 @@
-import { createSelector } from 'reselect';
+import {createSelector} from 'reselect';
 
-import { GlobalState } from '../store';
+import {GlobalState} from '../store';
 
 export const moviesState = (state: GlobalState) => state.moviesState;
 
 export const selectMovies = createSelector(
     [moviesState],
     moviesState => moviesState.movies
+);
+
+export const selectIsLoading = createSelector(
+    [moviesState],
+    moviesState => moviesState.isLoading
 );
 
 export const selectCurrentMovie = createSelector(
@@ -22,4 +27,9 @@ export const selectMoviesQuantity = createSelector(
 export const selectSearchQuery = createSelector(
     [moviesState],
     moviesState => moviesState.queryString
+);
+
+export const selectCurrentMovieId = createSelector(
+    [moviesState],
+    moviesState => moviesState.currentMovieId
 );
