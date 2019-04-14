@@ -2,18 +2,20 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import cn from 'classnames';
 
-import './sort-by.scss';
 import {common} from '../../constants/constants';
 import {GlobalState} from '../../store/store';
 import {selectMoviesQuantity} from '../../store/movies/selectors';
 import {setSortBy, sortByDate, sortByRating} from '../../store/actions';
 
+import './sort-by.scss';
+
 interface SortByProps {
     moviesCount: number;
     sortBy: string;
-    setSortBy: (payload: string) => any,
-    sortByRating: () => any,
-    sortByDate: () => any
+
+    setSortBy(payload: string): void;
+    sortByRating(): void;
+    sortByDate(): void;
 }
 
 const mapStateToProps = (state: GlobalState) => ({
@@ -28,24 +30,6 @@ const mapDispatchToProps = {
 };
 
 class SortBy extends Component<SortByProps> {
-    constructor(props: SortByProps) {
-        super(props);
-    }
-
-    private setSortBy = (e: any) => {
-        if (e.target.id === 'rating') {
-            this.props.sortByRating();
-        } else {
-            this.props.sortByDate();
-        }
-
-        this.props.setSortBy(e.target.id);
-    };
-
-    private setActiveLink = (sortBy: string) => {
-        return sortBy === this.props.sortBy;
-    };
-
     render() {
         const {moviesCount} = this.props;
         return (
@@ -63,6 +47,18 @@ class SortBy extends Component<SortByProps> {
             </div>
         );
     }
+
+    setSortBy = (e: any) => {
+        e.target.id === 'rating'
+            ? this.props.sortByRating()
+            : this.props.sortByDate();
+
+        this.props.setSortBy(e.target.id);
+    };
+
+    setActiveLink = (sortBy: string) => {
+        return sortBy === this.props.sortBy;
+    };
 }
 
 export default connect(

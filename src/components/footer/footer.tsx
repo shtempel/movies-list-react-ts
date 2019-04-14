@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
+
+import {common} from "../../constants/constants";
 
 import './footer.scss';
 
-export class Footer extends Component {
-    render() {
-        return (
-            <div className='footer'>
-                <span>netflixroulette</span>
-            </div>
-        );
-
-    }
-}
-
-export default Footer;
+export const Footer = () => {
+    return (
+        <div className='footer'>
+            <span>{common.MAIN_TITLE}</span>
+        </div>
+    )
+};

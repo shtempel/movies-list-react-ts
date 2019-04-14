@@ -23,14 +23,6 @@ const mapStateToProps = (state: GlobalState) => ({
 });
 
 class DetailedInfo extends Component<DetailedInfoProps> {
-    setPaddingForRating = (rating: any) => {
-        return Number.isInteger(rating);
-    };
-
-    toSearch = () => {
-        appHistory.push(`/`);
-    };
-
     render() {
         const {posterPath, title, voteAverage, tagLine, releaseDate, runtime, overview} = this.props.currentMovie;
         const {movies} = this.props;
@@ -77,6 +69,14 @@ class DetailedInfo extends Component<DetailedInfoProps> {
             </>
         );
     }
+
+    setPaddingForRating = (rating: any) => {
+        return Number.isInteger(rating);
+    };
+
+    toSearch = () => {
+        appHistory.push(`/`);
+    };
 }
 
 export default connect(
