@@ -4,8 +4,8 @@ import { BASE_URL } from '../constants/constants';
 
 export class MoviesService {
 
-    getMovies(searchQuery: string, searchBy: string) {
-        return axios.get(`${ BASE_URL }?search=${ searchQuery }&searchBy=${ searchBy }&limit=20`)
+    getMovies(searchQuery: string, searchBy: string, limit: string) {
+        return axios.get(`${ BASE_URL }?search=${ searchQuery }&searchBy=${ searchBy }&limit=${limit}`)
             .then((response) => {
                 return response.data.data.map(
                     (movie: any) => {

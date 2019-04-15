@@ -6,7 +6,7 @@ import {MovieItem} from "../../../store/movies/reducer";
 interface FilmCardProps {
     movie: MovieItem;
 
-    fetchMovieById(e: any): void
+    onImgClick(e: any): void
 }
 
 export const FilmCard = (props: FilmCardProps) => {
@@ -17,7 +17,7 @@ export const FilmCard = (props: FilmCardProps) => {
                      id={props.movie.id!.toString()}
                      src={props.movie.posterPath}
                      alt={props.movie.title}
-                     onClick={props.fetchMovieById}/>
+                     onClick={props.onImgClick}/>
             </Link>
             <div className='search-result__movie-card__header row'>
                 <span className='search-result__movie-card__title'>{props.movie.title}</span>

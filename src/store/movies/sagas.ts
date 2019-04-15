@@ -6,6 +6,7 @@ import moviesService from './../../services/movies-service';
 import * as actions from './actions';
 import {selectSearchBy} from '../search-by/selectors';
 import {selectCurrentMovieId, selectSearchQuery} from './selectors';
+import {selectSearchLimit} from "../search-limit/selectors";
 
 export function* watchFetchMovies() {
     yield throttle(1000, getType(actions.fetchMovies), fetchMovies);
@@ -16,7 +17,8 @@ export function* fetchMovies() {
     try {
         const searchQuery = yield select(selectSearchQuery);
         const searchBy = yield select(selectSearchBy);
-        const fetchedMovies = yield call([moviesService, moviesService.getMovies], searchQuery, searchBy);
+        const limit = yield select(selectSearchLimit);
+        const fetchedMovies = yield call([moviesService, moviesService.getMovies], searchQuery, searchBy, limit);
         yield put(actions.fetchMoviesSuccess(fetchedMovies));
     } catch (error) {
         yield put(actions.fetchMoviesFail(error));

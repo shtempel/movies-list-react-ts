@@ -10,5 +10,6 @@ export enum common {
     GENRE = 'genre',
     RELEASE_DATE = 'release date',
     RATING = 'rating',
-    MOVIES_FOUND = ' movies found'
+    MOVIES_FOUND = ' movies found',
+    RESULTS_ON_PAGE = 'Show results on page: '
 }

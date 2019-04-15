@@ -21,6 +21,7 @@ export interface GlobalState {
     moviesState: MoviesState;
     searchBy: string;
     sortBy: string;
+    searchLimit: string;
     router: Router
 }
 

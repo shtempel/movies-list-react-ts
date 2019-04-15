@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, {Component, ReactNode} from 'react';
 import {connect} from 'react-redux';
 import cn from 'classnames';
 
 import {appHistory, GlobalState} from '../../store/store';
-import {selectCurrentMovie, selectMovies} from '../../store/movies/selectors';
+import {selectCurrentMovie, selectIsLoading, selectMovies} from '../../store/movies/selectors';
 import SearchResult from '../home/search-result/search-result';
-import {Button, Title} from '../../components';
+import {Button, Loader, Title} from '../../components';
 import {common} from '../../constants/constants';
 import {MovieItem} from '../../store/movies/reducer';
 
@@ -15,17 +15,25 @@ import './detailed-info.scss';
 interface DetailedInfoProps {
     currentMovie: MovieItem,
     movies: MovieItem[];
+    isLoading: boolean;
 }
 
 const mapStateToProps = (state: GlobalState) => ({
     currentMovie: selectCurrentMovie(state),
-    movies: selectMovies(state)
+    movies: selectMovies(state),
+    isLoading: selectIsLoading(state)
 });
 
 class DetailedInfo extends Component<DetailedInfoProps> {
     render() {
         const {posterPath, title, voteAverage, tagLine, releaseDate, runtime, overview} = this.props.currentMovie;
-        const {movies} = this.props;
+        const {movies, isLoading} = this.props;
+
+        const searchResult: ReactNode = (
+            isLoading
+                ? <Loader/>
+                : <SearchResult movies={movies}/>
+        );
 
         return (
             <>
@@ -65,7 +73,7 @@ class DetailedInfo extends Component<DetailedInfoProps> {
                         </div>
                     </div>
                 </div>
-                <SearchResult movies={movies}/>
+                {searchResult}
             </>
         );
     }

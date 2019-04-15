@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import {MovieItem} from '../../../store/movies/reducer';
+import {FilmCard} from './film-card';
+import {ResultsAmountController} from '../../../components';
 import {fetchMovieById, setCurrentMovieId} from '../../../store/movies/actions';
-import {FilmCard} from "./film-card";
 
 import './search-result.scss';
 
@@ -11,36 +12,42 @@ interface SearchResultProps {
     movies: MovieItem[];
 
     fetchMovieById(): void
+
     setCurrentMovieId(id: string): void;
 }
 
 const mapDispatchToProps = {
-    fetchMovieById: fetchMovieById,
-    setCurrentMovieId: setCurrentMovieId
+    fetchMovieById,
+    setCurrentMovieId
 };
 
 class SearchResult extends Component<SearchResultProps> {
     render() {
         const {movies} = this.props;
+
         return (
-            <div className='search-result row'>
-                {
+            <>
+                <div className='search-result row'> {
                     movies.map(
                         movie => (
                             <FilmCard
                                 key={movie.id}
                                 movie={movie}
-                                fetchMovieById={this.fetchMovie}/>
+                                onImgClick={this.fetchMovie}/>
                         )
                     )
                 }
-            </div>
-        )
+
+                </div>
+                <ResultsAmountController/>
+            </>
+        );
     }
 
     fetchMovie = (e: any) => {
-        this.props.setCurrentMovieId(e.target.id);
-        this.props.fetchMovieById();
+        const {setCurrentMovieId, fetchMovieById} = this.props;
+        setCurrentMovieId(e.target.id);
+        fetchMovieById();
     };
 
 }
