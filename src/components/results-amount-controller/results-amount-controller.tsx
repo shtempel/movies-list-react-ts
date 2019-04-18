@@ -1,21 +1,19 @@
-import React, {Component, ReactNode} from 'react';
+import React, {ReactNode} from 'react';
 import {connect} from 'react-redux';
 import cn from 'classnames';
 
 import {setSearchLimit} from '../../store/search-limit/actions';
-import {fetchMovies} from "../../store/movies/actions";
-
-import {GlobalState} from "../../store/store";
-import {selectSearchLimit} from "../../store/search-limit/selectors";
+import {fetchMovies} from '../../store/movies/actions';
+import {GlobalState} from '../../store/store';
+import {selectSearchLimit} from '../../store/search-limit/selectors';
+import {common} from '../../constants/constants';
 
 import './results-amount-controller.scss';
-import {common} from "../../constants/constants";
 
 interface ResultsAmountControllerProps {
     searchLimit: string;
 
     setSearchLimit(limit: string): void;
-
     fetchMovies(): void;
 }
 
@@ -34,36 +32,34 @@ const mapDispatchToProps = {
     fetchMovies
 };
 
-class ResultsAmountController extends Component<ResultsAmountControllerProps> {
-    render() {
-        return (
-            <div className='results-amount-controller'>
-                <span>{common.RESULTS_ON_PAGE}</span>
-                {this.getSingleControl(Amount.ten)}
-                {this.getSingleControl(Amount.twenty)}
-                {this.getSingleControl(Amount.thirty)}
-            </div>
-        );
-    }
-
-    setAmountItems = (e: any) => {
-        const {setSearchLimit, fetchMovies, searchLimit} = this.props;
+const ResultsAmountController = (props: ResultsAmountControllerProps) => {
+    const setAmountItems = (e: any) => {
+        const {setSearchLimit, fetchMovies, searchLimit} = props;
 
         searchLimit !== e.target.id && setSearchLimit(e.target.id) && fetchMovies();
     };
 
-    getSingleControl = (content: string): ReactNode => {
-        const {searchLimit} = this.props;
+    const getSingleControl = (content: string): ReactNode => {
+        const {searchLimit} = props;
 
         return (
             <span id={content}
-                  onClick={this.setAmountItems}
+                  onClick={setAmountItems}
                   className={cn('single-control', {'single-control-active': searchLimit === content})}>
                 {content}
             </span>
         )
     };
-}
+
+    return (
+        <div className='results-amount-controller'>
+            <span>{common.RESULTS_ON_PAGE}</span>
+            {getSingleControl(Amount.ten)}
+            {getSingleControl(Amount.twenty)}
+            {getSingleControl(Amount.thirty)}
+        </div>
+    );
+};
 
 export default connect(
     mapStateToProps,

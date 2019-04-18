@@ -1,4 +1,4 @@
-import React, {Component, ReactNode} from 'react';
+import React, {useEffect, ReactNode} from 'react';
 import {connect} from 'react-redux';
 
 import SearchResult from './search-result/search-result';
@@ -21,38 +21,37 @@ const mapStateToProps = (state: GlobalState) => ({
 });
 
 const mapDispatchToProps = {
-    fetchMovies: fetchMovies
+    fetchMovies
 };
 
-class Home extends Component<HomeProps> {
-    componentWillMount(): void {
-        this.props.fetchMovies();
-    }
+const Home = (props: HomeProps) => {
+    const {fetchMovies, movies, isLoading} = props;
 
-    render() {
-        const {movies, isLoading} = this.props;
+    useEffect(() => {
+        fetchMovies();
+    }, [!movies]);
 
-        const searchResult: ReactNode = (
-            movies.length
-                ? <SearchResult movies={movies}/>
-                : < div className='no-films-found'><h1> No films found</h1></div>
-        );
+    const searchResult: ReactNode = (
+        movies.length
+            ? <SearchResult movies={movies}/>
+            : < div className='no-films-found'><h1> No films found</h1></div>
+    );
 
-        const content: ReactNode = (
-            isLoading
-                ? <Loader/>
-                : searchResult
-        );
+    const content: ReactNode = (
+        isLoading
+            ? <Loader/>
+            : searchResult
+    );
 
-        return (
-            <div>
-                <Header/>
-                <SortBy/>
-                {content}
-            </div>
-        );
-    }
-}
+    return (
+        <div>
+            <Header/>
+            <SortBy/>
+            {content}
+        </div>
+    );
+
+};
 
 export default connect(
     mapStateToProps,

@@ -1,0 +1,78 @@
+{
+  "defaultSeverity": "error",
+  "rulesDirectory": ["node_modules/tslint-eslint-rules/dist/rules"],
+  "extends": [
+    "tslint:recommended",
+    "tslint-eslint-rules",
+    "tslint-react",
+    "tslint-clean-code",
+    "tslint-consistent-codestyle",
+    "tslint-config-prettier"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "node_modules/**/*.*",
+      "**/*.html",
+      "**/*.css",
+      "**/*.json",
+      "**/*.md",
+      "**/*.js",
+      "**/*.snap"
+    ]
+  },
+  "jsRules": {},
+  "rules": {
+    "arrow-return-shorthand": [true, "multiline"],
+    "ban": [
+      true,
+      ["describe", "only"],
+      ["describe", "skip"],
+      ["test", "only"],
+      ["test", "skip"],
+      "it"
+    ],
+    "ban-ts-ignore": true,
+    "interface-name": [true, "never-prefix"],
+    "jsx-boolean-value": [true, "never"],
+    "member-access": [true, "no-public"],
+    "newline-before-return": true,
+    "no-inferrable-types": true,
+    "no-namespace": [true, "allow-declarations"],
+    "no-object-literal-type-assertion": true,
+    "no-redundant-jsdoc": true,
+    "no-string-literal": false,
+    "no-shadowed-variable": [
+      true,
+      {
+        "function": false
+      }
+    ],
+    "no-switch-case-fall-through": true,
+    "no-trailing-whitespace": true,
+    "unnecessary-else": true,
+    "object-literal-sort-keys": false,
+    "only-arrow-functions": false,
+    "prefer-method-signature": true,
+    "prefer-object-spread": true,
+    "variable-name": [
+      true,
+      "check-format",
+      "allow-leading-underscore",
+      "allow-pascal-case"
+    ],
+
+    // tslint-clean-code
+    "try-catch-first": true,
+    "no-for-each-push": true,
+    "no-map-without-usage": true,
+    "no-complex-conditionals": [true, 2],
+    "prefer-dry-conditionals": true,
+
+    // tslint-consistent-codestyle
+    "early-exit": false,
+    "no-else-after-return": true,
+    "no-collapsible-if": true,
+    "no-return-undefined": true,
+    "no-unnecessary-type-annotation": false
+  }
+}

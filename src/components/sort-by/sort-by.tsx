@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import {connect} from 'react-redux';
 import cn from 'classnames';
 
-import { common } from '../../constants/constants';
-import { GlobalState } from '../../store/store';
-import { selectMoviesQuantity } from '../../store/movies/selectors';
-import { setSortBy, sortByDate, sortByRating } from '../../store/actions';
+import {common} from '../../constants/constants';
+import {GlobalState} from '../../store/store';
+import {selectMoviesQuantity} from '../../store/movies/selectors';
+import {setSortBy, sortByDate, sortByRating} from '../../store/actions';
 
 import './sort-by.scss';
 
@@ -29,37 +29,36 @@ const mapDispatchToProps = {
     sortByDate
 };
 
-class SortBy extends Component<SortByProps> {
-    render() {
-        const { moviesCount } = this.props;
-        return (
-            <div className='sort-by row'>
-                <span>{ moviesCount }{ common.MOVIES_FOUND }</span>
-                <div className='row sort-by__buttons'>
-                    <span>{ common.SORT_BY }</span>
-                    <span id='date'
-                          className={ cn('link', { 'active-link': this.setActiveLink('date') }) }
-                          onClick={ this.setSortBy }>{ common.RELEASE_DATE }</span>
-                    <span id='rating'
-                          className={ cn('link', { 'active-link': this.setActiveLink('rating') }) }
-                          onClick={ this.setSortBy }>{ common.RATING }</span>
-                </div>
-            </div>
-        );
-    }
+const SortBy = (props: SortByProps) => {
+    const {moviesCount, setSortBy, sortByDate, sortByRating} = props;
 
-    setSortBy = (e: any) => {
+    const onSetSortBy = (e: any) => {
         e.target.id === 'rating'
-        ? this.props.sortByRating()
-        : this.props.sortByDate();
+            ? sortByRating()
+            : sortByDate();
 
-        this.props.setSortBy(e.target.id);
+        setSortBy(e.target.id);
     };
 
-    setActiveLink = (sortBy: string) => {
-        return sortBy === this.props.sortBy;
+    const setActiveLink = (sortBy: string) => {
+        return sortBy === props.sortBy;
     };
-}
+
+    return (
+        <div className='sort-by row'>
+            <span>{moviesCount}{common.MOVIES_FOUND}</span>
+            <div className='row sort-by__buttons'>
+                <span>{common.SORT_BY}</span>
+                <span id='date'
+                      className={cn('link', {'active-link': setActiveLink('date')})}
+                      onClick={onSetSortBy}>{common.RELEASE_DATE}</span>
+                <span id='rating'
+                      className={cn('link', {'active-link': setActiveLink('rating')})}
+                      onClick={onSetSortBy}>{common.RATING}</span>
+            </div>
+        </div>
+    );
+};
 
 export default connect(
     mapStateToProps,

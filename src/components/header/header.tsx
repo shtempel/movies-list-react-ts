@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import cn from 'classnames';
 
@@ -19,10 +19,6 @@ export interface HeaderProps {
     setQueryString(payload: string): void,
 }
 
-export interface HeaderState {
-    value: string;
-}
-
 const mapStateToProps = (state: GlobalState) => ({
     searchBy: state.searchBy,
     isLoading: state.moviesState.isLoading,
@@ -30,82 +26,70 @@ const mapStateToProps = (state: GlobalState) => ({
 });
 
 const mapDispatchToProps = {
-    fetchMovies: fetchMovies,
-    setSearchBy: setSearchBy,
-    setQueryString: setQueryString
+    fetchMovies,
+    setSearchBy,
+    setQueryString
 };
 
-class Header extends Component<HeaderProps, HeaderState> {
-    constructor(props: HeaderProps) {
-        super(props);
+const Header = (props: HeaderProps) => {
+    const {setQueryString, fetchMovies, isLoading, setSearchBy} = props;
+    const state: string = '';
+    const [value, setValue] = useState(state);
 
-        this.state = {value: ''};
-    }
+    const handleChange = (e: any) => {
+        setValue(e.target.value);
+    };
 
-    render() {
-        const {value} = this.state;
-        const {isLoading} = this.props;
+    const submitEvent = (e: any) => {
+        e.key === 'Enter' && handleSubmit();
+    };
 
-        return (
-            <div className='header column'>
-                <Title className='header__title' title={common.MAIN_TITLE}/>
-                <span className='header__find_your'>{common.FIND_YOUR_MOVIE}</span>
-                <input className='header__search-input'
-                       type='search'
-                       onKeyPress={this.submitEvent}
-                       value={value}
-                       onChange={this.handleChange}/>
-                <div className='header__controls row'>
-                    <div className='header__controls__left'>
-                        <span>{common.SEARCH_BY}</span>
-                        <Button value= {common.TITLE}
-                                onClick={this.setSearchBy}
-                                type='button'
-                                disabled={this.setActiveBtn(common.TITLE)}
-                                className={cn('btn', {'active-button': this.setActiveBtn(common.TITLE)})}
-                                name={common.TITLE}/>
-                        <Button value={common.GENRE}
-                                onClick={this.setSearchBy}
-                                type='button'
-                                disabled={this.setActiveBtn(common.GENRE)}
-                                className={cn('btn', {'active-button': this.setActiveBtn(common.GENRE)})}
-                                name={common.GENRE}/>
-                    </div>
-                    <Button className='header__controls__search-button btn'
-                            onClick={this.handleSubmit}
-                            disabled={isLoading}
-                            type='submit'
-                            name={common.SEARCH}/>
-                </div>
-            </div>
-        );
-    }
-
-    handleSubmit = () => {
-        const {value} = this.state;
-        const {setQueryString, fetchMovies} = this.props;
-
+    const handleSubmit = () => {
         appHistory.push(`/search/:${value}`);
         setQueryString(value);
         fetchMovies();
     };
 
-    handleChange = (e: any) => {
-        this.setState({value: e.target.value});
+    const onSetSearchBy = (e: any) => {
+        setSearchBy(e.target.value);
     };
 
-    submitEvent = (e: any) => {
-        e.key === 'Enter' && this.handleSubmit();
+    const setActiveBtn = (searchBy: string) => {
+        return searchBy === props.searchBy;
     };
 
-    setSearchBy = (e: any) => {
-        this.props.setSearchBy(e.target.value);
-    };
-
-    setActiveBtn = (searchBy: string) => {
-        return searchBy === this.props.searchBy;
-    };
-}
+    return <div className='header column'>
+        <Title className='header__title' title={common.MAIN_TITLE}/>
+        <span className='header__find_your'>{common.FIND_YOUR_MOVIE}</span>
+        <input className='header__search-input'
+               type='search'
+               onKeyPress={submitEvent}
+               value={value}
+               onChange={handleChange}/>
+        <div className='header__controls row'>
+            <div className='header__controls__left'>
+                <span>{common.SEARCH_BY}</span>
+                <Button value={common.TITLE}
+                        onClick={onSetSearchBy}
+                        type='button'
+                        disabled={setActiveBtn(common.TITLE)}
+                        className={cn('btn', {'active-button': setActiveBtn(common.TITLE)})}
+                        name={common.TITLE}/>
+                <Button value={common.GENRE}
+                        onClick={onSetSearchBy}
+                        type='button'
+                        disabled={setActiveBtn(common.GENRE)}
+                        className={cn('btn', {'active-button': setActiveBtn(common.GENRE)})}
+                        name={common.GENRE}/>
+            </div>
+            <Button className='header__controls__search-button btn'
+                    onClick={handleSubmit}
+                    disabled={isLoading}
+                    type='submit'
+                    name={common.SEARCH}/>
+        </div>
+    </div>
+};
 
 export default connect(
     mapStateToProps,
