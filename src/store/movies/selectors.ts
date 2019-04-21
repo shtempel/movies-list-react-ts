@@ -33,3 +33,8 @@ export const selectCurrentMovieId = createSelector(
     [moviesState],
     moviesState => moviesState.currentMovieId
 );
+
+export const selectFavorites = createSelector(
+    [moviesState],
+    moviesState => moviesState.favMovies
+);

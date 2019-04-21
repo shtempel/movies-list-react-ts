@@ -5,7 +5,7 @@ import SortBy from './sort-by/sort-by';
 import {Title} from './title/title';
 import {Loader} from './loader/loader';
 import ResultsAmountController from './results-amount-controller/results-amount-controller';
-
+import {Icon} from  './icon/icon';
 export {
     Header,
     Footer,
@@ -13,5 +13,6 @@ export {
     SortBy,
     Title,
     Loader,
-    ResultsAmountController
+    ResultsAmountController,
+    Icon
 };

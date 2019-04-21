@@ -6,7 +6,7 @@ import moviesService from './../../services/movies-service';
 import * as actions from './actions';
 import {selectSearchBy} from '../search-by/selectors';
 import {selectCurrentMovieId, selectSearchQuery} from './selectors';
-import {selectSearchLimit} from "../search-limit/selectors";
+import {selectSearchLimit} from '../search-limit/selectors';
 
 export function* watchFetchMovies() {
     yield throttle(1000, getType(actions.fetchMovies), fetchMovies);
@@ -39,7 +39,22 @@ export function* fetchMovieById() {
     }
 }
 
+export function* watchFetchFavMovie() {
+    yield throttle(1000, getType(actions.fetchFavoriteMovie), fetchFavoriteMovie);
+}
+
+export function* fetchFavoriteMovie() {
+    try {
+        const movieId = yield select(selectCurrentMovieId);
+        const fetchedMovie = yield call([moviesService, moviesService.getMovieById], movieId);
+        yield put(actions.fetchFavoriteMovieSuccess(fetchedMovie));
+    } catch (error) {
+        yield put(actions.fetchFavoriteMovieFail(error));
+    }
+}
+
 export const moviesSagas = [
     watchFetchMovies(),
-    watchFetchMovieById()
+    watchFetchMovieById(),
+    watchFetchFavMovie()
 ];

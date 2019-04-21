@@ -16,20 +16,24 @@ export interface MovieItem {
 }
 
 export interface MoviesState {
+    isFavoriteLoading: boolean;
     isLoading: boolean;
     queryString: string;
     currentMovieId: string;
     movies: MovieItem[];
+    favMovies: MovieItem[];
     currentMovie: MovieItem;
 }
 
 export type MoviesAction = ActionType<typeof actions>;
 
 export const initialState: MoviesState = {
+    isFavoriteLoading: false,
     isLoading: false,
     currentMovieId: '',
     queryString: '',
     movies: [],
+    favMovies: [],
     currentMovie: {}
 };
 
@@ -46,11 +50,35 @@ const reducer: Reducer<MoviesState, MoviesAction> = (
             };
         }
 
+        case getType(actions.fetchFavoriteMovieSuccess): {
+            return {
+                ...state,
+                favMovies: [...state.favMovies, action.payload],
+                isFavoriteLoading: false
+            }
+        }
+
+        case getType(actions.removeMovieFromFavorites): {
+            return {
+                ...state,
+                favMovies: [
+                    ...state.favMovies.filter(movie => movie.id !== parseInt(action.payload))
+                ]
+            }
+        }
+
         case getType(actions.setCurrentMovieId): {
             return {
                 ...state,
                 currentMovieId: action.payload
             }
+        }
+
+        case getType(actions.fetchFavoriteMovie): {
+            return {
+                ...state,
+                isFavoriteLoading: true
+            };
         }
 
         case getType(actions.fetchMovies):
@@ -66,6 +94,12 @@ const reducer: Reducer<MoviesState, MoviesAction> = (
                 ...state,
                 isLoading: false,
                 movies: action.payload
+            };
+        }
+        case getType(actions.fetchFavoriteMovieFail): {
+            return {
+                ...state,
+                isFavoriteLoading: false
             };
         }
 

@@ -39,3 +39,20 @@ export const fetchMovieByIdFail = createAction(
 export const sortByRating = createAction('SORT_BY_RATING');
 
 export const sortByDate = createAction('SORT_BY_DATE');
+
+export const fetchFavoriteMovie = createAction('FETCH_FAVORITE_MOVIE');
+
+export const fetchFavoriteMovieSuccess = createAction(
+    'FETCH_FAVORITE_MOVIE_SUCCESS',
+    resolve => (movieItem: MovieItem) => resolve(movieItem)
+);
+
+export const fetchFavoriteMovieFail = createAction(
+    'FETCH_FAVORITE_MOVIE_FAIL',
+    resolve => (payload: Error) => resolve(payload)
+);
+
+export const removeMovieFromFavorites = createAction(
+    'REMOVE_MOVIE_FROM_FAVORITES',
+    resolve => (id: string) => resolve(id)
+);

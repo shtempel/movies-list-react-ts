@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {common} from "../../constants/constants";
+import {common} from '../../constants/constants';
 
 import './footer.scss';
 

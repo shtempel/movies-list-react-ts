@@ -1,14 +1,15 @@
 import axios from 'axios';
 
-import { BASE_URL } from '../constants/constants';
+import {BASE_URL} from '../constants/constants';
+import {MovieItem} from "../store/movies/reducer";
 
 export class MoviesService {
 
     getMovies(searchQuery: string, searchBy: string, limit: string) {
-        return axios.get(`${ BASE_URL }?search=${ searchQuery }&searchBy=${ searchBy }&limit=${limit}`)
-            .then((response) => {
+        return axios.get(`${BASE_URL}?search=${searchQuery}&searchBy=${searchBy}&limit=${limit}`)
+            .then((response): MovieItem[] => {
                 return response.data.data.map(
-                    (movie: any) => {
+                    (movie: any): MovieItem => {
                         return {
                             title: movie.title,
                             id: movie.id,
@@ -23,7 +24,7 @@ export class MoviesService {
     }
 
     getMovieById(id: number) {
-        return axios.get(`${ BASE_URL }/${ id }`)
+        return axios.get(`${BASE_URL}/${id}`)
             .then((response) => {
                 return response.data = {
                     title: response.data.title,
@@ -34,7 +35,8 @@ export class MoviesService {
                     voteAverage: response.data.vote_average,
                     tagLine: response.data.tagline,
                     runtime: response.data.runtime,
-                    overview: response.data.overview
+                    overview: response.data.overview,
+
                 }
             })
     }
