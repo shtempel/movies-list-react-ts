@@ -1,11 +1,10 @@
 import React, {useEffect, ReactNode} from 'react';
 import {connect} from 'react-redux';
 
-import SearchResult from './search-result/search-result';
 import {GlobalState} from '../../store/store';
 import {fetchMovies} from '../../store/movies/actions';
 import {selectIsLoading, selectMovies} from '../../store/selectors';
-import {Header, SortBy, Loader} from '../../components';
+import {Header, SortBy, Loader, SearchResult} from '../../components';
 import {MovieItem} from '../../store/movies/reducer';
 
 interface HomeProps {
@@ -50,7 +49,6 @@ const Home = (props: HomeProps) => {
             {content}
         </div>
     );
-
 };
 
 export default connect(

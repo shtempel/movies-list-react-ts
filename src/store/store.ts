@@ -3,9 +3,10 @@ import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createHashHistory, History } from 'history';
 import createSagaMiddleware from 'redux-saga';
 
-import { MoviesState } from './movies/reducer';
+import {MovieItem, MoviesState} from './movies/reducer';
 import reducers from './reducers';
 import rootSaga from './sagas';
+import {RouterSavedState} from "./router/types";
 
 export interface Router {
     action: string;
@@ -17,7 +18,14 @@ export interface Router {
     };
 }
 
-export interface GlobalState {
+export interface AppSavedState {
+    router?: RouterSavedState;
+    favMovies?: MovieItem[];
+    currentMovie?: MovieItem;
+    movies?: MovieItem[];
+}
+
+export interface GlobalState extends AppSavedState{
     moviesState: MoviesState;
     searchBy: string;
     sortBy: string;

@@ -2,6 +2,7 @@ import {Reducer} from 'redux';
 import {ActionType, getType} from 'typesafe-actions';
 
 import * as actions from './actions';
+import {restoreSavedState} from "../saved-state/actions";
 
 export interface MovieItem {
     id?: number;
@@ -25,7 +26,9 @@ export interface MoviesState {
     currentMovie: MovieItem;
 }
 
-export type MoviesAction = ActionType<typeof actions>;
+export type MoviesAction =
+    | ActionType<typeof actions>
+    | ActionType<typeof restoreSavedState>;
 
 export const initialState: MoviesState = {
     isFavoriteLoading: false,
@@ -42,6 +45,16 @@ const reducer: Reducer<MoviesState, MoviesAction> = (
     action
 ) => {
     switch (action.type) {
+
+        case getType(restoreSavedState): {
+            const {movies, currentMovie, favMovies} = action.payload;
+            return {
+                ...state,
+                movies: movies || [],
+                currentMovie: currentMovie || {},
+                favMovies: favMovies || []
+            }
+        }
 
         case getType(actions.setQueryString): {
             return {

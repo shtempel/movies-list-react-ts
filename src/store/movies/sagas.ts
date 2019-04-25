@@ -2,11 +2,12 @@ import {call, put, select, throttle} from 'redux-saga/effects';
 import {delay} from 'redux-saga';
 import {getType} from 'typesafe-actions';
 
-import moviesService from './../../services/movies-service';
+
 import * as actions from './actions';
 import {selectSearchBy} from '../search-by/selectors';
 import {selectCurrentMovieId, selectSearchQuery} from './selectors';
 import {selectSearchLimit} from '../search-limit/selectors';
+import {moviesService} from "../../services";
 
 export function* watchFetchMovies() {
     yield throttle(1000, getType(actions.fetchMovies), fetchMovies);

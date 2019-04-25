@@ -6,13 +6,15 @@ import {common} from '../../constants/constants';
 import {appHistory, GlobalState} from '../../store/store';
 import {fetchMovies, setQueryString, setSearchBy} from '../../store/actions';
 import {Button, Title} from '..';
-import {selectMoviesQuantity} from '../../store/movies/selectors';
+import {selectFavorites, selectMoviesQuantity} from '../../store/movies/selectors';
 
 import './header.scss';
+import {MovieItem} from "../../store/movies/reducer";
 
 export interface HeaderProps {
     searchBy: string,
     isLoading: boolean;
+    favorites: MovieItem[];
 
     fetchMovies(): void,
     setSearchBy(payload: string): void,
@@ -21,6 +23,7 @@ export interface HeaderProps {
 
 const mapStateToProps = (state: GlobalState) => ({
     searchBy: state.searchBy,
+    favorites: selectFavorites(state),
     isLoading: state.moviesState.isLoading,
     moviesCount: selectMoviesQuantity(state)
 });

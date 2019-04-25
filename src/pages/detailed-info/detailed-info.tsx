@@ -1,11 +1,10 @@
-import React, {Component, ReactNode} from 'react';
+import React, {ReactNode} from 'react';
 import {connect} from 'react-redux';
 import cn from 'classnames';
 
 import {appHistory, GlobalState} from '../../store/store';
 import {selectCurrentMovie, selectIsLoading, selectMovies} from '../../store/movies/selectors';
-import SearchResult from '../home/search-result/search-result';
-import {Button, Loader, Title} from '../../components';
+import {Button, Loader, SearchResult, Title} from '../../components';
 import {common} from '../../constants/constants';
 import {MovieItem} from '../../store/movies/reducer';
 
@@ -83,9 +82,7 @@ const DetailedInfo = (props: DetailedInfoProps) => {
             {searchResult}
         </>
     );
-
-
-}
+};
 
 export default connect(
     mapStateToProps,

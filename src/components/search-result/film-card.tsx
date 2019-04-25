@@ -2,15 +2,15 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import cn from 'classnames';
 
-import {MovieItem} from '../../../store/movies/reducer';
-import {Icon} from "../../../components";
-import {IconPrefix} from "../../../components/icon/icon";
+import {MovieItem} from '../../store/movies/reducer';
+import {Icon} from "..";
+import {IconPrefix} from "../icon/icon";
 
 interface FilmCardProps {
     movie: MovieItem;
     favorites: MovieItem[];
 
-    onPosterClick(e: any): void
+    onPosterClick(e: any): void;
     onStarClick(id: string): void;
 }
 

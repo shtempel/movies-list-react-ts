@@ -1,17 +1,17 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {MovieItem} from '../../../store/movies/reducer';
+import {MovieItem} from '../../store/movies/reducer';
 import {FilmCard} from './film-card';
-import {ResultsAmountController} from '../../../components';
+import {Favorites, ResultsAmountController} from '..';
 import {
     fetchFavoriteMovie,
     fetchMovieById,
     removeMovieFromFavorites,
     setCurrentMovieId
-} from '../../../store/movies/actions';
-import {GlobalState} from "../../../store/store";
-import {selectFavorites} from "../../../store/movies/selectors";
+} from '../../store/movies/actions';
+import {GlobalState} from "../../store/store";
+import {selectFavorites} from "../../store/movies/selectors";
 
 import './search-result.scss';
 
@@ -20,8 +20,11 @@ interface SearchResultProps {
     favorites: MovieItem[];
 
     fetchMovieById(): void
+
     setCurrentMovieId(id: string): void;
+
     fetchFavoriteMovie(): void;
+
     removeMovieFromFavorites(id: string): void;
 }
 
@@ -40,7 +43,8 @@ const SearchResult = (props: SearchResultProps) => {
     const {
         setCurrentMovieId,
         fetchMovieById,
-        movies, favorites,
+        movies,
+        favorites,
         removeMovieFromFavorites,
         fetchFavoriteMovie,
     } = props;
@@ -63,24 +67,25 @@ const SearchResult = (props: SearchResultProps) => {
 
     return (
         <>
-            <div className='search-result row'> {
-                movies.map(
-                    movie => (
-                        <FilmCard
-                            key={movie.id}
-                            movie={movie}
-                            onPosterClick={fetchMovie}
-                            onStarClick={manageFavorites}
-                            favorites={favorites}/>
+            <div className='search-result-wrapper row'>
+                <div className='search-result row'> {
+                    movies.map(
+                        movie => (
+                            <FilmCard
+                                key={movie.id}
+                                movie={movie}
+                                onPosterClick={fetchMovie}
+                                onStarClick={manageFavorites}
+                                favorites={favorites}/>
+                        )
                     )
-                )
-            }
+                }
+                </div>
+                <Favorites favorites={favorites}/>
             </div>
             <ResultsAmountController/>
         </>
     );
-
-
 };
 
 export default connect(
