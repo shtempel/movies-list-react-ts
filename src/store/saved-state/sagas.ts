@@ -38,7 +38,6 @@ export function* watchRehydrateState() {
 
 export function* rehydrateState() {
     const state: AppSavedState = yield call(fetchState);
-    console.log('rehydrate');
     if (state) {
         if (state.router) {
             yield put(push(state.router.location.pathname))

@@ -1,9 +1,9 @@
 import React from 'react';
 
 import {MovieItem} from '../../store/movies/reducer';
+import {Link} from "react-router-dom";
 
 import './favorites.scss';
-import {Link} from "react-router-dom";
 
 interface FavoritesProps {
     favorites?: MovieItem[];
