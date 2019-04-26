@@ -7,6 +7,8 @@ import './favorites.scss';
 
 interface FavoritesProps {
     favorites?: MovieItem[];
+
+    fetchFavoriteMovie(e: any): void;
 }
 
 export const Favorites = (props: FavoritesProps) => {
@@ -19,7 +21,8 @@ export const Favorites = (props: FavoritesProps) => {
                             <img className='favorites__item__poster'
                                  id={favorite.id!.toString()}
                                  src={favorite.posterPath}
-                                 alt={favorite.title}/>
+                                 alt={favorite.title}
+                                 onClick={props.fetchFavoriteMovie}/>
                         </Link>
                     </div>
                 ))

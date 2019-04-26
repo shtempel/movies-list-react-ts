@@ -22,9 +22,7 @@ interface SearchResultProps {
     fetchMovieById(): void
 
     setCurrentMovieId(id: string): void;
-
     fetchFavoriteMovie(): void;
-
     removeMovieFromFavorites(id: string): void;
 }
 
@@ -81,7 +79,7 @@ const SearchResult = (props: SearchResultProps) => {
                     )
                 }
                 </div>
-                <Favorites favorites={favorites}/>
+                <Favorites fetchFavoriteMovie={fetchMovie} favorites={favorites}/>
             </div>
             <ResultsAmountController/>
         </>
