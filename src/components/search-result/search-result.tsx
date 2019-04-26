@@ -20,7 +20,6 @@ interface SearchResultProps {
     favorites: MovieItem[];
 
     fetchMovieById(): void
-
     setCurrentMovieId(id: string): void;
     fetchFavoriteMovie(): void;
     removeMovieFromFavorites(id: string): void;

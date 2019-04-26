@@ -3,30 +3,48 @@ import {connect} from 'react-redux';
 import cn from 'classnames';
 
 import {appHistory, GlobalState} from '../../store/store';
-import {selectCurrentMovie, selectIsLoading, selectMovies} from '../../store/movies/selectors';
-import {Button, Loader, SearchResult, Title} from '../../components';
+import {selectCurrentMovie, selectFavorites, selectIsLoading, selectMovies} from '../../store/movies/selectors';
+import {Button, Icon, Loader, SearchResult, Title} from '../../components';
 import {common} from '../../constants/constants';
 import {MovieItem} from '../../store/movies/reducer';
 
 import './detailed-info.scss';
+import {IconPrefix} from "../../components/icon/icon";
+import {
+    fetchFavoriteMovieSuccess,
+    removeMovieFromFavorites
+} from "../../store/movies/actions";
 
 
 interface DetailedInfoProps {
+    favorites: MovieItem[];
     currentMovie: MovieItem,
     movies: MovieItem[];
     isLoading: boolean;
+
+    fetchFavoriteMovieSuccess(movie: MovieItem): void,
+    removeMovieFromFavorites(id: string): void
 }
 
 const mapStateToProps = (state: GlobalState) => ({
     currentMovie: selectCurrentMovie(state),
     movies: selectMovies(state),
+    favorites: selectFavorites(state),
     isLoading: selectIsLoading(state)
 });
 
-const DetailedInfo = (props: DetailedInfoProps) => {
-    const {posterPath, title, voteAverage, tagLine, releaseDate, runtime, overview} = props.currentMovie;
-    const {movies, isLoading} = props;
+const mapDispatchToProps = {
+    fetchFavoriteMovieSuccess,
+    removeMovieFromFavorites
+};
 
+const DetailedInfo = (props: DetailedInfoProps) => {
+    const {posterPath, title, voteAverage, tagLine, releaseDate, runtime, overview, id} = props.currentMovie;
+    const {movies, isLoading, favorites, fetchFavoriteMovieSuccess, removeMovieFromFavorites} = props;
+    const isMovieInFavorites: boolean = favorites.some(movie => movie.id === props.currentMovie.id);
+    const iconPrefix: IconPrefix = isMovieInFavorites
+        ? 'fas'
+        : 'far';
     const setPaddingForRating = (rating: any) => {
         return Number.isInteger(rating);
     };
@@ -40,6 +58,14 @@ const DetailedInfo = (props: DetailedInfoProps) => {
             ? <Loader/>
             : <SearchResult movies={movies}/>
     );
+    const manageFavorites = () => {
+        const isFavoritesExist: boolean = favorites.some(
+            favorite => favorite.id === id
+        );
+        !isFavoritesExist
+            ? fetchFavoriteMovieSuccess(props.currentMovie)
+            : removeMovieFromFavorites(id!.toString());
+    };
 
     return (
         <>
@@ -56,6 +82,10 @@ const DetailedInfo = (props: DetailedInfoProps) => {
                     <div className='detailed-info__film__right column'>
                         <div className='detailed-info__film__right__title-rating row'>
                             <span className='detailed-info__film__right__title-rating__title'>{title}</span>
+                            <Icon className={cn('search-result__movie-card__favorite', {'fav': isMovieInFavorites})}
+                                  id={id!.toString()}
+                                  iconPrefix={iconPrefix} icon='star'
+                                  onIconClick={manageFavorites}/>
                             <span className={cn('detailed-info__film__right__title-rating__rating',
                                 {
                                     'integer-border ': setPaddingForRating(voteAverage),
@@ -86,5 +116,5 @@ const DetailedInfo = (props: DetailedInfoProps) => {
 
 export default connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(DetailedInfo);
