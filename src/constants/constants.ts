@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://react-cdp-api.herokuapp.com/movies';
+export const BASE_URL = 'https://react-cdp-api.herokuapp.com/movies';
 
 export enum common {
     MAIN_TITLE = 'netflixroulette',
