@@ -1,11 +1,16 @@
-import { Reducer } from 'redux';
-import { ActionType, getType } from 'typesafe-actions';
+import {Reducer} from 'redux';
+import {ActionType, getType} from 'typesafe-actions';
 
 import * as actions from './actions';
 
 export type SortByAction = ActionType<typeof actions>;
 
-export const initialState: string = 'date';
+export enum SortByEnum {
+    Date = 'date',
+    Rating = 'rating'
+}
+
+export const initialState: SortByEnum = SortByEnum.Date;
 
 const reducer: Reducer<string, SortByAction> = (
     state = initialState, action) => {

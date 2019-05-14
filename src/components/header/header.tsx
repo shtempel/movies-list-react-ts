@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import cn from 'classnames';
 
-import {common} from '../../constants/constants';
+import {Common} from '../../constants/constants';
 import {appHistory, GlobalState} from '../../store/store';
 import {fetchMovies, setQueryString, setSearchBy} from '../../store/actions';
 import {Button, Title} from '..';
 import {selectFavorites, selectMoviesQuantity} from '../../store/movies/selectors';
+import {MovieItem} from '../../store/movies/reducer';
 
 import './header.scss';
-import {MovieItem} from "../../store/movies/reducer";
 
 export interface HeaderProps {
     searchBy: string,
@@ -62,8 +62,8 @@ const Header = (props: HeaderProps) => {
     };
 
     return <div className='header column'>
-        <Title className='header__title' title={common.MAIN_TITLE}/>
-        <span className='header__find_your'>{common.FIND_YOUR_MOVIE}</span>
+        <Title className='header__title' title={Common.MainTitle}/>
+        <span className='header__find_your'>{Common.FindYourMovie}</span>
         <input className='header__search-input'
                type='search'
                onKeyPress={submitEvent}
@@ -71,25 +71,25 @@ const Header = (props: HeaderProps) => {
                onChange={handleChange}/>
         <div className='header__controls row'>
             <div className='header__controls__left'>
-                <span>{common.SEARCH_BY}</span>
-                <Button value={common.TITLE}
+                <span>{Common.SearchBy}</span>
+                <Button value={Common.Title}
                         onClick={onSetSearchBy}
                         type='button'
-                        disabled={setActiveBtn(common.TITLE)}
-                        className={cn('btn', {'active-button': setActiveBtn(common.TITLE)})}
-                        name={common.TITLE}/>
-                <Button value={common.GENRE}
+                        disabled={setActiveBtn(Common.Title)}
+                        className={cn('btn', {'active-button': setActiveBtn(Common.Title)})}
+                        name={Common.Title}/>
+                <Button value={Common.Genres}
                         onClick={onSetSearchBy}
                         type='button'
-                        disabled={setActiveBtn(common.GENRE)}
-                        className={cn('btn', {'active-button': setActiveBtn(common.GENRE)})}
-                        name={common.GENRE}/>
+                        disabled={setActiveBtn(Common.Genres)}
+                        className={cn('btn', {'active-button': setActiveBtn(Common.Genres)})}
+                        name={Common.Genres}/>
             </div>
             <Button className='header__controls__search-button btn'
                     onClick={handleSubmit}
                     disabled={isLoading}
                     type='submit'
-                    name={common.SEARCH}/>
+                    name={Common.Search}/>
         </div>
     </div>
 };

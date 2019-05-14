@@ -5,7 +5,7 @@ import * as actions from './actions';
 import {Amount} from '../../components/results-amount-controller/results-amount-controller';
 
 export type SearchLimitAction = ActionType<typeof actions>;
-
+export type SearchLimit = Amount;
 export const initialState: string = Amount.ten;
 
 const reducer: Reducer<string, SearchLimitAction> = (

@@ -2,10 +2,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 import cn from 'classnames';
 
-import {common} from '../../constants/constants';
+import {Common} from '../../constants/constants';
 import {GlobalState} from '../../store/store';
 import {selectMoviesQuantity} from '../../store/movies/selectors';
 import {setSortBy, sortByDate, sortByRating} from '../../store/actions';
+import {SortByEnum} from '../../store/sort-by/reducer';
 
 import './sort-by.scss';
 
@@ -46,15 +47,15 @@ const SortBy = (props: SortByProps) => {
 
     return (
         <div className='sort-by row'>
-            <span>{moviesCount}{common.MOVIES_FOUND}</span>
+            <span>{moviesCount}{Common.MoviesFound}</span>
             <div className='row sort-by__buttons'>
-                <span>{common.SORT_BY}</span>
+                <span>{Common.SortBy}</span>
                 <span id='date'
-                      className={cn('link', {'active-link': setActiveLink('date')})}
-                      onClick={onSetSortBy}>{common.RELEASE_DATE}</span>
+                      className={cn('link', {'active-link': setActiveLink(SortByEnum.Date)})}
+                      onClick={onSetSortBy}>{Common.ReleaseDate}</span>
                 <span id='rating'
-                      className={cn('link', {'active-link': setActiveLink('rating')})}
-                      onClick={onSetSortBy}>{common.RATING}</span>
+                      className={cn('link', {'active-link': setActiveLink(SortByEnum.Rating)})}
+                      onClick={onSetSortBy}>{Common.Rating}</span>
             </div>
         </div>
     );

@@ -6,7 +6,7 @@ import {setSearchLimit} from '../../store/search-limit/actions';
 import {fetchMovies} from '../../store/movies/actions';
 import {GlobalState} from '../../store/store';
 import {selectSearchLimit} from '../../store/search-limit/selectors';
-import {common} from '../../constants/constants';
+import {Common} from '../../constants/constants';
 
 import './results-amount-controller.scss';
 
@@ -53,7 +53,7 @@ const ResultsAmountController = (props: ResultsAmountControllerProps) => {
 
     return (
         <div className='results-amount-controller'>
-            <span>{common.RESULTS_ON_PAGE}</span>
+            <span>{Common.ResultsOnPage}</span>
             {getSingleControl(Amount.ten)}
             {getSingleControl(Amount.twenty)}
             {getSingleControl(Amount.thirty)}

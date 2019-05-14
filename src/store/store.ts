@@ -6,7 +6,10 @@ import createSagaMiddleware from 'redux-saga';
 import {MovieItem, MoviesState} from './movies/reducer';
 import reducers from './reducers';
 import rootSaga from './sagas';
-import {RouterSavedState} from "./router/types";
+import {RouterSavedState} from './router/types';
+import {SearchBy} from './search-by/reducer';
+import {Amount} from '../components/results-amount-controller/results-amount-controller';
+import {SortByEnum} from "./sort-by/reducer";
 
 export interface Router {
     action: string;
@@ -27,9 +30,9 @@ export interface AppSavedState {
 
 export interface GlobalState extends AppSavedState{
     moviesState: MoviesState;
-    searchBy: string;
-    sortBy: string;
-    searchLimit: string;
+    searchBy: SearchBy;
+    sortBy: SortByEnum;
+    searchLimit: Amount;
     router: Router
 }
 
@@ -39,7 +42,7 @@ export const sagaMiddleware = createSagaMiddleware();
 
 const middleware: any[] = [sagaMiddleware, routerMiddleware(appHistory)];
 
-const rootReducer = (history: History) =>
+export const rootReducer = (history: History) =>
     combineReducers({
         ...reducers,
         router: connectRouter(history)

@@ -5,16 +5,15 @@ import cn from 'classnames';
 import {appHistory, GlobalState} from '../../store/store';
 import {selectCurrentMovie, selectFavorites, selectIsLoading, selectMovies} from '../../store/movies/selectors';
 import {Button, Icon, Loader, SearchResult, Title} from '../../components';
-import {common} from '../../constants/constants';
+import {Common} from '../../constants/constants';
 import {MovieItem} from '../../store/movies/reducer';
-
-import './detailed-info.scss';
-import {IconPrefix} from "../../components/icon/icon";
+import {IconPrefix} from '../../components/icon/icon';
 import {
     fetchFavoriteMovieSuccess,
     removeMovieFromFavorites
-} from "../../store/movies/actions";
+} from '../../store/movies/actions';
 
+import './detailed-info.scss';
 
 interface DetailedInfoProps {
     favorites: MovieItem[];
@@ -71,9 +70,9 @@ const DetailedInfo = (props: DetailedInfoProps) => {
         <>
             <div className='detailed-info column'>
                 <div className='detailed-info__top row'>
-                    <Title className='detailed-info__top__title' title={common.MAIN_TITLE}/>
+                    <Title className='detailed-info__top__title' title={Common.MainTitle}/>
                     <Button type='button'
-                            name={common.SEARCH}
+                            name={Common.Search}
                             className='btn detailed-info__top__to-search'
                             onClick={toSearch}/>
                 </div>

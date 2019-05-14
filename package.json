@@ -7,6 +7,8 @@
     "@fortawesome/free-solid-svg-icons": "^5.8.1",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@types/classnames": "^2.2.6",
+    "@types/enzyme": "^3.9.2",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/expect": "^1.20.3",
     "@types/history": "^4.7.2",
     "@types/jest": "^23.3.10",
@@ -20,6 +22,9 @@
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "connected-react-router": "6.0.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.13.0",
+    "enzyme-to-json": "^3.3.5",
     "history": "^4.7.2",
     "node-sass": "^4.11.0",
     "react": "^16.6.3",
@@ -37,7 +42,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!(react-i18next/hooks))/\"",
+    "test:coverage": "yarn test --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -48,5 +54,29 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "jest": {
+    "coverageReporters": [
+      "text",
+      "lcov"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!node_modules/",
+      "!src/typings/**/*.*",
+      "!src/jest/**/*.*",
+      "!src/index.tsx",
+      "!src/**/index.ts",
+      "!src/common/api/entities/*.*",
+      "!src/common/enums/*.*",
+      "src/store/store.ts",
+      "!src/services/translation-service.ts",
+      "!src/services/elf-service.ts",
+      "!src/services/api-service.ts",
+      "!src/styles/**/*.*"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  }
 }

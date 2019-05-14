@@ -1,6 +1,7 @@
-import { createAction } from 'typesafe-actions';
+import {createAction} from 'typesafe-actions';
+import {SearchBy} from './reducer';
 
 export const setSearchBy = createAction(
     'SET_SEARCH_BY',
-    resolve => (searchBy: string) => resolve(searchBy)
+    resolve => (searchBy: SearchBy) => resolve(searchBy)
 );
