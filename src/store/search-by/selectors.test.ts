@@ -1,7 +1,7 @@
 import * as selectors from './selectors';
-import {GlobalState} from '../store';
-import {Common} from '../../constants/constants';
-import {SearchBy} from "./reducer";
+import { GlobalState } from '../store';
+import { Common } from '../../constants/constants';
+import { SearchBy } from './reducer';
 
 describe('search-by selectors', () => {
     let state: GlobalState;

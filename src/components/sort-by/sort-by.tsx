@@ -1,12 +1,12 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import cn from 'classnames';
 
-import {Common} from '../../constants/constants';
-import {GlobalState} from '../../store/store';
-import {selectMoviesQuantity} from '../../store/movies/selectors';
-import {setSortBy, sortByDate, sortByRating} from '../../store/actions';
-import {SortByEnum} from '../../store/sort-by/reducer';
+import { Common } from '../../constants/constants';
+import { GlobalState } from '../../store/store';
+import { selectMoviesQuantity } from '../../store/movies/selectors';
+import { setSortBy, sortByDate, sortByRating } from '../../store/actions';
+import { SortByEnum } from '../../store/sort-by/reducer';
 
 import './sort-by.scss';
 
@@ -31,7 +31,7 @@ const mapDispatchToProps = {
 };
 
 const SortBy = (props: SortByProps) => {
-    const {moviesCount, setSortBy, sortByDate, sortByRating} = props;
+    const { moviesCount, setSortBy, sortByDate, sortByRating } = props;
 
     const onSetSortBy = (e: any) => {
         e.target.id === 'rating'
@@ -47,15 +47,15 @@ const SortBy = (props: SortByProps) => {
 
     return (
         <div className='sort-by row'>
-            <span>{moviesCount}{Common.MoviesFound}</span>
+            <span>{ moviesCount }{ Common.MoviesFound }</span>
             <div className='row sort-by__buttons'>
-                <span>{Common.SortBy}</span>
+                <span>{ Common.SortBy }</span>
                 <span id='date'
-                      className={cn('link', {'active-link': setActiveLink(SortByEnum.Date)})}
-                      onClick={onSetSortBy}>{Common.ReleaseDate}</span>
+                      className={ cn('link', { 'active-link': setActiveLink(SortByEnum.Date) }) }
+                      onClick={ onSetSortBy }>{ Common.ReleaseDate }</span>
                 <span id='rating'
-                      className={cn('link', {'active-link': setActiveLink(SortByEnum.Rating)})}
-                      onClick={onSetSortBy}>{Common.Rating}</span>
+                      className={ cn('link', { 'active-link': setActiveLink(SortByEnum.Rating) }) }
+                      onClick={ onSetSortBy }>{ Common.Rating }</span>
             </div>
         </div>
     );

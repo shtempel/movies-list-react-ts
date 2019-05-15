@@ -5,19 +5,19 @@ import {
     takeEvery,
     throttle
 } from 'redux-saga/effects';
-import {getType} from 'typesafe-actions';
-import {LOCATION_CHANGE, push} from 'connected-react-router';
+import { getType } from 'typesafe-actions';
+import { LOCATION_CHANGE, push } from 'connected-react-router';
 
 import * as actions from './actions';
-import {AppSavedState} from "../store";
-import {localStorageService} from "../../services";
-import {selectSavedState} from "./selectors";
+import { AppSavedState } from '../store';
+import { localStorageService } from '../../services';
+import { selectSavedState } from './selectors';
 import {
     fetchFavoriteMovieSuccess,
     fetchMovieByIdSuccess,
     fetchMovies,
     removeMovieFromFavorites
-} from "../movies/actions";
+} from '../movies/actions';
 
 export const saveStateActions: string[] = [
     LOCATION_CHANGE,
@@ -38,8 +38,8 @@ export function* watchRehydrateState() {
 
 export function* rehydrateState() {
     const state: AppSavedState = yield call(fetchState);
-    if (state) {
-        if (state.router) {
+    if(state) {
+        if(state.router) {
             yield put(push(state.router.location.pathname))
         }
         yield put(actions.restoreSavedState(state));

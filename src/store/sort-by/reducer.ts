@@ -1,5 +1,5 @@
-import {Reducer} from 'redux';
-import {ActionType, getType} from 'typesafe-actions';
+import { Reducer } from 'redux';
+import { ActionType, getType } from 'typesafe-actions';
 
 import * as actions from './actions';
 

@@ -1,6 +1,6 @@
 import { createAction } from 'typesafe-actions';
 
-import {SortByEnum} from './reducer';
+import { SortByEnum } from './reducer';
 
 export const setSortBy = createAction(
     'SET_SORT_BY',

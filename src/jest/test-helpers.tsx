@@ -1,6 +1,7 @@
-import {getType} from 'typesafe-actions';
-import {createMemoryHistory} from 'history';
-import {rootReducer} from "../store/store";
+import { getType } from 'typesafe-actions';
+import { createMemoryHistory } from 'history';
+
+import { rootReducer } from '../store/store';
 
 export const SEARCH_QUERY = 'die hard';
 export const MOVIE_ID = 'qwerty 123';
@@ -16,7 +17,7 @@ export function itCreatesAction<T extends string>(
     actionCreator: ActionCreator<T>
 ) {
     test(name, () => {
-        const expected = {type: getType(actionCreator)};
+        const expected = { type: getType(actionCreator) };
         const actual = actionCreator();
 
         expect(expected).toEqual(actual);
@@ -33,7 +34,7 @@ export function itCreatesActionWithPayload<T extends string, TPayload>(
     payload: TPayload
 ) {
     test(name, () => {
-        const expected = {type: getType(actionCreator), payload};
+        const expected = { type: getType(actionCreator), payload };
         const actual = actionCreator(payload);
 
         expect(actual).toEqual(expected);

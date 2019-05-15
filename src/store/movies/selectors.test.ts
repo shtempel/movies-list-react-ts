@@ -1,8 +1,8 @@
 import * as selectors from './selectors';
-import {GlobalState} from '../store';
-import {MoviesState} from './reducer';
-import {getRootReducer, MOVIE_ID, SEARCH_QUERY} from '../../jest/test-helpers';
-import {favMoviesStub, moviesStateStub, moviesStub} from '../../jest/stubs';
+import { GlobalState } from '../store';
+import { MoviesState } from './reducer';
+import { getRootReducer, MOVIE_ID, SEARCH_QUERY } from '../../jest/test-helpers';
+import { favMoviesStub, moviesStateStub, moviesStub } from '../../jest/stubs';
 
 describe('movies selectors', () => {
     const rootReducer = getRootReducer();
@@ -24,7 +24,7 @@ describe('movies selectors', () => {
     });
 
     test('selectIsLoading selects movies loading flag', () => {
-        const testState = mutateSliceState(state, {isLoading: true});
+        const testState = mutateSliceState(state, { isLoading: true });
         const actual = selectors.selectIsLoading(testState);
 
         expect(actual).toBe(true);
@@ -39,7 +39,7 @@ describe('movies selectors', () => {
 
     test('selectCurrentMovie selects current movie', () => {
         const currentMovie = moviesStub[0];
-        const testState = mutateSliceState(state, {currentMovie: currentMovie});
+        const testState = mutateSliceState(state, { currentMovie: currentMovie });
         const actual = selectors.selectCurrentMovie(testState);
 
         expect(actual).toEqual(moviesStub[0]);
@@ -54,21 +54,21 @@ describe('movies selectors', () => {
     });
 
     test('selectSearchQuery selects search query', () => {
-        const testState = mutateSliceState(state, {queryString: SEARCH_QUERY});
+        const testState = mutateSliceState(state, { queryString: SEARCH_QUERY });
         const actual = selectors.selectSearchQuery(testState);
 
         expect(actual).toEqual(SEARCH_QUERY);
     });
 
     test('selectCurrentMovieId selects current movie id', () => {
-        const testState = mutateSliceState(state, {currentMovieId: MOVIE_ID});
+        const testState = mutateSliceState(state, { currentMovieId: MOVIE_ID });
         const actual = selectors.selectCurrentMovieId(testState);
 
         expect(actual).toEqual(MOVIE_ID);
     });
 
     test('selectFavorites selects favorites movies', () => {
-        const testState = mutateSliceState(state, {favMovies: favMoviesStub});
+        const testState = mutateSliceState(state, { favMovies: favMoviesStub });
         const actual = selectors.selectFavorites(testState);
 
         expect(actual).toEqual(favMoviesStub);

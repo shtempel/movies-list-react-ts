@@ -1,6 +1,6 @@
-import {createAction} from 'typesafe-actions';
+import { createAction } from 'typesafe-actions';
 
-import {MovieItem} from './reducer';
+import { MovieItem } from './reducer';
 
 export const setQueryString = createAction(
     'SET_QUERY_STRING',

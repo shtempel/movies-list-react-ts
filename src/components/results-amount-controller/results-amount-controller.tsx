@@ -1,12 +1,12 @@
-import React, {ReactNode} from 'react';
-import {connect} from 'react-redux';
+import React, { ReactNode } from 'react';
+import { connect } from 'react-redux';
 import cn from 'classnames';
 
-import {setSearchLimit} from '../../store/search-limit/actions';
-import {fetchMovies} from '../../store/movies/actions';
-import {GlobalState} from '../../store/store';
-import {selectSearchLimit} from '../../store/search-limit/selectors';
-import {Common} from '../../constants/constants';
+import { setSearchLimit } from '../../store/search-limit/actions';
+import { fetchMovies } from '../../store/movies/actions';
+import { GlobalState } from '../../store/store';
+import { selectSearchLimit } from '../../store/search-limit/selectors';
+import { Common } from '../../constants/constants';
 
 import './results-amount-controller.scss';
 
@@ -34,29 +34,29 @@ const mapDispatchToProps = {
 
 const ResultsAmountController = (props: ResultsAmountControllerProps) => {
     const setAmountItems = (e: any) => {
-        const {setSearchLimit, fetchMovies, searchLimit} = props;
+        const { setSearchLimit, fetchMovies, searchLimit } = props;
 
         searchLimit !== e.target.id && setSearchLimit(e.target.id) && fetchMovies();
     };
 
     const getSingleControl = (content: string): ReactNode => {
-        const {searchLimit} = props;
+        const { searchLimit } = props;
 
         return (
-            <span id={content}
-                  onClick={setAmountItems}
-                  className={cn('single-control', {'single-control-active': searchLimit === content})}>
-                {content}
+            <span id={ content }
+                  onClick={ setAmountItems }
+                  className={ cn('single-control', { 'single-control-active': searchLimit === content }) }>
+                { content }
             </span>
         )
     };
 
     return (
         <div className='results-amount-controller'>
-            <span>{Common.ResultsOnPage}</span>
-            {getSingleControl(Amount.ten)}
-            {getSingleControl(Amount.twenty)}
-            {getSingleControl(Amount.thirty)}
+            <span>{ Common.ResultsOnPage }</span>
+            { getSingleControl(Amount.ten) }
+            { getSingleControl(Amount.twenty) }
+            { getSingleControl(Amount.thirty) }
         </div>
     );
 };

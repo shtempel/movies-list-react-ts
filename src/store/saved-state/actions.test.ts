@@ -1,5 +1,5 @@
 import * as action from './actions';
-import {itCreatesAction, itCreatesActionWithPayload} from '../../jest/test-helpers';
+import { itCreatesAction, itCreatesActionWithPayload } from '../../jest/test-helpers';
 
 describe('saved-state actions', () => {
     describe('rehydrate state', () => {

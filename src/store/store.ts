@@ -3,13 +3,10 @@ import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createHashHistory, History } from 'history';
 import createSagaMiddleware from 'redux-saga';
 
-import {MovieItem, MoviesState} from './movies/reducer';
+import { MovieItem, MoviesState } from './movies/reducer';
 import reducers from './reducers';
 import rootSaga from './sagas';
-import {RouterSavedState} from './router/types';
-import {SearchBy} from './search-by/reducer';
-import {Amount} from '../components/results-amount-controller/results-amount-controller';
-import {SortByEnum} from "./sort-by/reducer";
+import { RouterSavedState } from './router/types';
 
 export interface Router {
     action: string;
@@ -28,11 +25,11 @@ export interface AppSavedState {
     movies?: MovieItem[];
 }
 
-export interface GlobalState extends AppSavedState{
+export interface GlobalState extends AppSavedState {
     moviesState: MoviesState;
-    searchBy: SearchBy;
-    sortBy: SortByEnum;
-    searchLimit: Amount;
+    searchBy: string;
+    sortBy: string;
+    searchLimit: string;
     router: Router
 }
 

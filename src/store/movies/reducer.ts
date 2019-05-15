@@ -1,8 +1,8 @@
-import {Reducer} from 'redux';
-import {ActionType, getType} from 'typesafe-actions';
+import { Reducer } from 'redux';
+import { ActionType, getType } from 'typesafe-actions';
 
 import * as actions from './actions';
-import {restoreSavedState} from "../saved-state/actions";
+import { restoreSavedState } from '../saved-state/actions';
 
 export interface MovieItem {
     id?: number;
@@ -47,7 +47,7 @@ const reducer: Reducer<MoviesState, MoviesAction> = (
     switch (action.type) {
 
         case getType(restoreSavedState): {
-            const {movies, currentMovie, favMovies} = action.payload;
+            const { movies, currentMovie, favMovies } = action.payload;
             return {
                 ...state,
                 movies: movies || [],

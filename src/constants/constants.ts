@@ -1,7 +1,7 @@
 export const BASE_URL = 'https://react-cdp-api.herokuapp.com/movies';
 
 export enum Common {
-    MainTitle= 'netflixroulette',
+    MainTitle = 'netflixroulette',
     Search = 'search',
     SearchBy = 'search by',
     SortBy = 'Sort by',

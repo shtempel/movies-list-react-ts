@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-import {BASE_URL} from '../constants/constants';
-import {MovieItem} from "../store/movies/reducer";
+import { BASE_URL } from '../constants/constants';
+import { MovieItem } from '../store/movies/reducer';
 
 export class MoviesService {
 
     getMovies(searchQuery: string, searchBy: string, limit: string) {
-        return axios.get(`${BASE_URL}?search=${searchQuery}&searchBy=${searchBy}&limit=${limit}`)
+        return axios.get(`${ BASE_URL }?search=${ searchQuery }&searchBy=${ searchBy }&limit=${ limit }`)
             .then((response): MovieItem[] => {
                 return response.data.data.map(
                     (movie: any): MovieItem => {
@@ -24,7 +24,7 @@ export class MoviesService {
     }
 
     getMovieById(id: number) {
-        return axios.get(`${BASE_URL}/${id}`)
+        return axios.get(`${ BASE_URL }/${ id }`)
             .then((response) => {
                 return response.data = {
                     title: response.data.title,

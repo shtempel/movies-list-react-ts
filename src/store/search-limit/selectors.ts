@@ -1,6 +1,6 @@
-import {createSelector} from 'reselect';
+import { createSelector } from 'reselect';
 
-import {GlobalState} from '../store';
+import { GlobalState } from '../store';
 
 const state = (state: GlobalState) => state;
 

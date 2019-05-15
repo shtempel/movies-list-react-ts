@@ -1,11 +1,11 @@
-import React, {useEffect, ReactNode} from 'react';
-import {connect} from 'react-redux';
+import React, { useEffect, ReactNode } from 'react';
+import { connect } from 'react-redux';
 
-import {GlobalState} from '../../store/store';
-import {fetchMovies} from '../../store/movies/actions';
-import {selectIsLoading, selectMovies} from '../../store/selectors';
-import {Header, SortBy, Loader, SearchResult} from '../../components';
-import {MovieItem} from '../../store/movies/reducer';
+import { GlobalState } from '../../store/store';
+import { fetchMovies } from '../../store/movies/actions';
+import { selectIsLoading, selectMovies } from '../../store/selectors';
+import { Header, SortBy, Loader, SearchResult } from '../../components';
+import { MovieItem } from '../../store/movies/reducer';
 
 interface HomeProps {
     movies: MovieItem[];
@@ -24,7 +24,7 @@ const mapDispatchToProps = {
 };
 
 const Home = (props: HomeProps) => {
-    const {fetchMovies, movies, isLoading} = props;
+    const { fetchMovies, movies, isLoading } = props;
 
     useEffect(() => {
         fetchMovies();
@@ -32,7 +32,7 @@ const Home = (props: HomeProps) => {
 
     const searchResult: ReactNode = (
         movies.length
-            ? <SearchResult movies={movies}/>
+            ? <SearchResult movies={ movies }/>
             : < div className='no-films-found'><h1> No films found</h1></div>
     );
 
@@ -46,7 +46,7 @@ const Home = (props: HomeProps) => {
         <div>
             <Header/>
             <SortBy/>
-            {content}
+            { content }
         </div>
     );
 };

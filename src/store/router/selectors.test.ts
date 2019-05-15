@@ -1,7 +1,7 @@
 import * as selectors from './selectors';
-import {getRootReducer} from '../../jest/test-helpers';
-import {RouterState} from 'connected-react-router';
-import {GlobalState} from '../store';
+import { getRootReducer } from '../../jest/test-helpers';
+import { RouterState } from 'connected-react-router';
+import { GlobalState } from '../store';
 
 describe('router selectors', () => {
     const rootReducer = getRootReducer();
@@ -19,7 +19,7 @@ describe('router selectors', () => {
     });
 
     beforeEach(() => {
-        state = rootReducer(undefined, {type: 'FAKE'});
+        state = rootReducer(undefined, { type: 'FAKE' });
     });
 
     test('selectCurrentPath selects current path', () => {

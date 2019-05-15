@@ -1,5 +1,6 @@
 export class LocalStorageService {
-    constructor(private localStorage: Storage) {}
+    constructor(private localStorage: Storage) {
+    }
 
     setItem(key: string, value: object) {
         this.localStorage.setItem(key, JSON.stringify(value));

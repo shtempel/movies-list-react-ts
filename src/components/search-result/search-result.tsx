@@ -1,17 +1,17 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {MovieItem} from '../../store/movies/reducer';
-import {FilmCard} from './film-card';
-import {Favorites, ResultsAmountController} from '..';
+import { MovieItem } from '../../store/movies/reducer';
+import { FilmCard } from './film-card';
+import { Favorites, ResultsAmountController } from '..';
 import {
     fetchFavoriteMovie,
     fetchMovieById,
     removeMovieFromFavorites,
     setCurrentMovieId
 } from '../../store/movies/actions';
-import {GlobalState} from "../../store/store";
-import {selectFavorites} from "../../store/movies/selectors";
+import { GlobalState } from '../../store/store';
+import { selectFavorites } from '../../store/movies/selectors';
 
 import './search-result.scss';
 
@@ -69,16 +69,16 @@ const SearchResult = (props: SearchResultProps) => {
                     movies.map(
                         movie => (
                             <FilmCard
-                                key={movie.id}
-                                movie={movie}
-                                onPosterClick={fetchMovie}
-                                onStarClick={manageFavorites}
-                                favorites={favorites}/>
+                                key={ movie.id }
+                                movie={ movie }
+                                onPosterClick={ fetchMovie }
+                                onStarClick={ manageFavorites }
+                                favorites={ favorites }/>
                         )
                     )
                 }
                 </div>
-                <Favorites fetchFavoriteMovie={fetchMovie} favorites={favorites}/>
+                <Favorites fetchFavoriteMovie={ fetchMovie } favorites={ favorites }/>
             </div>
             <ResultsAmountController/>
         </>

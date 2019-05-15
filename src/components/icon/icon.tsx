@@ -15,7 +15,7 @@ interface IconProps {
 export const Icon = (props: IconProps) => {
     return (
         <i className={ `${ props.className }  ${ props.iconPrefix } fa-${ props.icon }` }
-           title={props.title}
+           title={ props.title }
            id={ props.id }
            onClick={ props.onIconClick }/>
     );

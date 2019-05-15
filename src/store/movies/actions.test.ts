@@ -1,4 +1,4 @@
-import {ERROR, itCreatesAction, itCreatesActionWithPayload, MOVIE_ID, SEARCH_QUERY} from '../../jest/test-helpers';
+import { ERROR, itCreatesAction, itCreatesActionWithPayload, MOVIE_ID, SEARCH_QUERY } from '../../jest/test-helpers';
 import * as actions from './actions';
 
 describe('movies actions', () => {

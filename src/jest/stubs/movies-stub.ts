@@ -1,4 +1,4 @@
-import { MovieItem } from "../../store/movies/reducer";
+import { MovieItem } from '../../store/movies/reducer';
 
 export const moviesStub: MovieItem[] = [
     {
