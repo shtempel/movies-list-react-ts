@@ -1,3 +1,5 @@
+@import './constants/variables';
+
 .app {
-  width: 900px;
+  width: $app_width;
 }

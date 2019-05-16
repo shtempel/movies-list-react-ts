@@ -25,7 +25,7 @@ export class MoviesService {
 
     getMovieById(id: number) {
         return axios.get(`${ BASE_URL }/${ id }`)
-            .then((response) => {
+            .then(response => {
                 return response.data = {
                     title: response.data.title,
                     id: response.data.id,
