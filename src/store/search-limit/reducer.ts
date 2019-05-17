@@ -2,7 +2,12 @@ import {Reducer} from 'redux';
 import {ActionType, getType} from 'typesafe-actions';
 
 import * as actions from './actions';
-import {Amount} from '../../components/results-amount-controller/results-amount-controller';
+
+export enum Amount {
+    ten = '10',
+    twenty = '20',
+    thirty = '30',
+}
 
 export type SearchLimitAction = ActionType<typeof actions>;
 export type SearchLimit = Amount;

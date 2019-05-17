@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import { store } from './store/store';
 import App from './App';
 import { init } from './store/actions';
+import { initTranslationService } from './services';
+import { Loader } from './components';
 
 import './index.scss';
 
+const translationService = initTranslationService();
+const loader = <Loader/>;
+
 store.dispatch(init());
+translationService.changeLanguage('ru-RU');
 
 ReactDOM.render(
     <Provider store={ store }>
-        <App/>
+        <Suspense fallback={ loader }>
+            <App/>
+        </Suspense>
     </Provider>,
     document.getElementById('root'));

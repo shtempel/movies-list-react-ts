@@ -1,18 +1,17 @@
 import { ConnectedRouter } from 'connected-react-router';
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
-import { Footer } from './components';
 import { appHistory } from './store/store';
 import routes from './routes';
+import { Header } from './components';
 
 import './App.scss';
 
-const App = () => {
-
+const App: FunctionComponent = () => {
     return (
         <div className='app'>
+            <Header />
             <ConnectedRouter history={ appHistory }>{ routes }</ConnectedRouter>
-            <Footer/>
         </div>
     );
 };

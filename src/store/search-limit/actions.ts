@@ -1,6 +1,6 @@
 import { createAction } from 'typesafe-actions';
+import { Amount } from './reducer';
 
-import { Amount } from '../../components/results-amount-controller/results-amount-controller';
 
 export const setSearchLimit = createAction(
     'SET_SEARCH_LIMIT',

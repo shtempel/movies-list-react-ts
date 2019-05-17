@@ -1,69 +1,9 @@
-@import './../../constants/variables';
+@import './../../styles/variables';
 
-.header {
-  display: flex;
-  min-height: $header_height;
-  padding: $padding-XL;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./../../assets/background.jpg") center no-repeat;
-
-  &__title {
-    font-weight: bold;
-    color: $_color_Mandy;
-    margin-bottom: $margin-X;
-  }
-
-  &__find_your {
-    text-transform: uppercase;
-    color: $_color_White;
-    margin-bottom: $margin-base;
-  }
-
-  &__search-input {
-    background-color: $_color_Black;
-    opacity: $search_input_opacity;
-    width: 100%;
-    outline: none;
-    margin-bottom: $margin-base;
-    height: $search_input_height;
-    color: $_color_White;
-    font-size: $search_input_font_size;
-    padding: $padding-small;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: 2px solid $_color_Mandy;
-  }
-
-  &__controls {
-    justify-content: space-between;
-
-    &__left {
-
-      width: 45%;
-
-      span {
-        text-transform: uppercase;
-        color: $_color_White;
-        margin-right: $margin-base;
-      }
-
-      button {
-        text-transform: uppercase;
-        width: 25%;
-        margin-right: $margin-base;
-      }
-    }
-
-    &__search-button {
-      text-transform: uppercase;
-      width: 30%;
-      background-color: $_color_Mandy;
-      color: $_color_White;
-      border: none;
-      font-size: $search_button_font_size;
-      padding: $padding-small;
-      font-weight: bold;
-      opacity: $search_input_opacity;
-    }
-  }
+.header-title {
+  font-weight: bold;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  color: $_COLOR_Mandy;
 }
