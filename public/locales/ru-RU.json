@@ -1,10 +1,20 @@
 {
   "header": {
-    "title": "netflixroulette"
+    "title": "netflixroulette",
+    "rus": "Рус",
+    "eng": "Анг"
   },
   "home": {
     "search": {
-      "find": "Find your movie"
+      "find": "Найдите свой фильм",
+      "searchBy": "Поиск по",
+      "title": "Названию",
+      "genres": "Жанру",
+      "search": "Поиск",
+      "sortBy": "Сортировка по",
+      "releaseDate": "дата выхода",
+      "rating": "рейтинг",
+      "moviesFound": "фильмов найдно"
     }
   }
 }

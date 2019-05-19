@@ -26,21 +26,21 @@ body, html {
   cursor: pointer;
   padding: $buttons_padding;
   border: 0;
-  background-color: $_color_Outer_Space;
+  background-color: $_COLOR_OUTER_SPACE;
   color: $_COLOR_WHITE;
   font-size: 13px;
 }
 
 .btn:active {
-  background-color: $_color_Crown_of_Thorns;
+  background-color: $_COLOR_CROWN_OF_THORNS;
 }
 
 .active-button {
-  background-color: $_COLOR_Mandy;
+  background-color: $_COLOR_MANDY;
 }
 
 .active-link {
-  color: $_COLOR_Mandy;
+  color: $_COLOR_MANDY;
 }
 
 .link {
@@ -49,7 +49,7 @@ body, html {
 }
 
 .link:active {
-  color: $_color_Crown_of_Thorns;
+  color: $_COLOR_CROWN_OF_THORNS;
 }
 
 .fractional-border {
@@ -58,4 +58,8 @@ body, html {
 
 .integer-border {
   padding: $padding-integer;
+}
+
+.disabled-btn {
+  background-color: $_COLOR_DOVE_GRAY!important;
 }

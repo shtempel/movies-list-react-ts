@@ -10,11 +10,10 @@ import { Loader } from './components';
 
 import './index.scss';
 
-const translationService = initTranslationService();
 const loader = <Loader/>;
 
 store.dispatch(init());
-translationService.changeLanguage('ru-RU');
+initTranslationService().init({ lng: store.getState().locale });
 
 ReactDOM.render(
     <Provider store={ store }>

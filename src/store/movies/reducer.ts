@@ -40,10 +40,7 @@ export const initialState: MoviesState = {
     currentMovie: {}
 };
 
-const reducer: Reducer<MoviesState, MoviesAction> = (
-    state = initialState,
-    action
-) => {
+const reducer: Reducer<MoviesState, MoviesAction> = (state = initialState, action) => {
     switch (action.type) {
 
         case getType(restoreSavedState): {

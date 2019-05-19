@@ -3,10 +3,59 @@
 .search-component {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./../../assets/background.jpg") center no-repeat;
   width: 100%;
-  .find-your-movie {
-    text-transform: uppercase;
-    color: $_COLOR_WHITE;
-    margin-bottom: $margin-base;
+  box-sizing: border-box;
+  padding: 10px;
+
+  .search-form {
+    margin: $margin-X 0 0;
+
+    .search-input {
+      margin-bottom: 5px;
+      background-color: $_COLOR_BLACK;
+      opacity: 0.9;
+      width: 100%;
+      outline: none;
+      height: 30px;
+      color: $_COLOR_WHITE;
+      font-size: 20px;
+      padding: $padding-small;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 2px solid $_COLOR_MANDY;
+    }
+
+    .search-button {
+      text-transform: uppercase;
+      width: 100%;
+      background-color: $_COLOR_MANDY;
+      color: $_COLOR_WHITE;
+      border: none;
+      font-size: 13px;
+      padding: $padding-small;
+      font-weight: bold;
+      opacity: 0.9;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .search-button:active {
+      background-color: $_COLOR_CROWN_OF_THORNS;
+    }
+  }
+
+  .search-by {
+    margin: $margin-small 0 $margin-X 0;
+
+    span {
+      width: 20%;
+      color: $_COLOR_WHITE;
+    }
+
+    button {
+      flex: 1;
+      text-transform: uppercase;
+    }
   }
 }
 

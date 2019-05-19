@@ -5,7 +5,7 @@ import { GlobalState } from '../../store/store';
 import { fetchMovies } from '../../store/movies/actions';
 import { selectIsLoading, selectMovies } from '../../store/selectors';
 import { MovieItem } from '../../store/movies/reducer';
-import { SearchComponent } from './search-component';
+import SearchComponent from './search-component';
 
 interface HomeProps {
     movies: MovieItem[];
@@ -44,7 +44,7 @@ const Home = (props: HomeProps) => {
 
     return (
         <div>
-           <SearchComponent />
+            <SearchComponent/>
         </div>
     );
 };

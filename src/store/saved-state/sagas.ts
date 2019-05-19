@@ -8,6 +8,7 @@ import {
 import { getType } from 'typesafe-actions';
 import { LOCATION_CHANGE, push } from 'connected-react-router';
 
+import { setLocale } from '../language/actions';
 import * as actions from './actions';
 import { AppSavedState } from '../store';
 import { localStorageService } from '../../services';
@@ -24,7 +25,8 @@ export const saveStateActions: string[] = [
     getType(fetchMovieByIdSuccess),
     getType(fetchFavoriteMovieSuccess),
     getType(removeMovieFromFavorites),
-    getType(fetchMovies)
+    getType(fetchMovies),
+    getType(setLocale)
 ];
 
 const SAVE_STATE_THROTTLE = 500;

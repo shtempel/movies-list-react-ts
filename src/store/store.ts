@@ -23,6 +23,7 @@ export interface AppSavedState {
     favMovies?: MovieItem[];
     currentMovie?: MovieItem;
     movies?: MovieItem[];
+    locale: string;
 }
 
 export interface GlobalState extends AppSavedState {
@@ -30,7 +31,8 @@ export interface GlobalState extends AppSavedState {
     searchBy: string;
     sortBy: string;
     searchLimit: string;
-    router: Router
+    router: Router;
+    locale: string;
 }
 
 export const appHistory = createHashHistory();

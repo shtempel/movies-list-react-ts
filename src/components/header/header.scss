@@ -1,9 +1,15 @@
 @import './../../styles/variables';
 
-.header-title {
-  font-weight: bold;
+.header {
   position: absolute;
   top: 15px;
   left: 15px;
-  color: $_COLOR_Mandy;
+  right: 15px;
+  justify-content: space-between;
+
+  .title {
+    color: $_COLOR_MANDY;
+    font-weight: bold;
+  }
+
 }

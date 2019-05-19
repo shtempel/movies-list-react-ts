@@ -11,20 +11,20 @@
     margin-bottom: $margin-X;
     &__title {
       font-weight: bold;
-      color: $_COLOR_Mandy;
+      color: $_COLOR_MANDY;
     }
 
     &__to-search {
       text-transform: uppercase;
       margin-right: 10%;
       box-sizing: border-box;
-      color: $_COLOR_Mandy;
+      color: $_COLOR_MANDY;
       background-color: $_COLOR_WHITE;
     }
     &__to-search:hover {
       box-sizing: border-box;
       padding: $buttons_padding_hover;
-      border: 2px solid $_COLOR_Mandy;
+      border: 2px solid $_COLOR_MANDY;
 
 
     }
@@ -47,7 +47,7 @@
         margin-top: $margin-base;
 
         &__title {
-          color: $_COLOR_Mandy;
+          color: $_COLOR_MANDY;
           font-weight: bolder;
           font-size: x-large;
           margin-right: 20px;
@@ -63,7 +63,7 @@
       &__tagline {
         font-size: small;
         margin-top: $margin-small;
-        color: $_color_Silver_Chalice;
+        color: $_COLOR_SILVER_CHALICE;
       }
 
       &__date-runtime {
