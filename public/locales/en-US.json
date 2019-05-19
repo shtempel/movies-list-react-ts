@@ -16,5 +16,7 @@
 	  "rating": "rating",
 	  "moviesFound": "movies found"
 	}
-  }
+  },
+  "searchResults": "Search results",
+  "favorites": "Favorite movies"
 }
