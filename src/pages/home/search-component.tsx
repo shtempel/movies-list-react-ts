@@ -8,7 +8,7 @@ import { MovieItem } from '../../store/movies/reducer';
 import { selectFavorites, selectMoviesQuantity } from '../../store/movies/selectors';
 import { setSearchBy } from '../../store/search-by/actions';
 import { appHistory } from '../../store/store';
-import { Button } from '../../components';
+import { Button, ResultsAmount } from '../../components';
 import { GlobalState } from '../../store/interfaces';
 
 import './search-component.scss';
@@ -87,6 +87,7 @@ const SearchComponent: FunctionComponent<SearchComponentProps> = (props: SearchC
                         className={ cn('btn', { 'active-button': setActiveBtn('genres') }) }
                         name={ t('home.search.genres') }/>
             </div>
+            <ResultsAmount/>
         </div>
     );
 };

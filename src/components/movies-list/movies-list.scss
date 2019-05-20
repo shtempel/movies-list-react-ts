@@ -1,8 +1,20 @@
 @import "./../../styles/variables";
 
 .search-results {
+  position: absolute;
+  top: 219px;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  margin-top: $margin-small;
+}
 
-  .nav-bar {
-    background-color: $_COLOR_OUTER_SPACE;
-  }
+.nav-bar {
+  position: absolute;
+  top: 197px;
+  background-color: $_COLOR_OUTER_SPACE;
+  width: 100%;
 }

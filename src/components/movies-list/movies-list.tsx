@@ -10,15 +10,17 @@ import {
     setCurrentMovieId
 } from '../../store/movies/actions';
 import { MovieItem } from '../../store/movies/reducer';
-import { selectFavorites, selectMovies } from '../../store/movies/selectors';
+import { selectFavorites, selectIsLoading, selectMovies } from '../../store/movies/selectors';
 import { FilmCard } from './film-card';
 import { GlobalState } from '../../store/interfaces';
+import { Loader } from '..';
 
 import './movies-list.scss';
 
 interface MoviesListProps {
     movies: MovieItem[];
     favorites: MovieItem[];
+    isLoading: boolean;
 
     fetchMovieById(): void
     setCurrentMovieId(id: string): void;
@@ -33,7 +35,8 @@ enum Tabs {
 
 const mapStateToProps = (state: GlobalState) => ({
     movies: selectMovies(state),
-    favorites: selectFavorites(state)
+    favorites: selectFavorites(state),
+    isLoading: selectIsLoading(state)
 });
 
 const mapDispatchToProps = {
@@ -53,6 +56,7 @@ const MoviesList: FunctionComponent<MoviesListProps> = (props: MoviesListProps) 
         fetchMovieById,
         removeMovieFromFavorites,
         setCurrentMovieId,
+        isLoading,
         fetchFavoriteMovie
     } = props;
 
@@ -78,34 +82,29 @@ const MoviesList: FunctionComponent<MoviesListProps> = (props: MoviesListProps) 
 
     const handleTabs = (e: any) => setActiveTab(e.target.id);
 
-    const searchResultsNode = (): ReactNode => {
-        return isSearchResultsTab && (
-            <div className='column'>{
-                movies.map(
-                    movie => (
-                        <FilmCard
-                            key={ movie.id }
-                            movie={ movie }
-                            onPosterClick={ fetchMovie }
-                            onStarClick={ manageFavorites }
-                            favorites={ favorites }/>
-                    )
-                )
-            }
+    const getList = (moviesList: MovieItem[]): ReactNode => {
+        return (
+            <div className='column'>
+                {
+                    isLoading
+                        ? <Loader/>
+                        : moviesList.map(
+                        movie => (
+                            <FilmCard
+                                key={ movie.id }
+                                movie={ movie }
+                                onPosterClick={ fetchMovie }
+                                onStarClick={ manageFavorites }
+                                favorites={ favorites }/>
+                        )
+                        )
+                }
             </div>
-        )
-    };
-
-    const favoritesNode = (): ReactNode => {
-        return isFavoritesTab && (
-            <div>
-                favorites
-            </div>
-        )
+        );
     };
 
     return (
-        <div className='search-results columns'>
+        <>
             <div className='nav-bar row'>
                 <span className={ cn('btn', { 'active-button': isSearchResultsTab }) }
                       id={ Tabs.movies }
@@ -114,9 +113,11 @@ const MoviesList: FunctionComponent<MoviesListProps> = (props: MoviesListProps) 
                       id={ Tabs.favorites }
                       onClick={ handleTabs }>{ t('favorites') }</span>
             </div>
-            { searchResultsNode() }
-            { favoritesNode() }
-        </div>
+            <div className='search-results columns'>
+                { isSearchResultsTab && getList(movies) }
+                { isFavoritesTab && getList(favorites) }
+            </div>
+        </>
     );
 };
 

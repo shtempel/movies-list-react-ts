@@ -1,0 +1,27 @@
+@import './../../styles/variables';
+
+.results-amount {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.single-control,
+.single-control-active {
+  border: 1px solid $_COLOR_MANDY;
+  border-radius: $border-radius-small;
+  cursor: pointer;
+  padding: 2px;
+  font-size: smaller;
+  margin-left: 5px;
+}
+
+.single-control {
+  color: $_COLOR_DOVE_GRAY;
+}
+
+.single-control:hover,
+.single-control-active {
+  background-color: $_COLOR_DOVE_GRAY;
+  color: $_COLOR_WHITE;
+}
