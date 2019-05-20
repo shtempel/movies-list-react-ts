@@ -1,11 +1,11 @@
-import React, { useEffect, ReactNode } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { GlobalState } from '../../store/store';
 import { fetchMovies } from '../../store/movies/actions';
 import { selectIsLoading, selectMovies } from '../../store/selectors';
 import { MovieItem } from '../../store/movies/reducer';
 import SearchComponent from './search-component';
+import { GlobalState } from '../../store/interfaces';
 
 interface HomeProps {
     movies: MovieItem[];

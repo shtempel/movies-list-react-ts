@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { GlobalState } from '../store';
+import { GlobalState } from '../interfaces';
 
 const state = (state: GlobalState) => state;
 

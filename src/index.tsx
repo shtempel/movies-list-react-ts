@@ -13,7 +13,7 @@ import './index.scss';
 const loader = <Loader/>;
 
 store.dispatch(init());
-initTranslationService().init({ lng: store.getState().locale });
+initTranslationService().init({ lng: store.getState().language });
 
 ReactDOM.render(
     <Provider store={ store }>

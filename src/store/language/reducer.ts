@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
 import { ActionType, getType } from 'typesafe-actions';
 
-import { Locales } from '../../services/translation-service';
+import { Languages } from '../../services';
 
 import { restoreSavedState } from '../saved-state/actions';
 import * as actions from './actions';
@@ -10,17 +10,19 @@ export type LanguageAction =
     | ActionType<typeof actions>
     | ActionType<typeof restoreSavedState>;
 
-export const initialState: string = Locales.en;
+export const initialState: string = Languages.en;
 
 const reducer: Reducer<string, LanguageAction> = (state = initialState, action) => {
         switch (action.type) {
-            case getType(actions.setLocale): {
+
+            case getType(actions.setLanguage): {
                 return action.payload;
             }
+
             case getType(restoreSavedState): {
-                const { locale } = action.payload;
-                return locale
+                return action.payload.language
             }
+
             default: {
                 return state;
             }

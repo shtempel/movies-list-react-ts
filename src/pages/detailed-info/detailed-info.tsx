@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { connect } from 'react-redux';
 import cn from 'classnames';
 
-import { appHistory, GlobalState } from '../../store/store';
+import { appHistory } from '../../store/store';
 import { selectCurrentMovie, selectFavorites, selectIsLoading, selectMovies } from '../../store/movies/selectors';
 import { Common } from '../../constants/constants';
 import { MovieItem } from '../../store/movies/reducer';
@@ -10,6 +10,7 @@ import {
     fetchFavoriteMovieSuccess,
     removeMovieFromFavorites
 } from '../../store/movies/actions';
+import { GlobalState } from '../../store/interfaces';
 
 import './detailed-info.scss';
 

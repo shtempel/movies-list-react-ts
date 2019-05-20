@@ -7,8 +7,9 @@ import { fetchMovies, setQueryString } from '../../store/movies/actions';
 import { MovieItem } from '../../store/movies/reducer';
 import { selectFavorites, selectMoviesQuantity } from '../../store/movies/selectors';
 import { setSearchBy } from '../../store/search-by/actions';
-import { appHistory, GlobalState } from '../../store/store';
+import { appHistory } from '../../store/store';
 import { Button } from '../../components';
+import { GlobalState } from '../../store/interfaces';
 
 import './search-component.scss';
 

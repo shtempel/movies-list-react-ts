@@ -9,5 +9,5 @@ export default {
     sortBy: sortByReducer,
     searchBy: searchByReducer,
     searchLimit: searchLimitReducer,
-    locale: languageStateReducer
+    language: languageStateReducer
 };

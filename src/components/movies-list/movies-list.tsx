@@ -2,17 +2,17 @@ import React, { FunctionComponent, ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import cn from 'classnames';
+
 import {
     fetchFavoriteMovie,
     fetchMovieById,
     removeMovieFromFavorites,
     setCurrentMovieId
 } from '../../store/movies/actions';
-
 import { MovieItem } from '../../store/movies/reducer';
 import { selectFavorites, selectMovies } from '../../store/movies/selectors';
-import { GlobalState } from '../../store/store';
 import { FilmCard } from './film-card';
+import { GlobalState } from '../../store/interfaces';
 
 import './movies-list.scss';
 

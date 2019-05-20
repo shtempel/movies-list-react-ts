@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { GlobalState } from '../store';
+import { GlobalState } from '../interfaces';
 
 export const moviesState = (state: GlobalState) => state.moviesState;
 

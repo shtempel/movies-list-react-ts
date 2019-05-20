@@ -2,12 +2,12 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import Backend from 'i18next-xhr-backend';
 
-export enum Locales {
+export enum Languages {
     en = 'en-US',
     ru = 'ru-RU'
 }
 
-const DEFAULT_LANGUAGE = Locales.en;
+const DEFAULT_LANGUAGE = Languages.en;
 
 export function initTranslationService() {
     i18n
@@ -18,7 +18,7 @@ export function initTranslationService() {
 
             fallbackLng: DEFAULT_LANGUAGE,
 
-            whitelist: [Locales.en, Locales.ru],
+            whitelist: [Languages.en, Languages.ru],
 
             load: 'currentOnly',
 

@@ -1,3 +1,3 @@
-import { GlobalState } from '../store';
+import { GlobalState } from '../interfaces';
 
-export const selectLocale = (state: GlobalState) => state.locale;
+export const selectLanguage = (state: GlobalState) => state.language;

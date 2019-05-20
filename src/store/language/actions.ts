@@ -1,6 +1,6 @@
 import { createAction } from 'typesafe-actions';
 
-export const setLocale = createAction(
+export const setLanguage = createAction(
     'SET_LANGUAGE',
-    resolve => (locale: string) => resolve(locale)
+    resolve => (language: string) => resolve(language)
 );
