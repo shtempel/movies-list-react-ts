@@ -63,3 +63,9 @@ body, html {
 .disabled-btn {
   background-color: $_COLOR_DOVE_GRAY!important;
 }
+
+.space-btw {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

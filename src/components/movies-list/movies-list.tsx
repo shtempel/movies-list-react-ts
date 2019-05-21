@@ -13,7 +13,8 @@ import { MovieItem } from '../../store/movies/reducer';
 import { selectFavorites, selectIsLoading, selectMovies } from '../../store/movies/selectors';
 import { FilmCard } from './film-card';
 import { GlobalState } from '../../store/interfaces';
-import { Loader } from '..';
+import { Loader, SortBy } from '..';
+import { selectSortBy } from '../../store/sort-by/selectors';
 
 import './movies-list.scss';
 
@@ -21,6 +22,7 @@ interface MoviesListProps {
     movies: MovieItem[];
     favorites: MovieItem[];
     isLoading: boolean;
+    sortBy: string;
 
     fetchMovieById(): void
     setCurrentMovieId(id: string): void;
@@ -30,13 +32,14 @@ interface MoviesListProps {
 
 enum Tabs {
     movies = 'movies',
-    favorites = 'favorites'
+    favorites = 'favMovies'
 }
 
 const mapStateToProps = (state: GlobalState) => ({
     movies: selectMovies(state),
     favorites: selectFavorites(state),
-    isLoading: selectIsLoading(state)
+    isLoading: selectIsLoading(state),
+    sortBy: selectSortBy(state)
 });
 
 const mapDispatchToProps = {
@@ -105,13 +108,16 @@ const MoviesList: FunctionComponent<MoviesListProps> = (props: MoviesListProps) 
 
     return (
         <>
-            <div className='nav-bar row'>
+            <div className='column'>
+                <div className='row nav-bar'>
                 <span className={ cn('btn', { 'active-button': isSearchResultsTab }) }
                       id={ Tabs.movies }
                       onClick={ handleTabs }>{ t('searchResults') }</span>
-                <span className={ cn('btn', { 'active-button': isFavoritesTab }) }
-                      id={ Tabs.favorites }
-                      onClick={ handleTabs }>{ t('favorites') }</span>
+                    <span className={ cn('btn', { 'active-button': isFavoritesTab }) }
+                          id={ Tabs.favorites }
+                          onClick={ handleTabs }>{ t('favorites') }</span>
+                </div>
+                <SortBy tab={ tab }/>
             </div>
             <div className='search-results columns'>
                 { isSearchResultsTab && getList(movies) }

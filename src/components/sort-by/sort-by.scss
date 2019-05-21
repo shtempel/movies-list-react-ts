@@ -1,0 +1,10 @@
+@import './../../styles/variables';
+
+.sort-by {
+  position: absolute;
+  top: 171px;
+  right: 10px;
+  span {
+    color: $_COLOR_WHITE;
+  }
+}

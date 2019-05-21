@@ -11,10 +11,11 @@
       "title": "Названию",
       "genres": "Жанру",
       "search": "Поиск",
-      "sortBy": "Сортировка по",
-      "releaseDate": "дата выхода",
+      "sortBy": "Сортировать:",
+      "releaseDate": "дата",
       "rating": "рейтинг",
-      "moviesFound": "фильмов найдно"
+      "moviesFound": "фильмов найдено",
+      "resultsOnPage": "Отобразить:"
     }
   },
   "searchResults": "Результаты поиска",

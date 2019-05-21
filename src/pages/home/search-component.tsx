@@ -87,7 +87,9 @@ const SearchComponent: FunctionComponent<SearchComponentProps> = (props: SearchC
                         className={ cn('btn', { 'active-button': setActiveBtn('genres') }) }
                         name={ t('home.search.genres') }/>
             </div>
-            <ResultsAmount/>
+            <div className='space-btw'>
+                <ResultsAmount/>
+            </div>
         </div>
     );
 };

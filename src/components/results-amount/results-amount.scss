@@ -3,7 +3,10 @@
 .results-amount {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+
+  span {
+    color: $_COLOR_WHITE;
+  }
 }
 
 .single-control,

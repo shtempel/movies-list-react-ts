@@ -1,6 +1,7 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { connect } from 'react-redux';
 import cn from 'classnames';
+import { useTranslation } from 'react-i18next';
 
 import { GlobalState } from '../../store/interfaces';
 import { fetchMovies } from '../../store/movies/actions';
@@ -8,7 +9,6 @@ import { setSearchLimit } from '../../store/search-limit/actions';
 import { selectSearchLimit } from '../../store/search-limit/selectors';
 
 import './results-amount.scss';
-import { useTranslation } from 'react-i18next';
 
 interface ResultsAmountProps {
     searchLimit: string;
@@ -53,7 +53,7 @@ const ResultsAmount: FunctionComponent<ResultsAmountProps> =
 
         return (
             <div className='results-amount row'>
-                <span>{ t('') }</span>
+                <span>{ t('home.search.resultsOnPage') }</span>
                 { getSingleControl(Amount.ten) }
                 { getSingleControl(Amount.twenty) }
                 { getSingleControl(Amount.thirty) }
