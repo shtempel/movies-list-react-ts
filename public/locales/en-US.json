@@ -18,6 +18,9 @@
       "resultsOnPage": "Show results:"
     }
   },
+  "detailed": {
+    "min": "min"
+  },
   "searchResults": "Search results",
   "favorites": "Favorite movies"
 }

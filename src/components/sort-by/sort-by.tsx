@@ -1,10 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import cn from 'classnames';
 
 import { GlobalState } from '../../store/interfaces';
 import { sortByDate, sortByRating } from '../../store/movies/actions';
 import { setSortBy } from '../../store/sort-by/actions';
+import { SortByEnum } from '../../store/sort-by/reducer';
 
 import './sort-by.scss';
 
@@ -32,18 +34,25 @@ const SortBy: FunctionComponent<SortByProps> = (props: SortByProps) => {
     const { setSortBy, sortByRating, sortByDate, tab } = props;
 
     const onSetSortBy = (e: any) => {
-        e.target.id === 'rating'
-            ? sortByRating(tab)
-            : sortByDate(tab);
-
-        setSortBy(e.target.id);
+        if (e.target.id !== props.sortBy) {
+            e.target.id === SortByEnum.Rating
+                ? sortByRating(tab)
+                : sortByDate(tab);
+            setSortBy(e.target.id);
+        }
     };
+
+    const setActiveLink = (sortBy: string) => sortBy === props.sortBy;
 
     return (
         <div className='sort-by'>
             <span>{ t('home.search.sortBy') }</span>
-            <span id='date' onClick={ onSetSortBy }>	&nbsp;{ t('home.search.releaseDate') }</span>
-            <span id='rating' onClick={ onSetSortBy }>	&nbsp;{ t('home.search.rating') }</span>
+            <span id='date'
+                  className={ cn('link', { 'active-link': setActiveLink(SortByEnum.Date) }) }
+                  onClick={ onSetSortBy }>	&nbsp;{ t('home.search.releaseDate') }</span>
+            <span id='rating'
+                  className={ cn('link', { 'active-link': setActiveLink(SortByEnum.Rating) }) }
+                  onClick={ onSetSortBy }>	&nbsp;{ t('home.search.rating') }</span>
         </div>
     );
 };

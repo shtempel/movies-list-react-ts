@@ -5,82 +5,72 @@
   background: linear-gradient(rgba(0, 0, 0, 0.5),
           rgba(0, 0, 0, 0.5)), url("./../../assets/background.jpg");
   background-size: cover;
+  color: $_COLOR_WHITE;
 
-  &__top {
-    justify-content: space-between;
-    margin-bottom: $margin-X;
-    &__title {
-      font-weight: bold;
-      color: $_COLOR_MANDY;
-    }
-
-    &__to-search {
-      text-transform: uppercase;
-      margin-right: 10%;
-      box-sizing: border-box;
-      color: $_COLOR_MANDY;
-      background-color: $_COLOR_WHITE;
-    }
-    &__to-search:hover {
-      box-sizing: border-box;
-      padding: $buttons_padding_hover;
-      border: 2px solid $_COLOR_MANDY;
-
-
-    }
+  .title-vote,
+  .poster-date-duration {
+    margin-top: 50px;
   }
 
-  &__film {
-    color: $_COLOR_WHITE;
+  .poster-date-duration {
+    width: 180px;
 
-    &__poster {
+    .date,
+    .duration,
+    .overview {
+      color: $_COLOR_WHITE;
+    }
+
+    .duration {
+      font-weight: bold;
+    }
+
+    .poster {
       display: flex;
       height: 265px;
+      width: 180px;
     }
 
-    &__right {
-      width: 60%;
-      margin-left: $margin-X;
-
-      &__title-rating {
-        align-items: center;
-        margin-top: $margin-base;
-
-        &__title {
-          color: $_COLOR_MANDY;
-          font-weight: bolder;
-          font-size: x-large;
-          margin-right: 20px;
-        }
-
-        &__rating {
-          margin-left: $margin-base;
-          border-radius: $border-radius-circle;
-          border: 1px solid $_COLOR_WHITE;
-        }
-      }
-
-      &__tagline {
-        font-size: small;
-        margin-top: $margin-small;
-        color: $_COLOR_SILVER_CHALICE;
-      }
-
-      &__date-runtime {
-        font-weight: bold;
-        margin-top: $margin-base;
-
-        &__date {
-          margin-right: $margin-X;
-        }
-      }
-
-      &__overview {
-        margin-top: $margin-base;
-        height: 100px;
-        overflow: auto;
-      }
+    .date {
+      font-weight: bold;
+      font-size: large;
     }
-
   }
+
+  .title-vote {
+    height: 34px;
+    margin-left: 20px;
+
+    i {
+      margin-right: 10px;
+    }
+
+    .title {
+      color: $_COLOR_MANDY;
+      font-weight: bolder;
+      font-size: large;
+      margin-right: 5px;
+    }
+
+    .rating {
+      border-radius: $border-radius-circle;
+      border: 1px solid $_COLOR_WHITE;
+      width: 20px;
+    }
+  }
+
+  .overview {
+    font-size: small;
+  }
+}
+.favorite {
+  cursor: pointer;
+}
+
+.fav {
+  color: $_COLOR_GREEN!important;
+}
+
+.favorite:hover {
+  color: $_COLOR_DOVE_GRAY;
 }

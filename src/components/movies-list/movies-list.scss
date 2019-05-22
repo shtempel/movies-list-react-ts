@@ -10,11 +10,14 @@
   flex-direction: column;
   overflow: auto;
   margin-top: $margin-small;
+  -webkit-overflow-scrolling: touch;
 }
 
 .nav-bar {
-  position: absolute;
-  top: 197px;
   background-color: $_COLOR_OUTER_SPACE;
   width: 100%;
+}
+
+.mobile-detailed-hide-list {
+  display: none;
 }

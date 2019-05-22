@@ -1,7 +1,6 @@
 import { MovieItem, MoviesState } from './reducer';
 
 export const sortBy = (state: MoviesState, tab: string, sortBy: string) => {
-    console.log(tab, sortBy);
     return sortBy === 'date'
         ? tab === 'movies'
             ? {

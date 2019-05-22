@@ -2,6 +2,7 @@ import React, { FunctionComponent, ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import cn from 'classnames';
+import { push } from 'connected-react-router';
 
 import {
     fetchFavoriteMovie,
@@ -15,6 +16,7 @@ import { FilmCard } from './film-card';
 import { GlobalState } from '../../store/interfaces';
 import { Loader, SortBy } from '..';
 import { selectSortBy } from '../../store/sort-by/selectors';
+import { selectCurrentPath } from '../../store/router/selectors';
 
 import './movies-list.scss';
 
@@ -23,7 +25,9 @@ interface MoviesListProps {
     favorites: MovieItem[];
     isLoading: boolean;
     sortBy: string;
+    pathname: string;
 
+    push(path: string): void;
     fetchMovieById(): void
     setCurrentMovieId(id: string): void;
     fetchFavoriteMovie(): void;
@@ -39,14 +43,16 @@ const mapStateToProps = (state: GlobalState) => ({
     movies: selectMovies(state),
     favorites: selectFavorites(state),
     isLoading: selectIsLoading(state),
-    sortBy: selectSortBy(state)
+    sortBy: selectSortBy(state),
+    pathname: selectCurrentPath(state)
 });
 
 const mapDispatchToProps = {
     fetchMovieById,
     setCurrentMovieId,
     removeMovieFromFavorites,
-    fetchFavoriteMovie
+    fetchFavoriteMovie,
+    push
 };
 
 const MoviesList: FunctionComponent<MoviesListProps> = (props: MoviesListProps) => {
@@ -55,20 +61,24 @@ const MoviesList: FunctionComponent<MoviesListProps> = (props: MoviesListProps) 
     const [tab, setActiveTab] = useState(state);
     const {
         movies,
+        push,
         favorites,
         fetchMovieById,
         removeMovieFromFavorites,
         setCurrentMovieId,
         isLoading,
-        fetchFavoriteMovie
+        fetchFavoriteMovie,
+        pathname
     } = props;
 
     const isSearchResultsTab: boolean = tab === Tabs.movies;
     const isFavoritesTab: boolean = tab === Tabs.favorites;
+    const isDetailedPage: boolean = pathname.includes('movie');
 
     const fetchMovie = (e: any) => {
         setCurrentMovieId(e.target.id);
         fetchMovieById();
+        push(`/movie/:${ e.target.id }`);
     };
 
     const manageFavorites = (e: any) => {
@@ -107,15 +117,19 @@ const MoviesList: FunctionComponent<MoviesListProps> = (props: MoviesListProps) 
     };
 
     return (
-        <>
+        <div className={ cn('mobile-detailed-hide-list', { 'column': !isDetailedPage }) }>
             <div className='column'>
                 <div className='row nav-bar'>
-                <span className={ cn('btn', { 'active-button': isSearchResultsTab }) }
-                      id={ Tabs.movies }
-                      onClick={ handleTabs }>{ t('searchResults') }</span>
+                    <span className={ cn('btn', { 'active-button': isSearchResultsTab }) }
+                          id={ Tabs.movies }
+                          onClick={ handleTabs }>
+                    { t('searchResults') }
+                    </span>
                     <span className={ cn('btn', { 'active-button': isFavoritesTab }) }
                           id={ Tabs.favorites }
-                          onClick={ handleTabs }>{ t('favorites') }</span>
+                          onClick={ handleTabs }>
+                    { t('favorites') }
+                </span>
                 </div>
                 <SortBy tab={ tab }/>
             </div>
@@ -123,7 +137,7 @@ const MoviesList: FunctionComponent<MoviesListProps> = (props: MoviesListProps) 
                 { isSearchResultsTab && getList(movies) }
                 { isFavoritesTab && getList(favorites) }
             </div>
-        </>
+        </div>
     );
 };
 

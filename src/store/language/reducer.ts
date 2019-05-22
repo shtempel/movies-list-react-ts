@@ -2,7 +2,6 @@ import { Reducer } from 'redux';
 import { ActionType, getType } from 'typesafe-actions';
 
 import { Languages } from '../../services';
-
 import { restoreSavedState } from '../saved-state/actions';
 import * as actions from './actions';
 
@@ -20,7 +19,7 @@ const reducer: Reducer<string, LanguageAction> = (state = initialState, action) 
             }
 
             case getType(restoreSavedState): {
-                return action.payload.language
+                return action.payload.language;
             }
 
             default: {

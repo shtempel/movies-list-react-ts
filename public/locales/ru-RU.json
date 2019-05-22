@@ -18,6 +18,9 @@
       "resultsOnPage": "Отобразить:"
     }
   },
+  "detailed": {
+    "min": "мин"
+  },
   "searchResults": "Результаты поиска",
   "favorites": "Избранные фильмы"
 }

@@ -35,12 +35,4 @@
     font-size: x-small;
     color: $_COLOR_DOVE_GRAY;
   }
-
-  &__favorite {
-    cursor: pointer;
-  }
-
-  &__favorite:hover {
-    color: $_COLOR_DOVE_GRAY;
-  }
 }
