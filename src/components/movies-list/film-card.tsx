@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import cn from 'classnames';
 
 import { MovieItem } from '../../store/movies/reducer';
-import { Icon } from '..';
-import { IconPrefix } from '..';
+import { FavoriteIcon } from '..';
 
 import './film-card.scss';
 
@@ -16,26 +14,25 @@ interface FilmCardProps {
 }
 
 export const FilmCard: FunctionComponent<FilmCardProps> = (props: FilmCardProps) => {
-    const isMovieInFavorites: boolean = props.favorites.some(movie => movie.id === props.movie.id);
-    const iconPrefix: IconPrefix = isMovieInFavorites ? 'fas' : 'far';
+    const { onStarClick, movie, favorites, onPosterClick } = props;
+    const { id, title, genres, posterPath, releaseDate } = movie;
 
     return (
         <div className='film-card'>
             <img className='film-card__poster'
-                 id={ props.movie.id!.toString() }
-                 src={ props.movie.posterPath }
-                 alt={ props.movie.title }
-                 onClick={ props.onPosterClick }/>
+                 id={ id!.toString() }
+                 src={ posterPath }
+                 alt={ title }
+                 onClick={ onPosterClick }/>
             <div className='film-card__header row'>
-                <span>{ props.movie.title }</span>
-                <span>{ props.movie.releaseDate }</span>
+                <span>{ title }</span>
+                <span>{ releaseDate }</span>
             </div>
             <div className='film-card__footer row'>
-                <span className='film-card__genres'>{ props.movie.genres!.join(' & ') }</span>
-                <Icon className={ cn('film-card__favorite', { 'fav': isMovieInFavorites }) }
-                      id={ props.movie.id!.toString() }
-                      iconPrefix={ iconPrefix } icon='star'
-                      onIconClick={ props.onStarClick }/>
+                <span className='film-card__genres'>{ genres!.join(' & ') }</span>
+                <FavoriteIcon id={ movie.id! }
+                              favorites={ favorites }
+                              manageFavorites={ onStarClick }/>
             </div>
         </div>
     );

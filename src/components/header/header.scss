@@ -7,9 +7,19 @@
   right: 15px;
   justify-content: space-between;
 
-  .title {
-    color: $_COLOR_MANDY;
-    font-weight: bold;
+  .left {
+    display: flex;
+    align-items: center;
+
+    .back {
+      color: $_COLOR_MANDY;
+      margin-right: 30px;
+    }
+
+    .title {
+      color: $_COLOR_MANDY;
+      font-weight: bold;
+    }
   }
 
 }

@@ -52,10 +52,19 @@
       margin-right: 5px;
     }
 
-    .rating {
-      border-radius: $border-radius-circle;
-      border: 1px solid $_COLOR_WHITE;
-      width: 20px;
+    .rating-tagline {
+      margin: 40px 0 40px 0;
+
+      .rating {
+        border-radius: $border-radius-circle;
+        border: 1px solid $_COLOR_WHITE;
+        width: 20px;
+        margin-right: 40px;
+      }
+    }
+
+    .tagLine {
+      color: $_COLOR_SILVER_CHALICE;
     }
   }
 
@@ -63,12 +72,13 @@
     font-size: small;
   }
 }
+
 .favorite {
   cursor: pointer;
 }
 
 .fav {
-  color: $_COLOR_GREEN!important;
+  color: $_COLOR_GREEN !important;
 }
 
 .favorite:hover {

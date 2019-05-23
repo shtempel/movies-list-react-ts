@@ -1,16 +1,34 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { LangPanel } from '../index';
+import { Icon, LangPanel } from '../index';
 
 import './header.scss';
 
-export const Header: FunctionComponent = () => {
+interface HeaderProps {
+    pathname: string;
+
+    push(path: string): void;
+}
+
+export const Header: FunctionComponent<HeaderProps> = (props: HeaderProps) => {
     const { t } = useTranslation();
+    const toMainPage = () => props.push('/');
+    const isDetailedPage: boolean = props.pathname.includes('movie');
+
+    const backIcon: ReactNode = isDetailedPage && (
+        <Icon icon='chevron-circle-left'
+              iconPrefix='fa'
+              className='back link'
+              onIconClick={ toMainPage }/>
+    );
 
     return (
         <div className='header row'>
-            <span className='title'>{ t('header.title') }</span>
+            <div className='left'>
+                { backIcon }
+                <span className='title'>{ t('header.title') }</span>
+            </div>
             <LangPanel/>
         </div>
     );

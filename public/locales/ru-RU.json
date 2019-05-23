@@ -19,7 +19,8 @@
     }
   },
   "detailed": {
-    "min": "мин"
+    "min": "мин",
+    "voteCount": "проголосовало"
   },
   "searchResults": "Результаты поиска",
   "favorites": "Избранные фильмы"

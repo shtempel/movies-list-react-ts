@@ -15,6 +15,7 @@ export interface MovieItem {
     tagLine?: string;
     runtime?: number;
     overview?: string;
+    voteCount?: number;
 }
 
 export interface MoviesState {

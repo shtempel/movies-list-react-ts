@@ -6,3 +6,4 @@ export * from './loader/loader';
 export * from './header/header';
 export * from './button/button';
 export * from './icon/icon';
+export * from './favorite-icon/favorite-icon';

@@ -19,7 +19,8 @@
     }
   },
   "detailed": {
-    "min": "min"
+    "min": "min",
+    "voteCount": "vote count"
   },
   "searchResults": "Search results",
   "favorites": "Favorite movies"
