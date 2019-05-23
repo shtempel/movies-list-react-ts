@@ -5,6 +5,7 @@
   width: 100%;
   box-sizing: border-box;
   padding: 10px;
+  @include column-direction;
 
   .search-form {
     margin: $margin-X 0 0;
@@ -16,13 +17,14 @@
       width: 100%;
       outline: none;
       height: 30px;
+      padding: 5px;
       color: $_COLOR_WHITE;
       font-size: 20px;
-      padding: $padding-small;
       border-top: none;
       border-left: none;
       border-right: none;
       border-bottom: 2px solid $_COLOR_MANDY;
+      -webkit-appearance: none;
     }
 
     .search-button {
@@ -32,7 +34,6 @@
       color: $_COLOR_WHITE;
       border: none;
       font-size: 13px;
-      padding: $padding-small;
       font-weight: bold;
       opacity: 0.9;
       cursor: pointer;
@@ -46,6 +47,7 @@
 
   .search-by {
     margin: $margin-small 0 20px 0;
+    @include row-direction;
 
     span {
       width: 20%;
@@ -59,3 +61,58 @@
   }
 }
 
+@media (min-width: 320px) and (orientation: landscape) {
+  .search-component {
+    justify-content: space-between;
+    @include row-direction;
+    
+    * {
+      height: 30px;
+    }
+
+
+    .search-form {
+      width: 50%;
+      margin-top: 30px;
+      @include row-direction;
+
+      .search-input {
+        display: flex;
+        width: 80%;
+        margin: 0;
+      }
+
+      button {
+        width: 20%;
+        padding: 0 2px;
+        flex: 0;
+      }
+    }
+
+    .search-by {
+      margin-top: 30px;
+      width: 30%;
+
+      span {
+        display: none;
+      }
+    }
+
+    .amount-title {
+      display: none;
+    }
+
+    .amount {
+      box-sizing: border-box;
+      margin-top: 30px;
+      height: 30px;
+      padding: 0;
+
+      .single-control {
+        border-radius: 0;
+        padding: 7px;
+      }
+    }
+
+  }
+}

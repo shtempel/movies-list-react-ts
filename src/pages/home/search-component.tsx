@@ -58,8 +58,8 @@ const SearchComponent: FunctionComponent<SearchComponentProps> = (props: SearchC
     };
 
     return (
-        <div className='search-component column'>
-            <div className='search-form column'>
+        <div className='search-component'>
+            <div className='search-form'>
                 <input className='search-input'
                        type='search'
                        placeholder={ t('home.search.find') }
@@ -72,7 +72,7 @@ const SearchComponent: FunctionComponent<SearchComponentProps> = (props: SearchC
                         disabled={ isLoading }
                         name={ t('home.search.search') }/>
             </div>
-            <div className='search-by row'>
+            <div className='search-by'>
                 <span>{ t('home.search.searchBy') }:</span>
                 <Button value={ 'title' }
                         onClick={ onSetSearchBy }
@@ -87,9 +87,7 @@ const SearchComponent: FunctionComponent<SearchComponentProps> = (props: SearchC
                         className={ cn('btn', { 'active-button': setActiveBtn('genres') }) }
                         name={ t('home.search.genres') }/>
             </div>
-            <div className='space-btw'>
-                <ResultsAmount/>
-            </div>
+            <ResultsAmount className='amount'/>
         </div>
     );
 };

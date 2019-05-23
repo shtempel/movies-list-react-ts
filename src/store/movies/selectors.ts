@@ -9,6 +9,11 @@ export const selectMovies = createSelector(
     moviesState => moviesState.movies
 );
 
+export const selectFavorites = createSelector(
+    [moviesState],
+    moviesState => moviesState.favMovies
+);
+
 export const selectIsLoading = createSelector(
     [moviesState],
     moviesState => moviesState.isLoading
@@ -24,6 +29,11 @@ export const selectMoviesQuantity = createSelector(
     movies => movies.length
 );
 
+export const selectFavMoviesQuantity = createSelector(
+    [selectFavorites],
+    favs => favs.length
+);
+
 export const selectSearchQuery = createSelector(
     [moviesState],
     moviesState => moviesState.queryString
@@ -34,7 +44,3 @@ export const selectCurrentMovieId = createSelector(
     moviesState => moviesState.currentMovieId
 );
 
-export const selectFavorites = createSelector(
-    [moviesState],
-    moviesState => moviesState.favMovies
-);

@@ -11,7 +11,13 @@ import {
     setCurrentMovieId
 } from '../../store/movies/actions';
 import { MovieItem } from '../../store/movies/reducer';
-import { selectFavorites, selectIsLoading, selectMovies } from '../../store/movies/selectors';
+import {
+    selectFavMoviesQuantity,
+    selectFavorites,
+    selectIsLoading,
+    selectMovies,
+    selectMoviesQuantity
+} from '../../store/movies/selectors';
 import { FilmCard } from './film-card';
 import { GlobalState } from '../../store/interfaces';
 import { Loader, SortBy } from '..';
@@ -26,6 +32,8 @@ interface MoviesListProps {
     isLoading: boolean;
     sortBy: string;
     pathname: string;
+    moviesQuantity: number;
+    favMoviesQuantity: number;
 
     push(path: string): void;
     fetchMovieById(): void
@@ -44,7 +52,9 @@ const mapStateToProps = (state: GlobalState) => ({
     favorites: selectFavorites(state),
     isLoading: selectIsLoading(state),
     sortBy: selectSortBy(state),
-    pathname: selectCurrentPath(state)
+    pathname: selectCurrentPath(state),
+    moviesQuantity: selectMoviesQuantity(state),
+    favMoviesQuantity: selectFavMoviesQuantity(state)
 });
 
 const mapDispatchToProps = {
@@ -68,7 +78,9 @@ const MoviesList: FunctionComponent<MoviesListProps> = (props: MoviesListProps) 
         setCurrentMovieId,
         isLoading,
         fetchFavoriteMovie,
-        pathname
+        pathname,
+        favMoviesQuantity,
+        moviesQuantity
     } = props;
 
     const isSearchResultsTab: boolean = tab === Tabs.movies;
@@ -125,12 +137,12 @@ const MoviesList: FunctionComponent<MoviesListProps> = (props: MoviesListProps) 
                     <span className={ cn('btn', { 'active-button': isSearchResultsTab }) }
                           id={ Tabs.movies }
                           onClick={ handleTabs }>
-                    { t('searchResults') }
+                    { t('searchResults') } { moviesQuantity }
                     </span>
                     <span className={ cn('btn', { 'active-button': isFavoritesTab }) }
                           id={ Tabs.favorites }
                           onClick={ handleTabs }>
-                    { t('favorites') }
+                    { t('favorites') } { favMoviesQuantity }
                 </span>
                 </div>
                 { sortBy }

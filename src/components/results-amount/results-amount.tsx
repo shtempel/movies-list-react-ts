@@ -12,6 +12,7 @@ import './results-amount.scss';
 
 interface ResultsAmountProps {
     searchLimit: string;
+    className?: string
 
     setSearchLimit(limit: string): void;
     fetchMovies(): void;
@@ -52,8 +53,8 @@ const ResultsAmount: FunctionComponent<ResultsAmountProps> =
         };
 
         return (
-            <div className='results-amount row'>
-                <span>{ t('home.search.resultsOnPage') }</span>
+            <div className={ `results-amount ${ props.className }` }>
+                <span className='amount-title'>{ t('home.search.resultsOnPage') }</span>
                 { getSingleControl(Amount.ten) }
                 { getSingleControl(Amount.twenty) }
                 { getSingleControl(Amount.thirty) }

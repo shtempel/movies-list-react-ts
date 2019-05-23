@@ -24,11 +24,9 @@ body, html {
 .btn {
   outline: none;
   cursor: pointer;
-  padding: $buttons_padding;
   border: 0;
   background-color: $_COLOR_OUTER_SPACE;
   color: $_COLOR_WHITE;
-  font-size: 13px;
 }
 
 .btn:active {
