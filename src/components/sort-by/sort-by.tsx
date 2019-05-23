@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
@@ -45,7 +45,7 @@ const SortBy: FunctionComponent<SortByProps> = (props: SortByProps) => {
     const setActiveLink = (sortBy: string) => sortBy === props.sortBy;
 
     return (
-        <div className='sort-by'>
+        <div className='sort-by row'>
             <span>{ t('home.search.sortBy') }</span>
             <span id='date'
                   className={ cn('link', { 'active-link': setActiveLink(SortByEnum.Date) }) }

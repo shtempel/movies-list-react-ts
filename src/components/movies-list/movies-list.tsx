@@ -116,8 +116,10 @@ const MoviesList: FunctionComponent<MoviesListProps> = (props: MoviesListProps) 
         );
     };
 
+    const sortBy: ReactNode = !isDetailedPage && <SortBy tab={ tab }/>;
+
     return (
-        <div className={ cn('mobile-detailed-hide-list', { 'column': !isDetailedPage }) }>
+        <div className='column'>
             <div className='column'>
                 <div className='row nav-bar'>
                     <span className={ cn('btn', { 'active-button': isSearchResultsTab }) }
@@ -131,9 +133,9 @@ const MoviesList: FunctionComponent<MoviesListProps> = (props: MoviesListProps) 
                     { t('favorites') }
                 </span>
                 </div>
-                <SortBy tab={ tab }/>
+                { sortBy }
             </div>
-            <div className='search-results columns'>
+            <div className={ cn('search-results columns', { 'search-results-detailed': isDetailedPage }) }>
                 { isSearchResultsTab && getList(movies) }
                 { isFavoritesTab && getList(favorites) }
             </div>
