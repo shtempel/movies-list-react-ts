@@ -18,7 +18,8 @@
     border: 2px solid $_COLOR_MANDY;
   }
 
-  &__header, &__footer {
+  &__header,
+  &__footer {
     margin-top: $margin-small;
     justify-content: space-between;
   }
