@@ -8,3 +8,9 @@
     color: $_COLOR_WHITE;
   }
 }
+
+@media (min-width: 320px) and (orientation: landscape) {
+  .sort-by{
+    top: 107px;
+  }
+}

@@ -6,6 +6,7 @@
   padding: 0 10px;
   margin-bottom: 20px;
 
+
   &__poster {
     width: 100%;
     height: 535px;
@@ -22,6 +23,7 @@
   &__footer {
     margin-top: $margin-small;
     justify-content: space-between;
+    @include row-direction;
   }
 
   &__date {
@@ -35,5 +37,42 @@
   &__genres {
     font-size: x-small;
     color: $_COLOR_DOVE_GRAY;
+  }
+}
+
+@media (min-width: 320px) and (orientation: landscape) {
+  .film-card {
+    @include row-direction;
+
+    &__poster {
+      width: 140px;
+      height: 180px;
+    }
+
+    &__header,
+    &__footer {
+      display: none;
+    }
+  }
+}
+
+@media (min-height: 375px) and (orientation: landscape) {
+  .film-card {
+    @include column-direction;
+
+    &__footer,
+    &__header {
+      display: flex;
+    }
+
+    &__header {
+      &__title {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 100px;
+      }
+    }
+
   }
 }

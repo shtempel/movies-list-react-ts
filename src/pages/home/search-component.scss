@@ -65,7 +65,7 @@
   .search-component {
     justify-content: space-between;
     @include row-direction;
-    
+
     * {
       height: 30px;
     }
@@ -78,14 +78,13 @@
 
       .search-input {
         display: flex;
-        width: 80%;
+        flex: 3;
         margin: 0;
       }
 
       button {
-        width: 20%;
         padding: 0 2px;
-        flex: 0;
+        flex: 1;
       }
     }
 

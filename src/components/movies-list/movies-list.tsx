@@ -109,7 +109,7 @@ const MoviesList: FunctionComponent<MoviesListProps> = (props: MoviesListProps) 
 
     const getList = (moviesList: MovieItem[]): ReactNode => {
         return (
-            <div className='column'>
+            <div className='list'>
                 {
                     isLoading
                         ? <Loader/>
@@ -131,9 +131,9 @@ const MoviesList: FunctionComponent<MoviesListProps> = (props: MoviesListProps) 
     const sortBy: ReactNode = !isDetailedPage && <SortBy tab={ tab }/>;
 
     return (
-        <div className='column'>
-            <div className='column'>
-                <div className='row nav-bar'>
+        <>
+            <>
+                <div className='nav-bar'>
                     <span className={ cn('btn', { 'active-button': isSearchResultsTab }) }
                           id={ Tabs.movies }
                           onClick={ handleTabs }>
@@ -143,15 +143,15 @@ const MoviesList: FunctionComponent<MoviesListProps> = (props: MoviesListProps) 
                           id={ Tabs.favorites }
                           onClick={ handleTabs }>
                     { t('favorites') } { favMoviesQuantity }
-                </span>
+                    </span>
                 </div>
                 { sortBy }
-            </div>
+            </>
             <div className={ cn('search-results columns', { 'search-results-detailed': isDetailedPage }) }>
                 { isSearchResultsTab && getList(movies) }
                 { isFavoritesTab && getList(favorites) }
             </div>
-        </div>
+        </>
     );
 };
 

@@ -24,11 +24,11 @@ export const FilmCard: FunctionComponent<FilmCardProps> = (props: FilmCardProps)
                  src={ posterPath }
                  alt={ title }
                  onClick={ onPosterClick }/>
-            <div className='film-card__header row'>
-                <span>{ title }</span>
-                <span>{ releaseDate }</span>
+            <div className='film-card__header'>
+                <span className='film-card__header__title'>{ title }</span>
+                <span>{ releaseDate!.slice(0, 4) }</span>
             </div>
-            <div className='film-card__footer row'>
+            <div className='film-card__footer'>
                 <span className='film-card__genres'>{ genres!.join(' & ') }</span>
                 <FavoriteIcon id={ movie.id! }
                               favorites={ favorites }

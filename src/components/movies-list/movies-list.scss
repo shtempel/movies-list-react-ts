@@ -13,11 +13,31 @@
   -webkit-overflow-scrolling: touch;
 }
 
+.list {
+  width: 100%
+}
+
 .nav-bar {
   background-color: $_COLOR_OUTER_SPACE;
   width: 100%;
+  @include row-direction;
+
+  span {
+    padding: $padding-small;
+  }
 }
 
 .search-results-detailed {
   position: static;
+}
+
+@media (min-width: 320px) and (orientation: landscape) {
+  .search-results {
+    top: 130px;
+    @include row-direction;
+
+    .list {
+      @include row-direction;
+    }
+  }
 }
