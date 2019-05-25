@@ -76,3 +76,20 @@
 
   }
 }
+
+@media (min-width: 758px) {
+  .film-card {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1023px) and (orientation: landscape) {
+  .film-card {
+    width: 33%;
+
+    &__poster {
+      width: auto;
+      height: 425px;
+    }
+  }
+}

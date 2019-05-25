@@ -41,3 +41,21 @@
     }
   }
 }
+
+@media (min-width: 758px) {
+  .search-results {
+    .list {
+      @include row-direction;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+@media (min-width: 1024px) and (orientation: landscape) {
+  .search-results {
+    .list {
+      @include row-direction;
+      flex-wrap: wrap;
+    }
+  }
+}
