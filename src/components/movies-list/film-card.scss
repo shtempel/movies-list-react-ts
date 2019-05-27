@@ -86,9 +86,27 @@
         @include ellipsis;
       }
     }
+  }
+}
 
-    &__footer {
+@media (min-width: 1024px) and (orientation: landscape) {
+  .film-card {
+    width: 25%;
 
+    &__poster {
+      width: 100%;
+      height: 300px;
+    }
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1400px) {
+  .film-card {
+    width: 25%;
+
+    &__poster {
+      width: 100%;
+      height: 300px;
     }
   }
 }

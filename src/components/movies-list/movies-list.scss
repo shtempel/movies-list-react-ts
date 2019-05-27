@@ -33,7 +33,7 @@
 
 @media (min-width: 320px) and (orientation: landscape) {
   .search-results {
-    top: 125px;
+    top: 165px;
     @include row-direction;
 
     .list {
@@ -42,8 +42,15 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1024px) and (max-width: 1400px){
   .search-results {
-    top: 325px;
+    top: 275px;
+    padding: 0 10%;
+    box-sizing: border-box;
+
+    .list {
+      flex-wrap: wrap;
+      @include row-direction;
+    }
   }
 }
