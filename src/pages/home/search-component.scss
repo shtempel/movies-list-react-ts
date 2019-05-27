@@ -4,14 +4,13 @@
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./../../assets/background.jpg") center no-repeat;
   width: 100%;
   box-sizing: border-box;
-  padding: 10px;
+  padding: 10px 10px 5px 10px;
   @include column-direction;
 
   .search-form {
-    margin: $margin-X 0 0;
+    margin: 25px 0 0;
 
     .search-input {
-      margin-bottom: 5px;
       background-color: $_COLOR_BLACK;
       opacity: 0.9;
       width: 100%;
@@ -37,6 +36,7 @@
       font-weight: bold;
       opacity: 0.9;
       cursor: pointer;
+      padding: 3px 0;
       outline: none;
     }
 
@@ -50,7 +50,6 @@
     @include row-direction;
 
     span {
-      width: 20%;
       color: $_COLOR_WHITE;
     }
 
@@ -61,7 +60,7 @@
   }
 }
 
-@media (min-width: 320px) and (orientation: landscape) {
+@media (min-width: 320px) and (max-width: 1023px) and (orientation: landscape) {
   .search-component {
     justify-content: space-between;
     @include row-direction;
@@ -113,5 +112,43 @@
       }
     }
 
+  }
+}
+
+@media (min-width: 1024px) {
+  .search-component {
+    padding: 30px 10%;
+    @include column-direction;
+
+    .search-form {
+      width: 100%;
+      justify-content: space-between;
+      @include row-direction;
+
+      .search-button {
+        width: 200px;
+        margin-left: 20px;
+      }
+    }
+
+    .search-by {
+      margin-top: 30px;
+      width: 300px;
+
+      span {
+        font-size: x-large;;
+        display: flex;
+        margin-right: 20px;
+      }
+
+      button {
+        width: 100px;
+        margin-right: 20px;
+      }
+    }
+
+    .amount {
+      margin-top: 20px;
+    }
   }
 }

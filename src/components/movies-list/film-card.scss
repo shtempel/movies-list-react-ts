@@ -40,10 +40,8 @@
   }
 }
 
-@media (min-width: 320px) and (orientation: landscape) {
+@media (min-width: 319px) and (orientation: landscape) {
   .film-card {
-    @include row-direction;
-
     &__poster {
       width: 140px;
       height: 180px;
@@ -56,40 +54,41 @@
   }
 }
 
-@media (min-height: 375px) and (orientation: landscape) {
+@media (min-width: 319px) and (min-height: 360px) and (orientation: landscape) {
   .film-card {
-    @include column-direction;
-
-    &__footer,
-    &__header {
-      display: flex;
+    &__poster {
+      width: 140px;
+      height: 180px;
     }
 
     &__header {
+      display: flex;
+
       &__title {
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        width: 100px;
+        @include ellipsis;
+      }
+    }
+  }
+}
+
+@media (min-width: 319px) and (min-height: 361px) and (orientation: landscape) {
+  .film-card {
+    &__poster {
+      width: 140px;
+      height: 180px;
+    }
+
+    &__header,
+    &__footer {
+      display: flex;
+
+      &__title {
+        @include ellipsis;
       }
     }
 
-  }
-}
+    &__footer {
 
-@media (min-width: 758px) {
-  .film-card {
-    width: 50%;
-  }
-}
-
-@media (min-width: 1023px) and (orientation: landscape) {
-  .film-card {
-    width: 33%;
-
-    &__poster {
-      width: auto;
-      height: 425px;
     }
   }
 }

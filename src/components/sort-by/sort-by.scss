@@ -2,15 +2,23 @@
 
 .sort-by {
   position: absolute;
-  top: 171px;
+  top: 130px;
   right: 10px;
+
   span {
     color: $_COLOR_WHITE;
   }
 }
 
 @media (min-width: 320px) and (orientation: landscape) {
-  .sort-by{
-    top: 107px;
+  .sort-by {
+    top: 100px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sort-by {
+    top: 240px;
+    right: 10%;
   }
 }

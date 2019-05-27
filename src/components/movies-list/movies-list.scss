@@ -2,7 +2,7 @@
 
 .search-results {
   position: absolute;
-  top: 240px;
+  top: 190px;
   bottom: 0;
   width: 100%;
   height: auto;
@@ -33,7 +33,7 @@
 
 @media (min-width: 320px) and (orientation: landscape) {
   .search-results {
-    top: 130px;
+    top: 125px;
     @include row-direction;
 
     .list {
@@ -42,20 +42,8 @@
   }
 }
 
-@media (min-width: 758px) {
+@media (min-width: 1024px) {
   .search-results {
-    .list {
-      @include row-direction;
-      flex-wrap: wrap;
-    }
-  }
-}
-
-@media (min-width: 1024px) and (orientation: landscape) {
-  .search-results {
-    .list {
-      @include row-direction;
-      flex-wrap: wrap;
-    }
+    top: 325px;
   }
 }
