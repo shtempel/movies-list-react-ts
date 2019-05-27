@@ -42,7 +42,20 @@
   }
 }
 
-@media (min-width: 1024px) and (max-width: 1400px){
+@media (min-width: 1024px) and (max-width: 1400px) {
+  .search-results {
+    top: 275px;
+    padding: 0 10%;
+    box-sizing: border-box;
+
+    .list {
+      flex-wrap: wrap;
+      @include row-direction;
+    }
+  }
+}
+
+@media (min-width: 1401px) {
   .search-results {
     top: 275px;
     padding: 0 10%;
