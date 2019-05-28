@@ -13,14 +13,14 @@ import {
 import { MovieItem } from '../../store/movies/reducer';
 import {
     selectFavMoviesQuantity,
-    selectFavorites,
+    selectFavorites, selectIsFavMoviesNearRelease,
     selectIsLoading,
     selectMovies,
     selectMoviesQuantity
 } from '../../store/movies/selectors';
 import { FilmCard } from './film-card';
 import { GlobalState } from '../../store/interfaces';
-import { Loader, SortBy } from '..';
+import { Icon, Loader, SortBy } from '..';
 import { selectSortBy } from '../../store/sort-by/selectors';
 import { selectCurrentPath } from '../../store/router/selectors';
 
@@ -34,6 +34,7 @@ interface MoviesListProps {
     pathname: string;
     moviesQuantity: number;
     favMoviesQuantity: number;
+    isFavMoviesNearRelease: boolean;
 
     push(path: string): void;
     fetchMovieById(): void
@@ -54,7 +55,8 @@ const mapStateToProps = (state: GlobalState) => ({
     sortBy: selectSortBy(state),
     pathname: selectCurrentPath(state),
     moviesQuantity: selectMoviesQuantity(state),
-    favMoviesQuantity: selectFavMoviesQuantity(state)
+    favMoviesQuantity: selectFavMoviesQuantity(state),
+    isFavMoviesNearRelease: selectIsFavMoviesNearRelease(state)
 });
 
 const mapDispatchToProps = {
@@ -80,11 +82,13 @@ const MoviesList: FunctionComponent<MoviesListProps> = (props: MoviesListProps) 
         fetchFavoriteMovie,
         pathname,
         favMoviesQuantity,
-        moviesQuantity
+        moviesQuantity,
+        isFavMoviesNearRelease
     } = props;
 
     const isSearchResultsTab: boolean = tab === Tabs.movies;
     const isFavoritesTab: boolean = tab === Tabs.favorites;
+    const isFavoritesAvailable: boolean = favorites.length > 0;
     const isDetailedPage: boolean = pathname.includes('movie');
 
     const fetchMovie = (e: any) => {
@@ -117,6 +121,7 @@ const MoviesList: FunctionComponent<MoviesListProps> = (props: MoviesListProps) 
                         movie => (
                             <FilmCard
                                 key={ movie.id }
+                                isFavoritesTab={ isFavoritesTab }
                                 movie={ movie }
                                 onPosterClick={ fetchMovie }
                                 onStarClick={ manageFavorites }
@@ -130,6 +135,15 @@ const MoviesList: FunctionComponent<MoviesListProps> = (props: MoviesListProps) 
 
     const sortBy: ReactNode = !isDetailedPage && <SortBy tab={ tab }/>;
 
+    const favTab: ReactNode = isFavoritesAvailable && (
+        <span className={ cn('btn', { 'active-button': isFavoritesTab }) }
+              id={ Tabs.favorites }
+              onClick={ handleTabs }>
+                    { t('favorites') } { favMoviesQuantity }
+            { isFavMoviesNearRelease && <Icon className='fav-bell' iconPrefix='fas' icon='bell'/> }
+        </span>
+    );
+
     return (
         <>
             <>
@@ -139,11 +153,7 @@ const MoviesList: FunctionComponent<MoviesListProps> = (props: MoviesListProps) 
                           onClick={ handleTabs }>
                     { t('searchResults') } { moviesQuantity }
                     </span>
-                    <span className={ cn('btn', { 'active-button': isFavoritesTab }) }
-                          id={ Tabs.favorites }
-                          onClick={ handleTabs }>
-                    { t('favorites') } { favMoviesQuantity }
-                    </span>
+                    { favTab }
                 </div>
                 { sortBy }
             </>

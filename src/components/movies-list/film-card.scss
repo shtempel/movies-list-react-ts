@@ -1,5 +1,11 @@
 @import "./../../styles/variables";
 
+.release-soon {
+  color: $_COLOR_MANDY;
+  font-size: large;
+  font-weight: bold;
+}
+
 .film-card {
   width: 100%;
   box-sizing: border-box;

@@ -24,6 +24,11 @@
 
   span {
     padding: $padding-small;
+
+    .fav-bell {
+      margin-left: 5px;
+      color: $_COLOR_WHITE
+    }
   }
 }
 

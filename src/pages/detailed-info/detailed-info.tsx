@@ -4,9 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import {
     selectCurrentMovie,
-    selectFavorites,
-    selectIsLoading,
-    selectMovies
+    selectFavorites
 } from '../../store/movies/selectors';
 import { MovieItem } from '../../store/movies/reducer';
 import {

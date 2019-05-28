@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import moment from 'moment';
 
 import { GlobalState } from '../interfaces';
 
@@ -44,3 +45,9 @@ export const selectCurrentMovieId = createSelector(
     moviesState => moviesState.currentMovieId
 );
 
+export const selectIsFavMoviesNearRelease = createSelector(
+    [selectFavorites],
+    favs => favs.some(
+        favItem => moment(favItem.releaseDate).toDate().getFullYear() === moment().toDate().getFullYear()
+    )
+);
