@@ -42,6 +42,8 @@
 
 @media (min-width: 319px) and (orientation: landscape) {
   .film-card {
+    width: auto;
+
     &__poster {
       width: 140px;
       height: 180px;

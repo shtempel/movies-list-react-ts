@@ -5,8 +5,26 @@
   top: 130px;
   right: 10px;
 
+  .sort-icon {
+    display: none;
+    color: $_COLOR_MANDY;
+    margin-right: 5px;
+  }
+
   span {
     color: $_COLOR_WHITE;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 340px) and (orientation: portrait) {
+  .sort-by {
+    .sort-icon {
+      display: flex;
+    }
+
+    span:nth-child(1) {
+      display: none;
+    }
   }
 }
 

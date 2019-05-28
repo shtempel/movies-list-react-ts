@@ -33,7 +33,7 @@
 
 @media (min-width: 320px) and (orientation: landscape) {
   .search-results {
-    top: 165px;
+    top: 130px;
     @include row-direction;
 
     .list {

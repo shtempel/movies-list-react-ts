@@ -7,6 +7,7 @@ import { GlobalState } from '../../store/interfaces';
 import { sortByDate, sortByRating } from '../../store/movies/actions';
 import { setSortBy } from '../../store/sort-by/actions';
 import { SortByEnum } from '../../store/sort-by/reducer';
+import { Icon } from '..';
 
 import './sort-by.scss';
 
@@ -34,7 +35,7 @@ const SortBy: FunctionComponent<SortByProps> = (props: SortByProps) => {
     const { setSortBy, sortByRating, sortByDate, tab } = props;
 
     const onSetSortBy = (e: any) => {
-        if (e.target.id !== props.sortBy) {
+        if(e.target.id !== props.sortBy) {
             e.target.id === SortByEnum.Rating
                 ? sortByRating(tab)
                 : sortByDate(tab);
@@ -47,6 +48,9 @@ const SortBy: FunctionComponent<SortByProps> = (props: SortByProps) => {
     return (
         <div className='sort-by row'>
             <span>{ t('home.search.sortBy') }</span>
+            <Icon className='sort-icon'
+                  iconPrefix='fas'
+                  icon='sort'/>
             <span id='date'
                   className={ cn('link', { 'active-link': setActiveLink(SortByEnum.Date) }) }
                   onClick={ onSetSortBy }>	&nbsp;{ t('home.search.releaseDate') }</span>
