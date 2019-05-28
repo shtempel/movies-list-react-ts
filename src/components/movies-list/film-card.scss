@@ -1,0 +1,125 @@
+@import "./../../styles/variables";
+
+.film-card {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 10px;
+  margin-bottom: 20px;
+
+
+  &__poster {
+    width: 100%;
+    height: 535px;
+    box-sizing: border-box;
+  }
+
+  &__poster:hover {
+    box-sizing: border-box;
+    padding: 4px 4px;
+    border: 2px solid $_COLOR_MANDY;
+  }
+
+  &__header,
+  &__footer {
+    margin-top: $margin-small;
+    justify-content: space-between;
+    @include row-direction;
+  }
+
+  &__date {
+    font-size: smaller;
+    margin-right: $margin-small;
+    border: $border-base;
+    padding: 2px 5px;
+    border-radius: $border-radius-small;
+  }
+
+  &__genres {
+    font-size: x-small;
+    color: $_COLOR_DOVE_GRAY;
+  }
+}
+
+@media (min-width: 319px) and (orientation: landscape) {
+  .film-card {
+    width: auto;
+
+    &__poster {
+      width: 140px;
+      height: 180px;
+    }
+
+    &__header,
+    &__footer {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: 319px) and (min-height: 360px) and (orientation: landscape) {
+  .film-card {
+    &__poster {
+      width: 140px;
+      height: 180px;
+    }
+
+    &__header {
+      display: flex;
+
+      &__title {
+        @include ellipsis;
+      }
+    }
+  }
+}
+
+@media (min-width: 319px) and (min-height: 361px) and (orientation: landscape) {
+  .film-card {
+    &__poster {
+      width: 140px;
+      height: 180px;
+    }
+
+    &__header,
+    &__footer {
+      display: flex;
+
+      &__title {
+        @include ellipsis;
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) and (orientation: landscape) {
+  .film-card {
+    width: 25%;
+
+    &__poster {
+      width: 100%;
+      height: 300px;
+    }
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1400px) {
+  .film-card {
+    width: 25%;
+
+    &__poster {
+      width: 100%;
+      height: 300px;
+    }
+  }
+}
+
+@media (min-width: 1401px) {
+  .film-card {
+    width: 20%;
+
+    &__poster {
+      width: 100%;
+      height: 400px;
+    }
+  }
+}

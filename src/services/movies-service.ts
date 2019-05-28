@@ -36,7 +36,7 @@ export class MoviesService {
                     tagLine: response.data.tagline,
                     runtime: response.data.runtime,
                     overview: response.data.overview,
-
+                    voteCount: response.data.vote_count
                 }
             })
     }

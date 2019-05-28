@@ -1,7 +1,7 @@
 import * as selectors from './selectors';
 import { GlobalState } from '../store';
 import { SearchLimit } from './reducer';
-import { Amount } from '../../components/results-amount-controller/results-amount-controller';
+import { Amount } from '../../components/results-amount/results-amount-controller';
 
 describe('search limit selectors', () => {
     let state: GlobalState;

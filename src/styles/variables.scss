@@ -1,7 +1,9 @@
-@import './_colors';
+@import 'colors';
+@import'mixins';
 
 /* Padding */
 $padding-small:                         .4rem;
+$PADDING_SMALL:                          10px;
 $padding-base:                          .8rem;
 $padding-XL:                             25px 100px;
 $padding-integer:                        5px 11px;
@@ -13,20 +15,13 @@ $margin-base:                           20px;
 $margin-X:                              50px;
 
 /* Common*/
-$header_height:                         250px;
+$HEADER_HEIGHT:                         250px;
 $result-height:                         450px;
 $buttons_padding:                       3px 15px;
 $buttons_padding_hover:                 1px 13px;
 $app_width:                             900px;
-/* Search input*/
-$search_input_opacity:                  0.9;
-$search_input_height:                   30px;
-$search_input_font_size:                20px;
-
-/* Search button*/
-$search_button_font_size:               13px;
 
 /* Border*/
 $border-radius-small:                   5px;
 $border-radius-circle:                  50%;
-$border-base:                           1px solid $_colors_Dove_Gray;
+$border-base:                           1px solid $_COLOR_DOVE_GRAY;

@@ -1,5 +1,5 @@
 import reducer, { initialState } from './reducer';
-import { Amount } from '../../components/results-amount-controller/results-amount-controller';
+import { Amount } from '../../components/results-amount/results-amount-controller';
 import * as actions from './actions';
 
 describe('search limit reducer', () => {

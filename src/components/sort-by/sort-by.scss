@@ -1,19 +1,42 @@
-@import './../../constants/variables';
+@import './../../styles/variables';
 
 .sort-by {
-  justify-content: space-between;
-  font-size: $search_button_font_size;
-  font-weight: bold;
-  color: $_colors_Dove_Gray;
-  background-color: $_color_Silver_Chalice;
-  padding: $padding-small;
-  box-sizing: border-box;
+  position: absolute;
+  top: 130px;
+  right: 10px;
 
-  &__buttons span:last-child {
-    margin-left: $margin-base;
+  .sort-icon {
+    display: none;
+    color: $_COLOR_MANDY;
+    margin-right: 5px;
   }
 
-  &__buttons span:first-child {
-    margin-right: $margin-base;
+  span {
+    color: $_COLOR_WHITE;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 340px) and (orientation: portrait) {
+  .sort-by {
+    .sort-icon {
+      display: flex;
+    }
+
+    span:nth-child(1) {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: 320px) and (orientation: landscape) {
+  .sort-by {
+    top: 100px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sort-by {
+    top: 240px;
+    right: 10%;
   }
 }

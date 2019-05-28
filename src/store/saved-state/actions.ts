@@ -1,6 +1,6 @@
 import { createAction } from 'typesafe-actions';
 
-import { AppSavedState } from '../store';
+import { AppSavedState } from './interfaces';
 
 export const rehydrateState = createAction('REHYDRATE_STATE');
 

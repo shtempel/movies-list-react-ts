@@ -1,5 +1,5 @@
-@import './constants/variables';
+@import 'styles/variables';
 
 .app {
-  width: $app_width;
+  min-width: 300px;
 }

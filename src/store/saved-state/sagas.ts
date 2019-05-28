@@ -8,8 +8,8 @@ import {
 import { getType } from 'typesafe-actions';
 import { LOCATION_CHANGE, push } from 'connected-react-router';
 
+import { setLanguage } from '../language/actions';
 import * as actions from './actions';
-import { AppSavedState } from '../store';
 import { localStorageService } from '../../services';
 import { selectSavedState } from './selectors';
 import {
@@ -18,13 +18,15 @@ import {
     fetchMovies,
     removeMovieFromFavorites
 } from '../movies/actions';
+import { AppSavedState } from './interfaces';
 
 export const saveStateActions: string[] = [
     LOCATION_CHANGE,
     getType(fetchMovieByIdSuccess),
     getType(fetchFavoriteMovieSuccess),
     getType(removeMovieFromFavorites),
-    getType(fetchMovies)
+    getType(fetchMovies),
+    getType(setLanguage)
 ];
 
 const SAVE_STATE_THROTTLE = 500;

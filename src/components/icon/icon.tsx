@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { IconName } from '@fortawesome/fontawesome-common-types';
 
 export type IconPrefix = | 'fa' | 'fas' | 'far';
@@ -12,7 +12,7 @@ interface IconProps {
     onIconClick?: any;
 }
 
-export const Icon = (props: IconProps) => {
+export const Icon: FunctionComponent<IconProps> = (props: IconProps) => {
     return (
         <i className={ `${ props.className }  ${ props.iconPrefix } fa-${ props.icon }` }
            title={ props.title }

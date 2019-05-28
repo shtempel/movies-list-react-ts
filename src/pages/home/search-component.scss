@@ -1,0 +1,154 @@
+@import './../../styles/variables';
+
+.search-component {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./../../assets/background.jpg") center no-repeat;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 10px 5px 10px;
+  @include column-direction;
+
+  .search-form {
+    margin: 25px 0 0;
+
+    .search-input {
+      background-color: $_COLOR_BLACK;
+      opacity: 0.9;
+      width: 100%;
+      outline: none;
+      height: 30px;
+      padding: 5px;
+      color: $_COLOR_WHITE;
+      font-size: 20px;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 2px solid $_COLOR_MANDY;
+      -webkit-appearance: none;
+    }
+
+    .search-button {
+      text-transform: uppercase;
+      width: 100%;
+      background-color: $_COLOR_MANDY;
+      color: $_COLOR_WHITE;
+      border: none;
+      font-size: 13px;
+      font-weight: bold;
+      opacity: 0.9;
+      cursor: pointer;
+      padding: 3px 0;
+      outline: none;
+    }
+
+    .search-button:active {
+      background-color: $_COLOR_CROWN_OF_THORNS;
+    }
+  }
+
+  .search-by {
+    margin: $margin-small 0 20px 0;
+    @include row-direction;
+
+    span {
+      color: $_COLOR_WHITE;
+    }
+
+    button {
+      flex: 1;
+      text-transform: uppercase;
+    }
+  }
+}
+
+@media (min-width: 320px) and (max-width: 1023px) and (orientation: landscape) {
+  .search-component {
+    justify-content: space-between;
+    @include row-direction;
+
+    * {
+      height: 30px;
+    }
+
+
+    .search-form {
+      width: 50%;
+      margin-top: 30px;
+      @include row-direction;
+
+      .search-input {
+        display: flex;
+        flex: 3;
+        margin: 0;
+      }
+
+      button {
+        padding: 0 2px;
+        flex: 1;
+      }
+    }
+
+    .search-by {
+      margin-top: 30px;
+      width: 30%;
+
+      span {
+        display: none;
+      }
+    }
+
+    .amount-title {
+      display: none;
+    }
+
+    .amount {
+      box-sizing: border-box;
+      margin-top: 30px;
+      height: 30px;
+      padding: 0;
+
+      .single-control {
+        border-radius: 0;
+        padding: 7px;
+      }
+    }
+
+  }
+}
+
+@media (min-width: 1024px) {
+  .search-component {
+    padding: 30px 10%;
+    @include column-direction;
+
+    .search-form {
+      width: 100%;
+      justify-content: space-between;
+      @include row-direction;
+
+      .search-button {
+        width: 200px;
+        margin-left: 20px;
+      }
+    }
+
+    .search-by {
+      margin-top: 30px;
+      width: 400px;
+
+      span {
+        font-size: x-large;;
+        display: flex;
+        margin-right: 20px;
+      }
+
+      button {
+        width: 100px;
+        margin-right: 20px;
+      }
+    }
+
+    .amount {
+      margin-top: 20px;
+    }
+  }
+}

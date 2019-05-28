@@ -1,11 +1,11 @@
-import React, { useEffect, ReactNode } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { GlobalState } from '../../store/store';
 import { fetchMovies } from '../../store/movies/actions';
 import { selectIsLoading, selectMovies } from '../../store/selectors';
-import { Header, SortBy, Loader, SearchResult } from '../../components';
 import { MovieItem } from '../../store/movies/reducer';
+import SearchComponent from './search-component';
+import { GlobalState } from '../../store/interfaces';
 
 interface HomeProps {
     movies: MovieItem[];
@@ -30,23 +30,21 @@ const Home = (props: HomeProps) => {
         fetchMovies();
     }, [!movies]);
 
-    const searchResult: ReactNode = (
-        movies.length
-            ? <SearchResult movies={ movies }/>
-            : < div className='no-films-found'><h1> No films found</h1></div>
-    );
+    // const searchResult: ReactNode = (
+    //     movies.length
+    //         ? <SearchResult movies={ movies }/>
+    //         : < div className='no-films-found'><h1> No films found</h1></div>
+    // );
 
-    const content: ReactNode = (
-        isLoading
-            ? <Loader/>
-            : searchResult
-    );
+    // const content: ReactNode = (
+    //     isLoading
+    //         ? <Loader/>
+    //         : searchResult
+    // );
 
     return (
         <div>
-            <Header/>
-            <SortBy/>
-            { content }
+            <SearchComponent/>
         </div>
     );
 };

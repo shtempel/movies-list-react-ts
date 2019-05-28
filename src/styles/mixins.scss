@@ -1,0 +1,16 @@
+@mixin column-direction {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin row-direction {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100px;
+}

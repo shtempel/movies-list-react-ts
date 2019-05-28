@@ -1,0 +1,27 @@
+{
+  "header": {
+    "title": "netflixroulette",
+    "rus": "Rus",
+    "eng": "Eng"
+  },
+  "home": {
+    "search": {
+      "find": "Find your movie",
+      "searchBy": "Search by",
+      "title": "Title",
+      "genres": "Genres",
+      "search": "Search",
+      "sortBy": "Sort:",
+      "releaseDate": "date",
+      "rating": "rating",
+      "moviesFound": "movies found",
+      "resultsOnPage": "Show results:"
+    }
+  },
+  "detailed": {
+    "min": "min",
+    "voteCount": "vote count"
+  },
+  "searchResults": "Search results",
+  "favorites": "Favorite movies"
+}

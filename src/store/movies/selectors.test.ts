@@ -1,8 +1,8 @@
 import * as selectors from './selectors';
-import { GlobalState } from '../store';
 import { MoviesState } from './reducer';
 import { getRootReducer, MOVIE_ID, SEARCH_QUERY } from '../../jest/test-helpers';
 import { favMoviesStub, moviesStateStub, moviesStub } from '../../jest/stubs';
+import { GlobalState } from '../interfaces';
 
 describe('movies selectors', () => {
     const rootReducer = getRootReducer();

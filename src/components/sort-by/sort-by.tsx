@@ -1,26 +1,26 @@
-import React from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import { connect } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 
-import { Common } from '../../constants/constants';
-import { GlobalState } from '../../store/store';
-import { selectMoviesQuantity } from '../../store/movies/selectors';
-import { setSortBy, sortByDate, sortByRating } from '../../store/actions';
+import { GlobalState } from '../../store/interfaces';
+import { sortByDate, sortByRating } from '../../store/movies/actions';
+import { setSortBy } from '../../store/sort-by/actions';
 import { SortByEnum } from '../../store/sort-by/reducer';
+import { Icon } from '..';
 
 import './sort-by.scss';
 
 interface SortByProps {
-    moviesCount: number;
     sortBy: string;
+    tab: string;
 
     setSortBy(payload: string): void;
-    sortByRating(): void;
-    sortByDate(): void;
+    sortByRating(tab: string): void;
+    sortByDate(tab: string): void;
 }
 
 const mapStateToProps = (state: GlobalState) => ({
-    moviesCount: selectMoviesQuantity(state),
     sortBy: state.sortBy
 });
 
@@ -30,33 +30,33 @@ const mapDispatchToProps = {
     sortByDate
 };
 
-const SortBy = (props: SortByProps) => {
-    const { moviesCount, setSortBy, sortByDate, sortByRating } = props;
+const SortBy: FunctionComponent<SortByProps> = (props: SortByProps) => {
+    const { t } = useTranslation();
+    const { setSortBy, sortByRating, sortByDate, tab } = props;
 
     const onSetSortBy = (e: any) => {
-        e.target.id === 'rating'
-            ? sortByRating()
-            : sortByDate();
-
-        setSortBy(e.target.id);
+        if(e.target.id !== props.sortBy) {
+            e.target.id === SortByEnum.Rating
+                ? sortByRating(tab)
+                : sortByDate(tab);
+            setSortBy(e.target.id);
+        }
     };
 
-    const setActiveLink = (sortBy: string) => {
-        return sortBy === props.sortBy;
-    };
+    const setActiveLink = (sortBy: string) => sortBy === props.sortBy;
 
     return (
         <div className='sort-by row'>
-            <span>{ moviesCount }{ Common.MoviesFound }</span>
-            <div className='row sort-by__buttons'>
-                <span>{ Common.SortBy }</span>
-                <span id='date'
-                      className={ cn('link', { 'active-link': setActiveLink(SortByEnum.Date) }) }
-                      onClick={ onSetSortBy }>{ Common.ReleaseDate }</span>
-                <span id='rating'
-                      className={ cn('link', { 'active-link': setActiveLink(SortByEnum.Rating) }) }
-                      onClick={ onSetSortBy }>{ Common.Rating }</span>
-            </div>
+            <span>{ t('home.search.sortBy') }</span>
+            <Icon className='sort-icon'
+                  iconPrefix='fas'
+                  icon='sort'/>
+            <span id='date'
+                  className={ cn('link', { 'active-link': setActiveLink(SortByEnum.Date) }) }
+                  onClick={ onSetSortBy }>	&nbsp;{ t('home.search.releaseDate') }</span>
+            <span id='rating'
+                  className={ cn('link', { 'active-link': setActiveLink(SortByEnum.Rating) }) }
+                  onClick={ onSetSortBy }>	&nbsp;{ t('home.search.rating') }</span>
         </div>
     );
 };

@@ -1,0 +1,17 @@
+@import './../../styles/variables';
+
+.lang-panel {
+  .active {
+    cursor: default!important;
+    background-color: $_COLOR_MANDY !important;
+    color: $_COLOR_WHITE !important;
+  }
+
+  .not-active {
+    cursor: pointer;
+    font-size: small;
+    padding: 3px;
+    color: $_COLOR_SILVER_CHALICE;
+    background-color: $_COLOR_DOVE_GRAY;
+  }
+}

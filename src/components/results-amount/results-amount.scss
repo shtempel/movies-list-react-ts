@@ -1,0 +1,30 @@
+@import './../../styles/variables';
+
+.results-amount {
+  @include row-direction;
+
+  span {
+    color: $_COLOR_WHITE;
+  }
+}
+
+.single-control,
+.single-control-active {
+  border: 1px solid $_COLOR_MANDY;
+  border-radius: $border-radius-small;
+  cursor: pointer;
+  padding: 2px;
+  font-size: smaller;
+  margin-left: 5px;
+  box-sizing: border-box;
+}
+
+.single-control {
+  color: $_COLOR_DOVE_GRAY;
+}
+
+.single-control:hover,
+.single-control-active {
+  background-color: $_COLOR_DOVE_GRAY;
+  color: $_COLOR_WHITE;
+}

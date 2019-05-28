@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
-import {GlobalState} from '../store';
 import { RouterSavedState } from './types';
+import { GlobalState } from '../interfaces';
 
 const slice = (state: GlobalState) => state.router;
 

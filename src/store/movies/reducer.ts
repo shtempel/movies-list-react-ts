@@ -3,6 +3,7 @@ import { ActionType, getType } from 'typesafe-actions';
 
 import * as actions from './actions';
 import { restoreSavedState } from '../saved-state/actions';
+import { sortBy } from './helpers';
 
 export interface MovieItem {
     id?: number;
@@ -14,6 +15,7 @@ export interface MovieItem {
     tagLine?: string;
     runtime?: number;
     overview?: string;
+    voteCount?: number;
 }
 
 export interface MoviesState {
@@ -40,10 +42,7 @@ export const initialState: MoviesState = {
     currentMovie: {}
 };
 
-const reducer: Reducer<MoviesState, MoviesAction> = (
-    state = initialState,
-    action
-) => {
+const reducer: Reducer<MoviesState, MoviesAction> = (state = initialState, action) => {
     switch (action.type) {
 
         case getType(restoreSavedState): {
@@ -133,21 +132,11 @@ const reducer: Reducer<MoviesState, MoviesAction> = (
         }
 
         case getType(actions.sortByRating): {
-            return {
-                ...state,
-                movies: state.movies.sort((a: any, b: any) => {
-                    return a.voteAverage - b.voteAverage;
-                })
-            };
+            return sortBy(state, action.payload, 'rating');
         }
 
         case getType(actions.sortByDate): {
-            return {
-                ...state,
-                movies: state.movies.sort((a: any, b: any) => {
-                    return parseInt(b.releaseDate) - parseInt(a.releaseDate);
-                })
-            };
+            return sortBy(state, action.payload, 'date');
         }
 
         default: {
@@ -157,3 +146,4 @@ const reducer: Reducer<MoviesState, MoviesAction> = (
 };
 
 export default reducer;
+

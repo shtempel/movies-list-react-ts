@@ -1,20 +1,32 @@
-import { ConnectedRouter } from 'connected-react-router';
-import React from 'react';
+import { ConnectedRouter, push } from 'connected-react-router';
+import React, { FunctionComponent } from 'react';
+import { connect } from 'react-redux';
 
-import { Footer } from './components';
 import { appHistory } from './store/store';
 import routes from './routes';
+import { Header, MoviesList } from './components';
+import { GlobalState } from './store/interfaces';
+import { selectCurrentPath } from './store/router/selectors';
 
 import './App.scss';
 
-const App = () => {
+interface AppProps {
+    pathname: string;
 
+    push(path: string): void;
+}
+
+const App: FunctionComponent<AppProps> = (props: AppProps) => {
     return (
-        <div className='app'>
+        <div className='app column'>
+            <Header push={ props.push } pathname={ props.pathname }/>
             <ConnectedRouter history={ appHistory }>{ routes }</ConnectedRouter>
-            <Footer/>
+            <MoviesList/>
         </div>
     );
 };
 
-export default App;
+export default connect(
+    (state: GlobalState) => ({ pathname: selectCurrentPath(state) }),
+    { push }
+)(App);
