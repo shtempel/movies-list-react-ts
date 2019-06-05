@@ -17,11 +17,13 @@ interface AppProps {
 }
 
 const App: FunctionComponent<AppProps> = (props: AppProps) => {
+    const isCountries: boolean = !props.pathname.includes('countries');
+
     return (
         <div className='app column'>
-            <Header push={ props.push } pathname={ props.pathname }/>
+            { isCountries && <Header push={ props.push } pathname={ props.pathname }/> }
             <ConnectedRouter history={ appHistory }>{ routes }</ConnectedRouter>
-            <MoviesList/>
+            { isCountries && <MoviesList/> }
         </div>
     );
 };

@@ -19,7 +19,29 @@
     .title {
       color: $_COLOR_MANDY;
       font-weight: bold;
+      user-select: none;
     }
   }
 
+  .nav-menu {
+    @include row-direction;
+
+    span {
+      margin-left: 15px;
+      color: $_COLOR_WHITE;
+
+      i {
+        font-size: small;
+        margin-left: 10px;
+      }
+    }
+
+    span:hover {
+      color: $_COLOR_MANDY;
+
+      i {
+        margin-left: 15px;
+      }
+    }
+  }
 }
