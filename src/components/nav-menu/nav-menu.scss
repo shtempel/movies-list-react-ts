@@ -1,0 +1,26 @@
+@import './../../styles/variables';
+
+.nav-menu {
+  padding: $padding-small;
+  width: 100px;
+  @include column-direction;
+
+  span {
+    padding: $padding-small;
+    background-color: $_COLOR_SILVER_CHALICE;
+    color: $_COLOR_WHITE;
+
+    i {
+      font-size: small;
+      margin-left: 10px;
+    }
+  }
+
+  span:hover {
+    color: $_COLOR_MANDY;
+
+    i {
+      margin-left: 15px;
+    }
+  }
+}

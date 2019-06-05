@@ -23,11 +23,15 @@ export const Header: FunctionComponent<HeaderProps> = (props: HeaderProps) => {
               onIconClick={ toMainPage }/>
     );
 
+    const navMenu = () => {
+        
+    };
+
     return (
         <div className='header row'>
             <div className='left'>
                 { backIcon }
-                <span className='title'>{ t('header.title') }</span>
+                <span onClick={ navMenu } className='title'>{ t('header.title') }</span>
             </div>
             <LangPanel/>
         </div>
