@@ -1,0 +1,27 @@
+@import './../../../../styles/variables';
+
+.filter-pill {
+  opacity: 0.7;
+  color: $_COLOR_WHITE;
+  text-transform: lowercase;
+  border: 1px solid $_COLOR_WHITE;
+  width: fit-content;
+  border-radius: 5%;
+  padding: 1px 15px;
+
+  &:hover {
+    cursor: default;
+    border-color: $_COLOR_MANDY;
+    color: $_COLOR_MANDY;
+  }
+
+  &__active {
+    background-color: $_COLOR_MANDY;
+    border: none;
+    padding: 2px 16px;
+  }
+
+  &__active:hover {
+    color: $_COLOR_WHITE;
+  }
+}

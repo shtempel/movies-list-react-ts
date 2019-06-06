@@ -7,7 +7,7 @@
   },
   "home": {
     "search": {
-      "find": "Найдите свой фильм",
+      "findMovie": "Найдите свой фильм",
       "searchBy": "Поиск по",
       "title": "Названию",
       "genres": "Жанру",
@@ -22,6 +22,21 @@
   "detailed": {
     "min": "мин",
     "voteCount": "проголосовало"
+  },
+  "countries": {
+    "search": {
+      "findCountry": "Найдите страну",
+      "filters": {
+        "country": "названию страны",
+        "countryCode": "коду страны",
+        "callingCode": "телефонному коду",
+        "capital": "столице",
+        "currency": "валюте",
+        "language": "языку",
+        "region": "региону",
+        "subRegion": "подрегиону"
+      }
+    }
   },
   "searchResults": "Результаты поиска",
   "favorites": "Избранные фильмы"

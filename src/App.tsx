@@ -11,24 +11,24 @@ import { selectCurrentPath } from './store/router/selectors';
 import './App.scss';
 
 interface AppProps {
-    pathname: string;
+	pathname: string;
 
-    push(path: string): void;
+	push(path: string): void;
 }
 
 const App: FunctionComponent<AppProps> = (props: AppProps) => {
-    const isCountries: boolean = !props.pathname.includes('countries');
+	const isCountries: boolean = props.pathname.includes('countries');
 
-    return (
-        <div className='app column'>
-            { isCountries && <Header push={ props.push } pathname={ props.pathname }/> }
-            <ConnectedRouter history={ appHistory }>{ routes }</ConnectedRouter>
-            { isCountries && <MoviesList/> }
-        </div>
-    );
+	return (
+		<div className='app column'>
+			{ !isCountries && <Header push={ props.push } pathname={ props.pathname }/> }
+			<ConnectedRouter history={ appHistory }>{ routes }</ConnectedRouter>
+			{ !isCountries && <MoviesList/> }
+		</div>
+	);
 };
 
 export default connect(
-    (state: GlobalState) => ({ pathname: selectCurrentPath(state) }),
-    { push }
+	(state: GlobalState) => ({ pathname: selectCurrentPath(state) }),
+	{ push }
 )(App);

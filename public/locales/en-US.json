@@ -7,7 +7,7 @@
   },
   "home": {
     "search": {
-      "find": "Find your movie",
+      "findMovie": "Find your movie",
       "searchBy": "Search by",
       "title": "Title",
       "genres": "Genres",
@@ -22,6 +22,21 @@
   "detailed": {
     "min": "min",
     "voteCount": "vote count"
+  },
+  "countries": {
+    "search": {
+      "findCountry": "Find country",
+      "filters": {
+        "country": "country name",
+        "countryCode": "country code",
+        "callingCode": "calling code",
+        "capital": "capital",
+        "currency": "currency",
+        "language": "language",
+        "region": "region",
+        "subRegion": "subregion"
+      }
+    }
   },
   "searchResults": "Search results",
   "favorites": "Favorite movies"

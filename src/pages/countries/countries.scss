@@ -1,0 +1,43 @@
+@import './../../styles/variables';
+
+.countries {
+  padding: 10px;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./../../assets/earth.jpg");
+  @include column-direction;
+
+  .search-form {
+    @include row-direction;
+
+    .search-input {
+      opacity: 0.7;
+      outline: none;
+      padding: 5px;
+      flex: 2;
+    }
+
+    .search-button {
+      opacity: 0.7;
+      outline: none;
+      font-weight: bold;
+      padding: 3px 0;
+      background-color: $_COLOR_MANDY;
+      color: $_COLOR_WHITE;
+      border: none;
+      flex: 1;
+
+      &:active {
+        background-color: $_COLOR_CROWN_OF_THORNS;
+      }
+    }
+  }
+
+  .filters {
+    flex-wrap: wrap;
+    @include row-direction;
+    justify-content: space-between;
+
+    span {
+      margin-top: 5px;
+    }
+  }
+}
