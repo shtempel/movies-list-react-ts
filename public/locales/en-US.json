@@ -1,6 +1,7 @@
 {
   "header": {
     "title": "netflixroulette",
+    "toCountries": "Countries",
     "rus": "Rus",
     "eng": "Eng"
   },
