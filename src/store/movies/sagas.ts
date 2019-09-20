@@ -2,7 +2,6 @@ import { call, put, select, throttle } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import { getType } from 'typesafe-actions';
 
-
 import * as actions from './actions';
 import { selectSearchBy } from '../search-by/selectors';
 import { selectCurrentMovieId, selectSearchQuery } from './selectors';
@@ -19,7 +18,7 @@ export function* fetchMovies() {
         const searchQuery = yield select(selectSearchQuery);
         const searchBy = yield select(selectSearchBy);
         const limit = yield select(selectSearchLimit);
-        const fetchedMovies = yield call([moviesService, moviesService.getMovies], searchQuery, searchBy, limit);
+        const fetchedMovies = yield call([ moviesService, moviesService.getMovies ], searchQuery, searchBy, limit);
         yield put(actions.fetchMoviesSuccess(fetchedMovies));
     } catch (error) {
         yield put(actions.fetchMoviesFail(error));
@@ -33,7 +32,7 @@ export function* watchFetchMovieById() {
 export function* fetchMovieById() {
     try {
         const movieId = yield select(selectCurrentMovieId);
-        const fetchedMovie = yield call([moviesService, moviesService.getMovieById], movieId);
+        const fetchedMovie = yield call([ moviesService, moviesService.getMovieById ], movieId);
         yield put(actions.fetchMovieByIdSuccess(fetchedMovie));
     } catch (error) {
         yield put(actions.fetchMovieByIdFail(error));
@@ -47,7 +46,7 @@ export function* watchFetchFavMovie() {
 export function* fetchFavoriteMovie() {
     try {
         const movieId = yield select(selectCurrentMovieId);
-        const fetchedMovie = yield call([moviesService, moviesService.getMovieById], movieId);
+        const fetchedMovie = yield call([ moviesService, moviesService.getMovieById ], movieId);
         yield put(actions.fetchFavoriteMovieSuccess(fetchedMovie));
     } catch (error) {
         yield put(actions.fetchFavoriteMovieFail(error));

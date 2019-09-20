@@ -1,37 +1,26 @@
-import React, { FunctionComponent } from 'react';
-import { useTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
+import React, { FC } from 'react';
+import { useTranslation, UseTranslationResponse } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
+import { Dispatch } from 'redux';
+import { getType } from 'typesafe-actions';
 
 import { Languages } from '../../services';
+import { GlobalState } from '../../store/interfaces';
 import { setLanguage } from '../../store/language/actions';
 import { selectLanguage } from '../../store/language/selectors';
 import { selectIsLoading } from '../../store/movies/selectors';
-import { GlobalState } from '../../store/interfaces';
 
 import './lang-panel.scss';
 
-interface LangPanelProps {
-    language: string;
-    isLoading: boolean;
-
-    setLanguage(language: string): void;
-}
-
-const mapStateToProps = (state: GlobalState) => ({
-    language: selectLanguage(state),
-    isLoading: selectIsLoading(state)
-});
-
-const mapDispatchToProps = { setLanguage };
-
-const LangPanel: FunctionComponent<LangPanelProps> = (props: LangPanelProps) => {
-    const { language, setLanguage, isLoading } = props;
+const LangPanel: FC = () => {
     const { t } = useTranslation();
-
-    const changeLanguage = (e: any) => {
-        if (e.target.id !== language && !isLoading) {
-            setLanguage(e.target.id);
+    const dispatch: Dispatch = useDispatch();
+    const language = useSelector<GlobalState, string>(selectLanguage);
+    const isLoading = useSelector<GlobalState, boolean>(selectIsLoading);
+    const changeLanguage = (e: any): void => {
+        if ( e.target.id !== language && !isLoading ) {
+            dispatch({ type: getType(setLanguage), payload: e.target.id });
             window.location.reload();
         }
     };
@@ -48,7 +37,4 @@ const LangPanel: FunctionComponent<LangPanelProps> = (props: LangPanelProps) => 
     );
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(LangPanel);
+export default LangPanel;

@@ -1,49 +1,37 @@
-import React, { FunctionComponent, ReactNode } from 'react';
-import { connect } from 'react-redux';
+import React, { FC } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
+import { Dispatch } from 'redux';
+import { getType } from 'typesafe-actions';
 
 import { GlobalState } from '../../store/interfaces';
 import { sortByDate, sortByRating } from '../../store/movies/actions';
 import { setSortBy } from '../../store/sort-by/actions';
 import { SortByEnum } from '../../store/sort-by/reducer';
 import { Icon } from '..';
+import { selectSortBy } from '../../store/sort-by/selectors';
 
 import './sort-by.scss';
 
 interface SortByProps {
-    sortBy: string;
     tab: string;
-
-    setSortBy(payload: string): void;
-    sortByRating(tab: string): void;
-    sortByDate(tab: string): void;
 }
 
-const mapStateToProps = (state: GlobalState) => ({
-    sortBy: state.sortBy
-});
-
-const mapDispatchToProps = {
-    setSortBy,
-    sortByRating,
-    sortByDate
-};
-
-const SortBy: FunctionComponent<SortByProps> = (props: SortByProps) => {
+const SortBy: FC<SortByProps> = (props: SortByProps) => {
     const { t } = useTranslation();
-    const { setSortBy, sortByRating, sortByDate, tab } = props;
-
+    const dispatch = useDispatch<Dispatch>();
+    const sortBy = useSelector<GlobalState, string>(selectSortBy);
     const onSetSortBy = (e: any) => {
-        if(e.target.id !== props.sortBy) {
+        if ( e.target.id !== sortBy ) {
             e.target.id === SortByEnum.Rating
-                ? sortByRating(tab)
-                : sortByDate(tab);
-            setSortBy(e.target.id);
+                ? dispatch({ type: getType(sortByRating), payload: props.tab })
+                : dispatch({ type: getType(sortByDate), payload: props.tab });
+            dispatch({ type: getType(setSortBy), payload: e.target.id });
         }
     };
 
-    const setActiveLink = (sortBy: string) => sortBy === props.sortBy;
+    const setActiveLink = (sortByItem: string) => sortByItem === sortBy;
 
     return (
         <div className='sort-by row'>
@@ -61,7 +49,4 @@ const SortBy: FunctionComponent<SortByProps> = (props: SortByProps) => {
     );
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SortBy);
+export default SortBy;

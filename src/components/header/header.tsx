@@ -1,19 +1,21 @@
-import React, { FunctionComponent, ReactNode } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
 
-import { Icon, LangPanel } from '../index';
+import { Icon } from '..';
+import LangPanel from '../lang-panel/lang-panel';
 
 import './header.scss';
 
 interface HeaderProps {
     pathname: string;
-
-    push(path: string): void;
 }
 
-export const Header: FunctionComponent<HeaderProps> = (props: HeaderProps) => {
+const Header: FC<HeaderProps> = (props: HeaderProps) => {
     const { t } = useTranslation();
-    const toMainPage = () => props.push('/');
+    const dispatch: Dispatch = useDispatch();
+    const toMainPage = () => dispatch({ type: '@@router/LOCATION_CHANGE', payload: { location: { pathname: '/' } } });
     const isDetailedPage: boolean = props.pathname.includes('movie');
 
     const backIcon: ReactNode = isDetailedPage && (
@@ -33,3 +35,5 @@ export const Header: FunctionComponent<HeaderProps> = (props: HeaderProps) => {
         </div>
     );
 };
+
+export default Header;

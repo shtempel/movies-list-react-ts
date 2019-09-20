@@ -1,55 +1,23 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { FC, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+import { getType } from 'typesafe-actions';
 
 import { fetchMovies } from '../../store/movies/actions';
-import { selectIsLoading, selectMovies } from '../../store/selectors';
-import { MovieItem } from '../../store/movies/reducer';
+import { selectMovies } from '../../store/selectors';
 import SearchComponent from './search-component';
-import { GlobalState } from '../../store/interfaces';
 
-interface HomeProps {
-    movies: MovieItem[];
-    isLoading: boolean;
-
-    fetchMovies(): void;
-}
-
-const mapStateToProps = (state: GlobalState) => ({
-    movies: selectMovies(state),
-    isLoading: selectIsLoading(state)
-});
-
-const mapDispatchToProps = {
-    fetchMovies
-};
-
-const Home = (props: HomeProps) => {
-    const { fetchMovies, movies, isLoading } = props;
+const Home: FC = () => {
+    const dispatch = useDispatch<Dispatch>();
+    const movies = useSelector(selectMovies);
 
     useEffect(() => {
-        fetchMovies();
-    }, [!movies]);
+        dispatch({ type: getType(fetchMovies) });
+    }, [ !movies ]);
 
-    // const searchResult: ReactNode = (
-    //     movies.length
-    //         ? <SearchResult movies={ movies }/>
-    //         : < div className='no-films-found'><h1> No films found</h1></div>
-    // );
+    return <SearchComponent/>;
 
-    // const content: ReactNode = (
-    //     isLoading
-    //         ? <Loader/>
-    //         : searchResult
-    // );
-
-    return (
-        <div>
-            <SearchComponent/>
-        </div>
-    );
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Home);
+export default Home;
+

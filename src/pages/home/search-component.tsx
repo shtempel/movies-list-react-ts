@@ -1,60 +1,40 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
+import { Dispatch } from 'redux';
+import { getType } from 'typesafe-actions';
 
-import { fetchMovies, setQueryString } from '../../store/movies/actions';
-import { MovieItem } from '../../store/movies/reducer';
-import { selectFavorites, selectMoviesQuantity } from '../../store/movies/selectors';
-import { setSearchBy } from '../../store/search-by/actions';
-import { appHistory } from '../../store/store';
-import { Button, ResultsAmount } from '../../components';
+import ResultsAmount from '../../components/results-amount/results-amount';
 import { GlobalState } from '../../store/interfaces';
+import { fetchMovies, setQueryString } from '../../store/movies/actions';
+import { selectIsLoading } from '../../store/movies/selectors';
+import { setSearchBy } from '../../store/search-by/actions';
+import { selectSearchBy } from '../../store/search-by/selectors';
+import { appHistory } from '../../store/store';
+import { Button } from '../../components';
 
 import './search-component.scss';
 
-interface SearchComponentProps {
-    searchBy: string,
-    isLoading: boolean;
-    favorites: MovieItem[];
-
-    fetchMovies(): void,
-    setSearchBy(payload: string): void,
-    setQueryString(payload: string): void
-}
-
-const mapStateToProps = (state: GlobalState) => ({
-    searchBy: state.searchBy,
-    favorites: selectFavorites(state),
-    isLoading: state.moviesState.isLoading,
-    moviesCount: selectMoviesQuantity(state)
-});
-
-const mapDispatchToProps = {
-    fetchMovies,
-    setSearchBy,
-    setQueryString
-};
-
-const SearchComponent: FunctionComponent<SearchComponentProps> = (props: SearchComponentProps) => {
-    const { setQueryString, fetchMovies, isLoading, setSearchBy } = props;
+const SearchComponent: FC = () => {
+    const dispatch = useDispatch<Dispatch>();
     const { t } = useTranslation();
-    const state: string = '';
-
-    const [value, setValue] = useState(state);
+    const isLoading = useSelector<GlobalState, boolean>(selectIsLoading);
+    const searchByState = useSelector<GlobalState, string>(selectSearchBy);
+    const [ value, setValue ] = useState<string>('');
 
     const handleChange = (e: any) => setValue(e.target.value);
 
     const submitEvent = (e: any) => e.key === 'Enter' && handleSubmit();
 
-    const onSetSearchBy = (e: any) => setSearchBy(e.target.value);
+    const onSetSearchBy = (e: any) => dispatch({ type: getType(setSearchBy), payload: e.target.value });
 
-    const setActiveBtn = (searchBy: string) => searchBy === props.searchBy;
+    const setActiveBtn = (searchBy: string) => searchBy === searchByState;
 
     const handleSubmit = () => {
         appHistory.push(`/search/:${ value }`);
-        setQueryString(value);
-        fetchMovies();
+        dispatch({ type: getType(setQueryString), payload: value });
+        dispatch({ type: getType(fetchMovies) });
     };
 
     return (
@@ -92,7 +72,4 @@ const SearchComponent: FunctionComponent<SearchComponentProps> = (props: SearchC
     );
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SearchComponent);
+export default SearchComponent;

@@ -1,171 +1,42 @@
-import React, { FunctionComponent, ReactNode, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
+import React, { FC, ReactNode, useState } from 'react';
+import { useSelector } from 'react-redux';
 import cn from 'classnames';
-import { push } from 'connected-react-router';
 
-import {
-    fetchFavoriteMovie,
-    fetchMovieById,
-    removeMovieFromFavorites,
-    setCurrentMovieId
-} from '../../store/movies/actions';
-import { MovieItem } from '../../store/movies/reducer';
-import {
-    selectFavMoviesQuantity,
-    selectFavorites, selectIsFavMoviesNearRelease,
-    selectIsLoading,
-    selectMovies,
-    selectMoviesQuantity
-} from '../../store/movies/selectors';
-import { FilmCard } from './film-card';
-import { GlobalState } from '../../store/interfaces';
-import { Icon, Loader, SortBy } from '..';
+import { GlobalState, Tabs } from '../../store/interfaces';
 import { selectSortBy } from '../../store/sort-by/selectors';
+import NavBar from '../nav-bar/nav-bar';
+import SortBy from '../sort-by/sort-by';
 import { selectCurrentPath } from '../../store/router/selectors';
+import { List } from './list';
 
 import './movies-list.scss';
 
-interface MoviesListProps {
-    movies: MovieItem[];
-    favorites: MovieItem[];
-    isLoading: boolean;
-    sortBy: string;
-    pathname: string;
-    moviesQuantity: number;
-    favMoviesQuantity: number;
-    isFavMoviesNearRelease: boolean;
-
-    push(path: string): void;
-    fetchMovieById(): void
-    setCurrentMovieId(id: string): void;
-    fetchFavoriteMovie(): void;
-    removeMovieFromFavorites(id: string): void;
-}
-
-enum Tabs {
-    movies = 'movies',
-    favorites = 'favMovies'
-}
-
-const mapStateToProps = (state: GlobalState) => ({
-    movies: selectMovies(state),
-    favorites: selectFavorites(state),
-    isLoading: selectIsLoading(state),
-    sortBy: selectSortBy(state),
-    pathname: selectCurrentPath(state),
-    moviesQuantity: selectMoviesQuantity(state),
-    favMoviesQuantity: selectFavMoviesQuantity(state),
-    isFavMoviesNearRelease: selectIsFavMoviesNearRelease(state)
-});
-
-const mapDispatchToProps = {
-    fetchMovieById,
-    setCurrentMovieId,
-    removeMovieFromFavorites,
-    fetchFavoriteMovie,
-    push
-};
-
-const MoviesList: FunctionComponent<MoviesListProps> = (props: MoviesListProps) => {
-    const { t } = useTranslation();
+const MoviesList: FC = () => {
     const state: string = Tabs.movies;
-    const [tab, setActiveTab] = useState(state);
-    const {
-        movies,
-        push,
-        favorites,
-        fetchMovieById,
-        removeMovieFromFavorites,
-        setCurrentMovieId,
-        isLoading,
-        fetchFavoriteMovie,
-        pathname,
-        favMoviesQuantity,
-        moviesQuantity,
-        isFavMoviesNearRelease
-    } = props;
+    const [ tab, setActiveTab ] = useState<string>(state);
 
+    const sortByItem = useSelector<GlobalState, string>(selectSortBy);
+    const pathname = useSelector<GlobalState, string>(selectCurrentPath);
     const isSearchResultsTab: boolean = tab === Tabs.movies;
-    const isFavoritesTab: boolean = tab === Tabs.favorites;
-    const isFavoritesAvailable: boolean = favorites.length > 0;
+
     const isDetailedPage: boolean = pathname.includes('movie');
-
-    const fetchMovie = (e: any) => {
-        setCurrentMovieId(e.target.id);
-        fetchMovieById();
-        push(`/movie/:${ e.target.id }`);
-    };
-
-    const manageFavorites = (e: any) => {
-        const movieID = e.target.id;
-        const isFavoritesExist: boolean = favorites.some(
-            favorite => favorite.id === parseInt(movieID, 10)
-        );
-
-        setCurrentMovieId(e.target.id);
-        !isFavoritesExist
-            ? fetchFavoriteMovie()
-            : removeMovieFromFavorites(movieID);
-    };
+    const sortBy: ReactNode = !isDetailedPage && sortByItem && <SortBy tab={ tab }/>;
 
     const handleTabs = (e: any) => setActiveTab(e.target.id);
-
-    const getList = (moviesList: MovieItem[]): ReactNode => {
-        return (
-            <div className='list'>
-                {
-                    isLoading
-                        ? <Loader/>
-                        : moviesList.map(
-                        movie => (
-                            <FilmCard
-                                key={ movie.id }
-                                isFavoritesTab={ isFavoritesTab }
-                                movie={ movie }
-                                onPosterClick={ fetchMovie }
-                                onStarClick={ manageFavorites }
-                                favorites={ favorites }/>
-                        )
-                        )
-                }
-            </div>
-        );
-    };
-
-    const sortBy: ReactNode = !isDetailedPage && <SortBy tab={ tab }/>;
-
-    const favTab: ReactNode = isFavoritesAvailable && (
-        <span className={ cn('btn', { 'active-button': isFavoritesTab }) }
-              id={ Tabs.favorites }
-              onClick={ handleTabs }>
-                    { t('favorites') } { favMoviesQuantity }
-            { isFavMoviesNearRelease && <Icon className='fav-bell' iconPrefix='fas' icon='bell'/> }
-        </span>
-    );
 
     return (
         <>
             <>
-                <div className='nav-bar'>
-                    <span className={ cn('btn', { 'active-button': isSearchResultsTab }) }
-                          id={ Tabs.movies }
-                          onClick={ handleTabs }>
-                    { t('searchResults') } { moviesQuantity }
-                    </span>
-                    { favTab }
-                </div>
+                <NavBar setActiveTab={ handleTabs }
+                        handleTabs={ handleTabs }
+                        isSearchResultsTab={ isSearchResultsTab }/>
                 { sortBy }
             </>
             <div className={ cn('search-results columns', { 'search-results-detailed': isDetailedPage }) }>
-                { isSearchResultsTab && getList(movies) }
-                { isFavoritesTab && getList(favorites) }
+                <List isSearchResultsTab={ isSearchResultsTab }/>
             </div>
         </>
     );
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(MoviesList);
+export default MoviesList

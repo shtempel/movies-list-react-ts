@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 
 type ButtonType = 'button' | 'reset' | 'submit';
 
@@ -11,10 +11,5 @@ interface ButtonProps {
     disabled?: boolean;
 }
 
-export const Button: FunctionComponent<ButtonProps> = (props: ButtonProps) => {
-    return (
-        <button { ...props } >
-            { props.name }
-        </button>
-    );
-};
+export const Button: FC<ButtonProps> = (props: ButtonProps) =>
+    <button { ...props } >{ props.name }</button>;

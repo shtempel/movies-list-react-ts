@@ -1,7 +1,8 @@
+import { GlobalState } from '../interfaces';
 import * as selectors from './selectors';
 import { getRootReducer } from '../../jest/test-helpers';
 import { RouterState } from 'connected-react-router';
-import { GlobalState } from '../store';
+
 
 describe('router selectors', () => {
     const rootReducer = getRootReducer();

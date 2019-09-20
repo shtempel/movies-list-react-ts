@@ -1,4 +1,5 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
+
 import cn from 'classnames';
 import { Icon } from '../../components';
 
@@ -8,12 +9,10 @@ interface RatingProps {
     title?: string;
 }
 
-export const Rating: FunctionComponent<RatingProps> = (props: RatingProps) => {
+export const Rating: FC<RatingProps> = (props: RatingProps) => {
     const { voteAverage, voteCount, title } = props;
 
-    const setPaddingForRating = (rating: any) => {
-        return Number.isInteger(rating);
-    };
+    const setPaddingForRating = (rating: any) => Number.isInteger(rating);
 
     return (
         <div className='rating-tagline'>

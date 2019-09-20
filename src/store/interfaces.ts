@@ -10,3 +10,8 @@ export interface GlobalState extends AppSavedState {
     router: Router;
     language: string;
 }
+
+export enum Tabs {
+    movies = 'movies',
+    favorites = 'favMovies'
+}

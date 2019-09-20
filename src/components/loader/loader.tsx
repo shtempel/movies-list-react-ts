@@ -1,11 +1,5 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import './loader.scss'
 
-export const Loader = () => {
-    return (
-        <div className='loading-div'>
-            <span className='loading'/>
-        </div>
-    );
-};
+export const Loader: FC = () => <div className='loading-div'><span className='loading'/></div>;

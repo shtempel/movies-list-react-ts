@@ -1,7 +1,9 @@
-import React, { FunctionComponent, ReactNode } from 'react';
-import { connect } from 'react-redux';
+import React, { FC, ReactNode } from 'react';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+import { getType } from 'typesafe-actions';
 
 import { GlobalState } from '../../store/interfaces';
 import { fetchMovies } from '../../store/movies/actions';
@@ -11,11 +13,7 @@ import { selectSearchLimit } from '../../store/search-limit/selectors';
 import './results-amount.scss';
 
 interface ResultsAmountProps {
-    searchLimit: string;
     className?: string
-
-    setSearchLimit(limit: string): void;
-    fetchMovies(): void;
 }
 
 export enum Amount {
@@ -24,45 +22,31 @@ export enum Amount {
     thirty = '30',
 }
 
-const mapStateToProps = (state: GlobalState) => ({
-    searchLimit: selectSearchLimit(state)
-});
-
-const mapDispatchToProps = {
-    setSearchLimit,
-    fetchMovies
-};
-
-const ResultsAmount: FunctionComponent<ResultsAmountProps> =
-    (props: ResultsAmountProps) => {
-        const { t } = useTranslation();
-        const { setSearchLimit, fetchMovies, searchLimit } = props;
-
-        const setAmountItems = (e: any) => searchLimit !== e.target.id && setSearchLimit(e.target.id) && fetchMovies();
-
-        const getSingleControl = (content: string): ReactNode => {
-            const { searchLimit } = props;
-
-            return (
-                <span id={ content }
-                      onClick={ setAmountItems }
-                      className={ cn('single-control', { 'single-control-active': searchLimit === content }) }>
-                { content }
-            </span>
-            )
-        };
+const ResultsAmount: FC<ResultsAmountProps> = (props: ResultsAmountProps) => {
+    const { t } = useTranslation();
+    const dispatch = useDispatch<Dispatch>();
+    const searchLimit = useSelector<GlobalState, string>(selectSearchLimit);
+    const setAmountItems = (e: any) =>
+        searchLimit !== e.target.id && setSearchLimit(e.target.id) && dispatch({ type: getType(fetchMovies) });
+    const getSingleControl = (content: string): ReactNode => {
 
         return (
-            <div className={ `results-amount ${ props.className }` }>
-                <span className='amount-title'>{ t('home.search.resultsOnPage') }</span>
-                { getSingleControl(Amount.ten) }
-                { getSingleControl(Amount.twenty) }
-                { getSingleControl(Amount.thirty) }
-            </div>
-        );
+            <span id={ content }
+                  onClick={ setAmountItems }
+                  className={ cn('single-control', { 'single-control-active': searchLimit === content }) }>
+                { content }
+            </span>
+        )
     };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ResultsAmount);
+    return (
+        <div className={ `results-amount ${ props.className }` }>
+            <span className='amount-title'>{ t('home.search.resultsOnPage') }</span>
+            { getSingleControl(Amount.ten) }
+            { getSingleControl(Amount.twenty) }
+            { getSingleControl(Amount.thirty) }
+        </div>
+    );
+};
+
+export default ResultsAmount;

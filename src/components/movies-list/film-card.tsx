@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import cn from 'classnames';
 import moment from 'moment';
 
@@ -16,7 +16,7 @@ interface FilmCardProps {
     onStarClick(id: string): void;
 }
 
-export const FilmCard: FunctionComponent<FilmCardProps> = (props: FilmCardProps) => {
+export const FilmCard: FC<FilmCardProps> = (props: FilmCardProps) => {
     const { onStarClick, movie, favorites, onPosterClick, isFavoritesTab } = props;
     const { id, title, genres, posterPath, releaseDate } = movie;
 

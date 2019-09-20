@@ -1,49 +1,26 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { FC } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-
-import {
-    selectCurrentMovie,
-    selectFavorites
-} from '../../store/movies/selectors';
-import { MovieItem } from '../../store/movies/reducer';
-import {
-    fetchFavoriteMovieSuccess,
-    removeMovieFromFavorites
-} from '../../store/movies/actions';
+import { getType } from 'typesafe-actions';
 import { GlobalState } from '../../store/interfaces';
+import { MovieItem } from '../../store/movies/reducer';
+
+import { selectCurrentMovie, selectFavorites } from '../../store/movies/selectors';
+import { fetchFavoriteMovieSuccess, removeMovieFromFavorites } from '../../store/movies/actions';
 import { FavoriteIcon } from '../../components';
 import { Rating } from './rating';
 
 import './detailed-info.scss';
 
-interface DetailedInfoProps {
-    favorites: MovieItem[];
-    currentMovie: MovieItem,
-
-    fetchFavoriteMovieSuccess(movie: MovieItem): void,
-    removeMovieFromFavorites(id: string): void
-}
-
-const mapStateToProps = (state: GlobalState) => ({
-    currentMovie: selectCurrentMovie(state),
-    favorites: selectFavorites(state)
-});
-
-const mapDispatchToProps = {
-    fetchFavoriteMovieSuccess,
-    removeMovieFromFavorites
-};
-
-const DetailedInfo = (props: DetailedInfoProps) => {
-    const currentMovie: MovieItem = props.currentMovie;
-    const { favorites, fetchFavoriteMovieSuccess, removeMovieFromFavorites } = props;
+const DetailedInfo: FC = () => {
+    const dispatch = useDispatch();
     const { t } = useTranslation();
-
-    const manageFavorites = () => {
+    const favorites = useSelector<GlobalState, MovieItem[]>(selectFavorites);
+    const currentMovie = useSelector<GlobalState, MovieItem>(selectCurrentMovie);
+    const manageFavorites = (): void => {
         !favorites.some(favorite => favorite.id === currentMovie.id)
-            ? fetchFavoriteMovieSuccess(props.currentMovie)
-            : removeMovieFromFavorites(currentMovie.id!.toString());
+            ? dispatch({ type: getType(fetchFavoriteMovieSuccess), payload: currentMovie })
+            : dispatch({ type: getType(removeMovieFromFavorites), payload: currentMovie.id!.toString() });
     };
 
     return (
@@ -75,7 +52,4 @@ const DetailedInfo = (props: DetailedInfoProps) => {
     );
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(DetailedInfo);
+export default DetailedInfo;
