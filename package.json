@@ -32,7 +32,7 @@
     "i18next": "^15.1.1",
     "i18next-xhr-backend": "^2.0.1",
     "moment": "^2.24.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-i18next": "^10.9.1",
